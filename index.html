@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vishal Kumar A | Data Scientist & Systems Architect</title>
-  <meta name="description" content="Vishal Kumar A - Transforming raw data into intelligent systems that scale. Data Alchemist, ML Engineer & Scalable Systems Architect." />
-  <meta name="keywords" content="Data Alchemist, Systems Architect, ML Engineer, Python, Scalable Systems, AI Infrastructure" />
+  <meta name="description"
+    content="Vishal Kumar A - Transforming raw data into intelligent systems that scale. Data Alchemist, ML Engineer & Scalable Systems Architect." />
+  <meta name="keywords"
+    content="Data Alchemist, Systems Architect, ML Engineer, Python, Scalable Systems, AI Infrastructure" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
   <style>
     :root {
       --primary: #3a86ff;
@@ -41,7 +46,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: 
+      background:
         radial-gradient(circle at 10% 20%, rgba(58, 134, 255, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(131, 56, 236, 0.05) 0%, transparent 40%),
         linear-gradient(180deg, var(--darker) 0%, var(--dark) 100%);
@@ -59,7 +64,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: 
+      background-image:
         linear-gradient(rgba(58, 134, 255, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(58, 134, 255, 0.03) 1px, transparent 1px);
       background-size: 60px 60px;
@@ -310,8 +315,13 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     .modal-content {
@@ -333,8 +343,15 @@
     }
 
     @keyframes zoomIn {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .modal-info {
@@ -399,7 +416,8 @@
       margin: 0 auto;
       padding: 0 5%;
       position: relative;
-      padding-top: 100px; /* Account for fixed header */
+      padding-top: 100px;
+      /* Account for fixed header */
     }
 
     /* ================================================ */
@@ -410,7 +428,8 @@
       margin: 0 auto;
       padding: 0 4%;
       position: relative;
-      padding-top: 80px; /* Account for fixed header */
+      padding-top: 80px;
+      /* Account for fixed header */
     }
 
     /* Initially hide both containers */
@@ -498,9 +517,17 @@
       border-radius: 50%;
     }
 
-    .dot-red { background: #ff5f57; }
-    .dot-yellow { background: #ffbd2e; }
-    .dot-green { background: #28ca42; }
+    .dot-red {
+      background: #ff5f57;
+    }
+
+    .dot-yellow {
+      background: #ffbd2e;
+    }
+
+    .dot-green {
+      background: #28ca42;
+    }
 
     .terminal-title {
       font-family: 'JetBrains Mono', monospace;
@@ -536,8 +563,15 @@
     }
 
     @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
     }
 
     /* Buttons */
@@ -743,7 +777,9 @@
     }
 
     @keyframes progressFill {
-      from { width: 0%; }
+      from {
+        width: 0%;
+      }
     }
 
     /* Contact Terminal */
@@ -823,7 +859,7 @@
       z-index: 999;
       backdrop-filter: blur(3px);
     }
-    
+
     .menu-backdrop.active {
       display: block;
     }
@@ -846,42 +882,45 @@
 
     /* DESKTOP VIEW (768px and above) */
     @media (min-width: 768px) {
+
       /* Show desktop header, hide mobile header */
       .desktop-header {
         display: flex;
       }
+
       .mobile-header {
         display: none;
       }
-      
+
       /* Show desktop body container, hide mobile */
       .desktop-body-container {
         display: block;
       }
+
       .mobile-body-container {
         display: none;
       }
-      
+
       /* Desktop navigation */
       .desktop-nav {
         display: flex;
       }
-      
+
       /* Desktop hero layout */
       .hero-section {
         grid-template-columns: 1fr 1fr;
         padding: 14rem 0 8rem;
         gap: 4rem;
       }
-      
+
       .hero-content h1 {
         font-size: 3.5rem;
       }
-      
+
       .hero-tagline {
         max-width: 90%;
       }
-      
+
       .btn-group {
         justify-content: flex-start;
       }
@@ -896,27 +935,30 @@
 
     /* MOBILE VIEW (767px and below) */
     @media (max-width: 767px) {
+
       /* Show mobile header, hide desktop header */
       .mobile-header {
         display: flex;
       }
+
       .desktop-header {
         display: none;
       }
-      
+
       /* Show mobile body container, hide desktop */
       .mobile-body-container {
         display: block;
       }
+
       .desktop-body-container {
         display: none;
       }
-      
+
       /* Mobile menu toggle button */
       .menu-toggle {
         display: flex;
       }
-      
+
       /* Mobile hero layout */
       .hero-section {
         grid-template-columns: 1fr;
@@ -924,97 +966,97 @@
         padding: 8rem 0 4rem;
         min-height: auto;
       }
-      
+
       .hero-content h1 {
         font-size: 2.5rem;
       }
-      
+
       .hero-tagline {
         font-size: 1.1rem;
         max-width: 100%;
         margin: 0 auto 2rem;
       }
-      
+
       .btn-group {
         justify-content: center;
       }
-      
+
       .btn {
         width: 100%;
         justify-content: center;
       }
-      
+
       /* Mobile card adjustments */
       .card {
         padding: 1.5rem;
       }
-      
+
       .card-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
-      
+
       /* Mobile section adjustments */
       .section {
         padding: 4rem 0;
       }
-      
+
       .section-title {
         font-size: 2.2rem;
       }
-      
+
       .section-subtitle {
         font-size: 1rem;
         padding: 0 1rem;
       }
-      
+
       /* Mobile header adjustments */
       .header-profile-info {
         display: flex;
       }
-      
+
       .header-profile-name {
         font-size: 1rem;
       }
-      
+
       .header-profile-title {
         font-size: 0.7rem;
       }
-      
+
       /* Mobile terminal adjustments */
       .terminal-display {
         padding: 1.5rem;
       }
-      
+
       /* Mobile contact adjustments */
       .contact-terminal {
         padding: 1.5rem;
       }
-      
+
       .contact-info {
         grid-template-columns: 1fr;
       }
-      
+
       /* Hide profile info on very small screens */
       @media (max-width: 480px) {
         .header-profile-info {
           display: none;
         }
-        
+
         .hero-content h1 {
           font-size: 2rem;
         }
-        
+
         .section-title {
           font-size: 1.8rem;
         }
-        
+
         .card-icon {
           width: 60px;
           height: 60px;
           font-size: 1.5rem;
         }
-        
+
         .mobile-body-container {
           padding: 0 3%;
         }
@@ -1026,27 +1068,27 @@
       .hero-content h1 {
         font-size: 3rem;
       }
-      
+
       .hero-tagline {
         font-size: 1.1rem;
       }
-      
+
       .card-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       }
     }
   </style>
 </head>
+
 <body>
   <!-- Background Grid -->
   <div class="grid-bg"></div>
-  
+
   <!-- Instagram-style Photo Modal -->
   <div class="photo-modal" id="photoModal">
     <button class="close-modal" id="closeModal">&times;</button>
     <div class="modal-content">
-      <img src="profile.jpeg" 
-           alt="Vishal Kumar A" class="modal-image" id="modalImage">
+      <img src="profile.jpeg" alt="Vishal Kumar A" class="modal-image" id="modalImage">
       <div class="modal-info">
         <h3>Vishal Kumar A</h3>
         <div class="title">Data Scientist & SYSTEMS ARCHITECT</div>
@@ -1060,15 +1102,14 @@
   <header class="desktop-header">
     <div class="header-left">
       <div class="header-profile-container" id="desktopHeaderProfile">
-        <img src="profile.jpeg" 
-             alt="Vishal Kumar A" class="header-profile-photo">
+        <img src="profile.jpeg" alt="Vishal Kumar A" class="header-profile-photo">
         <div class="header-profile-info">
           <div class="header-profile-name">Vishal Kumar A</div>
           <div class="header-profile-title">DATA ALCHEMIST</div>
         </div>
       </div>
     </div>
-    
+
     <!-- Desktop Navigation -->
     <nav class="desktop-nav">
       <a href="#about">About</a>
@@ -1076,7 +1117,6 @@
       <a href="#projects">Projects</a>
       <a href="#architecture">Architecture</a>
       <a href="#contact">Contact</a>
-    </nav>
   </header>
 
   <!-- ================================================ -->
@@ -1085,20 +1125,19 @@
   <header class="mobile-header">
     <div class="header-left">
       <div class="header-profile-container" id="mobileHeaderProfile">
-        <img src="profile.jpeg" 
-             alt="Vishal Kumar A" class="header-profile-photo">
+        <img src="profile.jpeg" alt="Vishal Kumar A" class="header-profile-photo">
         <div class="header-profile-info">
           <div class="header-profile-name">Vishal Kumar A</div>
           <div class="header-profile-title">DATA ALCHEMIST</div>
         </div>
       </div>
     </div>
-    
+
     <!-- Mobile Menu Toggle -->
     <button class="menu-toggle" id="menuToggle">
       <i class="fas fa-bars"></i>
     </button>
-    
+
     <!-- Mobile Navigation -->
     <div class="menu-backdrop" id="menuBackdrop"></div>
     <nav class="mobile-nav" id="mobileNav">
@@ -1119,11 +1158,11 @@
       <div class="hero-content">
         <h1>Transforming Data Into Intelligent Systems</h1>
         <div class="hero-tagline">
-          I architect <span class="highlight">scalable systems</span> that transform raw data into 
-          <span class="highlight-2">intelligent solutions</span>, blending 
+          I architect <span class="highlight">scalable systems</span> that transform raw data into
+          <span class="highlight-2">intelligent solutions</span>, blending
           <span class="highlight-3">ML engineering</span> with production-grade infrastructure.
         </div>
-        
+
         <div class="btn-group">
           <a href="#projects" class="btn btn-primary">
             <i class="fas fa-rocket"></i> View Projects
@@ -1133,7 +1172,7 @@
           </a>
         </div>
       </div>
-      
+
       <div class="terminal-display fade-in">
         <div class="terminal-header">
           <div class="terminal-dots">
@@ -1143,7 +1182,7 @@
           </div>
           <div class="terminal-title">SYSTEM TERMINAL</div>
         </div>
-        
+
         <div class="terminal-content">
           <div class="terminal-line">
             <span class="prompt">$</span>
@@ -1153,7 +1192,7 @@
             <span class="prompt">></span>
             <span id="output1-desktop">Vishal Kumar A - Data Alchemist & Systems Architect</span>
           </div>
-          
+
           <div class="terminal-line">
             <span class="prompt">$</span>
             <span class="command" id="cmd2-desktop"></span>
@@ -1180,11 +1219,11 @@
         <div class="section-label">About Me</div>
         <h2 class="section-title">The Data Alchemist</h2>
         <p class="section-subtitle">
-          Transforming abstract data into tangible intelligence through advanced systems architecture 
+          Transforming abstract data into tangible intelligence through advanced systems architecture
           and machine learning engineering.
         </p>
       </div>
-      
+
       <div class="card-grid">
         <div class="card fade-in">
           <div class="card-icon">
@@ -1192,7 +1231,7 @@
           </div>
           <h3>Core Philosophy</h3>
           <p>
-            Data is the new alchemy. I transform raw, chaotic information into structured intelligence 
+            Data is the new alchemy. I transform raw, chaotic information into structured intelligence
             through systematic architecture and scalable engineering.
           </p>
           <div class="skill-progress">
@@ -1210,14 +1249,14 @@
             </div>
           </div>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-server"></i>
           </div>
           <h3>Technical Arsenal</h3>
           <p>
-            Specialized in building resilient systems that process millions of data points, 
+            Specialized in building resilient systems that process millions of data points,
             with expertise spanning from algorithm design to production deployment.
           </p>
           <div class="skill-matrix">
@@ -1244,7 +1283,7 @@
           A comprehensive toolkit for building intelligent, scalable systems from ground up.
         </p>
       </div>
-      
+
       <div class="card-grid">
         <div class="card fade-in">
           <div class="card-icon">
@@ -1260,7 +1299,7 @@
             <li>REST & GraphQL APIs</li>
           </ul>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-robot"></i>
@@ -1275,7 +1314,7 @@
             <li>Data visualization</li>
           </ul>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-cloud"></i>
@@ -1302,7 +1341,7 @@
           Production-grade systems designed for scale, reliability, and intelligent data processing.
         </p>
       </div>
-      
+
       <div class="card-grid">
         <div class="card fade-in">
           <div class="card-icon">
@@ -1314,7 +1353,7 @@
           <p><strong>Tech Stack:</strong> Python, Celery, Redis, SMTP/DNS</p>
           <p><strong>Architecture:</strong> Distributed worker pools, credit-based billing, real-time monitoring</p>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-file-contract"></i>
@@ -1325,7 +1364,7 @@
           <p><strong>Tech Stack:</strong> PyPDF2, Regex, Pandas, Flask</p>
           <p><strong>Process:</strong> PDF → Web → Excel automation with validation workflows</p>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-chart-line"></i>
@@ -1348,7 +1387,7 @@
           Scalable, fault-tolerant architecture designed for high-volume data processing and real-time analytics.
         </p>
       </div>
-      
+
       <div class="card-grid">
         <div class="card fade-in">
           <h3><i class="fas fa-layer-group"></i> Multi-Layer Architecture</h3>
@@ -1370,47 +1409,47 @@
             </div>
           </div>
         </div>
-        
-<div class="card fade-in">
-    <h3><i class="fas fa-expand-arrows-alt"></i> Scaling & System Architecture</h3>
-    <ul>
-      <li><strong>Horizontal Scaling:</strong> Celery worker pool architecture</li>
-      <li><strong>Queue Management:</strong> Redis-based distributed task queues</li>
-      <li><strong>Fault Tolerance:</strong> Automatic retry and failure recovery</li>
-      <li><strong>Load Balancing:</strong> Nginx reverse proxy and round-robin routing</li>
-      <li><strong>High Availability:</strong> Multi-instance Flask deployment</li>
-      <li><strong>Monitoring:</strong> System logs and real-time performance tracking</li>
-      <br>
-      <h3><i class="fas fa-server"></i> Backend & API Engineering</h3>
-      <li><strong>REST API Design:</strong> Modular Flask-based API architecture</li>
-      <li><strong>Database Design:</strong> MySQL relational schema optimization</li>
-      <li><strong>Authentication:</strong> OTP-based secure user verification</li>
-      <li><strong>File Processing:</strong> Bulk CSV upload and parsing pipelines</li>
-      <li><strong>Async Processing:</strong> Background task execution with Celery</li>
-      <li><strong>Session Management:</strong> Token-based user session handling</li>
-    </ul>
-  </div>
 
-  <!-- Machine Learning & AI Systems -->
-  <div class="card fade-in">
-    <h3><i class="fas fa-brain"></i> Machine Learning & AI Systems</h3>
-    <ul>
-      <li><strong>ML Deployment:</strong> Flask-integrated prediction endpoints</li>
-      <li><strong>Deep Learning:</strong> GAN-based Virtual Try-On (VITON / TryOnGAN)</li>
-      <li><strong>Feature Engineering:</strong> Spotify audio mood classification</li>
-      <li><strong>Predictive Modeling:</strong> Pokémon battle prediction ML system</li>
-      <li><strong>Data Pipeline:</strong> Automated preprocessing and cleaning workflows</li>
-      <li><strong>Model Training:</strong> Supervised ML classification & regression</li>
-      <br>
-      <h3><i class="fas fa-flask"></i> Research & Engineering Projects</h3>
-      <li><strong>Email Verification System:</strong> Bulk validation SaaS platform</li>
-      <li><strong>Virtual Try-On AI:</strong> Deep learning clothing simulation system</li>
-      <li><strong>Spotify Mood Predictor:</strong> ML-based emotion detection system</li>
-      <li><strong>Pokémon ML Battle Engine:</strong> Data-driven battle prediction</li>
-      <li><strong>Physiotherapy AI:</strong> Rehab recommendation ML framework</li>
-      <li><strong>Portfolio SaaS Platform:</strong> Scalable Flask-based personal platform</li>
-    </ul>
-  </div>
+        <div class="card fade-in">
+          <h3><i class="fas fa-expand-arrows-alt"></i> Scaling & System Architecture</h3>
+          <ul>
+            <li><strong>Horizontal Scaling:</strong> Celery worker pool architecture</li>
+            <li><strong>Queue Management:</strong> Redis-based distributed task queues</li>
+            <li><strong>Fault Tolerance:</strong> Automatic retry and failure recovery</li>
+            <li><strong>Load Balancing:</strong> Nginx reverse proxy and round-robin routing</li>
+            <li><strong>High Availability:</strong> Multi-instance Flask deployment</li>
+            <li><strong>Monitoring:</strong> System logs and real-time performance tracking</li>
+            <br>
+            <h3><i class="fas fa-server"></i> Backend & API Engineering</h3>
+            <li><strong>REST API Design:</strong> Modular Flask-based API architecture</li>
+            <li><strong>Database Design:</strong> MySQL relational schema optimization</li>
+            <li><strong>Authentication:</strong> OTP-based secure user verification</li>
+            <li><strong>File Processing:</strong> Bulk CSV upload and parsing pipelines</li>
+            <li><strong>Async Processing:</strong> Background task execution with Celery</li>
+            <li><strong>Session Management:</strong> Token-based user session handling</li>
+          </ul>
+        </div>
+
+        <!-- Machine Learning & AI Systems -->
+        <div class="card fade-in">
+          <h3><i class="fas fa-brain"></i> Machine Learning & AI Systems</h3>
+          <ul>
+            <li><strong>ML Deployment:</strong> Flask-integrated prediction endpoints</li>
+            <li><strong>Deep Learning:</strong> GAN-based Virtual Try-On (VITON / TryOnGAN)</li>
+            <li><strong>Feature Engineering:</strong> Spotify audio mood classification</li>
+            <li><strong>Predictive Modeling:</strong> Pokémon battle prediction ML system</li>
+            <li><strong>Data Pipeline:</strong> Automated preprocessing and cleaning workflows</li>
+            <li><strong>Model Training:</strong> Supervised ML classification & regression</li>
+            <br>
+            <h3><i class="fas fa-flask"></i> Research & Engineering Projects</h3>
+            <li><strong>Email Verification System:</strong> Bulk validation SaaS platform</li>
+            <li><strong>Virtual Try-On AI:</strong> Deep learning clothing simulation system</li>
+            <li><strong>Spotify Mood Predictor:</strong> ML-based emotion detection system</li>
+            <li><strong>Pokémon ML Battle Engine:</strong> Data-driven battle prediction</li>
+            <li><strong>Physiotherapy AI:</strong> Rehab recommendation ML framework</li>
+            <li><strong>Portfolio SaaS Platform:</strong> Scalable Flask-based personal platform</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -1423,7 +1462,7 @@
           Ready to architect intelligent systems. Let's transform data into competitive advantage.
         </p>
       </div>
-      
+
       <div class="contact-terminal fade-in">
         <div class="terminal-header">
           <div class="terminal-dots">
@@ -1433,7 +1472,7 @@
           </div>
           <div class="terminal-title">CONTACT TERMINAL</div>
         </div>
-        
+
         <div class="contact-info">
           <a href="mailto:vishalkumara.vka@gmail.com" class="contact-item">
             <div class="contact-icon">
@@ -1444,7 +1483,7 @@
               <div style="color: var(--muted); font-size: 0.95rem;">vishalkumara.vka@gmail.com</div>
             </div>
           </a>
-          
+
           <div class="contact-item">
             <div class="contact-icon">
               <i class="fas fa-phone"></i>
@@ -1454,7 +1493,7 @@
               <div style="color: var(--muted); font-size: 0.95rem;">+91 7760752108</div>
             </div>
           </div>
-          
+
           <a href="https://github.com/Vishalkumar-tech" target="_blank" class="contact-item">
             <div class="contact-icon">
               <i class="fab fa-github"></i>
@@ -1464,7 +1503,7 @@
               <div style="color: var(--muted); font-size: 0.95rem;">github.com/Vishalkumar-tech</div>
             </div>
           </a>
-          
+
           <a href="https://linkedin.com/in/vishalkumara" target="_blank" class="contact-item">
             <div class="contact-icon">
               <i class="fab fa-linkedin"></i>
@@ -1475,19 +1514,22 @@
             </div>
           </a>
         </div>
-        
+
         <div style="text-align: center; margin-top: 3rem;">
           <a href="mailto:vishalkumara.vka@gmail.com" class="btn btn-primary">
             <i class="fas fa-paper-plane"></i> Send Message
           </a>
-          <a href="#" class="btn btn-secondary" style="margin-left: 1rem;">
+          <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download
+            class="btn btn-secondary" style="margin-left: 1rem;">
             <i class="fas fa-download"></i> Download Resume
+          </a>
+
+          </a>
           </a>
         </div>
       </div>
     </section>
   </div>
-
   <!-- ================================================ -->
   <!-- MOBILE BODY CONTAINER -->
   <!-- ================================================ -->
@@ -1497,11 +1539,11 @@
       <div class="hero-content">
         <h1>Transforming Data Into Intelligent Systems</h1>
         <div class="hero-tagline">
-          I architect <span class="highlight">scalable systems</span> that transform raw data into 
-          <span class="highlight-2">intelligent solutions</span>, blending 
+          I architect <span class="highlight">scalable systems</span> that transform raw data into
+          <span class="highlight-2">intelligent solutions</span>, blending
           <span class="highlight-3">ML engineering</span> with production-grade infrastructure.
         </div>
-        
+
         <div class="btn-group">
           <a href="#projects" class="btn btn-primary">
             <i class="fas fa-rocket"></i> View Projects
@@ -1511,7 +1553,7 @@
           </a>
         </div>
       </div>
-      
+
       <div class="terminal-display fade-in">
         <div class="terminal-header">
           <div class="terminal-dots">
@@ -1521,7 +1563,7 @@
           </div>
           <div class="terminal-title">SYSTEM TERMINAL</div>
         </div>
-        
+
         <div class="terminal-content">
           <div class="terminal-line">
             <span class="prompt">$</span>
@@ -1531,7 +1573,7 @@
             <span class="prompt">></span>
             <span id="output1-mobile">Vishal Kumar A - Data Alchemist & Systems Architect</span>
           </div>
-          
+
           <div class="terminal-line">
             <span class="prompt">$</span>
             <span class="command" id="cmd2-mobile"></span>
@@ -1558,11 +1600,11 @@
         <div class="section-label">About Me</div>
         <h2 class="section-title">The Data Alchemist</h2>
         <p class="section-subtitle">
-          Transforming abstract data into tangible intelligence through advanced systems architecture 
+          Transforming abstract data into tangible intelligence through advanced systems architecture
           and machine learning engineering.
         </p>
       </div>
-      
+
       <div class="card-grid">
         <div class="card fade-in">
           <div class="card-icon">
@@ -1570,7 +1612,7 @@
           </div>
           <h3>Core Philosophy</h3>
           <p>
-            Data is the new alchemy. I transform raw, chaotic information into structured intelligence 
+            Data is the new alchemy. I transform raw, chaotic information into structured intelligence
             through systematic architecture and scalable engineering.
           </p>
           <div class="skill-progress">
@@ -1588,14 +1630,14 @@
             </div>
           </div>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-server"></i>
           </div>
           <h3>Technical Arsenal</h3>
           <p>
-            Specialized in building resilient systems that process millions of data points, 
+            Specialized in building resilient systems that process millions of data points,
             with expertise spanning from algorithm design to production deployment.
           </p>
           <div class="skill-matrix">
@@ -1622,7 +1664,7 @@
           A comprehensive toolkit for building intelligent, scalable systems from ground up.
         </p>
       </div>
-      
+
       <div class="card-grid">
         <div class="card fade-in">
           <div class="card-icon">
@@ -1638,7 +1680,7 @@
             <li>REST & GraphQL APIs</li>
           </ul>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-robot"></i>
@@ -1653,7 +1695,7 @@
             <li>Data visualization</li>
           </ul>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-cloud"></i>
@@ -1680,7 +1722,7 @@
           Production-grade systems designed for scale, reliability, and intelligent data processing.
         </p>
       </div>
-      
+
       <div class="card-grid">
         <div class="card fade-in">
           <div class="card-icon">
@@ -1692,7 +1734,7 @@
           <p><strong>Tech Stack:</strong> Python, Celery, Redis, SMTP/DNS</p>
           <p><strong>Architecture:</strong> Distributed worker pools, credit-based billing, real-time monitoring</p>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
             <i class="fas fa-file-contract"></i>
@@ -1703,10 +1745,10 @@
           <p><strong>Tech Stack:</strong> PyPDF2, Regex, Pandas, Flask</p>
           <p><strong>Process:</strong> PDF → Web → Excel automation with validation workflows</p>
         </div>
-        
+
         <div class="card fade-in">
           <div class="card-icon">
-          <i class="fas fa-analytics"></i>
+            <i class="fas fa-analytics"></i>
           </div>
           <h3>Revenue Intelligence Hub</h3>
           <p><strong>Data Volume:</strong> ₹984M+ revenue analyzed</p>
@@ -1726,7 +1768,7 @@
           Scalable, fault-tolerant architecture designed for high-volume data processing and real-time analytics.
         </p>
       </div>
-      
+
       <div class="card-grid">
         <div class="card fade-in">
           <h3><i class="fas fa-layer-group"></i> Multi-Layer Architecture</h3>
@@ -1748,7 +1790,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="card fade-in">
           <h3><i class="fas fa-expand-arrows-alt"></i> Scaling Protocol</h3>
           <ul style="color: var(--muted); line-height: 2; margin-top: 1rem; padding-left: 1.2rem;">
@@ -1772,7 +1814,7 @@
           Ready to architect intelligent systems. Let's transform data into competitive advantage.
         </p>
       </div>
-      
+
       <div class="contact-terminal fade-in">
         <div class="terminal-header">
           <div class="terminal-dots">
@@ -1782,7 +1824,7 @@
           </div>
           <div class="terminal-title">CONTACT TERMINAL</div>
         </div>
-        
+
         <div class="contact-info">
           <a href="mailto:vishalkumara.vka@gmail.com" class="contact-item">
             <div class="contact-icon">
@@ -1793,7 +1835,7 @@
               <div style="color: var(--muted); font-size: 0.95rem;">vishalkumara.vka@gmail.com</div>
             </div>
           </a>
-          
+
           <div class="contact-item">
             <div class="contact-icon">
               <i class="fas fa-phone"></i>
@@ -1803,7 +1845,7 @@
               <div style="color: var(--muted); font-size: 0.95rem;">+91 7760752108</div>
             </div>
           </div>
-          
+
           <a href="https://github.com/Vishalkumar-tech" target="_blank" class="contact-item">
             <div class="contact-icon">
               <i class="fab fa-github"></i>
@@ -1813,7 +1855,7 @@
               <div style="color: var(--muted); font-size: 0.95rem;">github.com/Vishalkumar-tech</div>
             </div>
           </a>
-          
+
           <a href="https://linkedin.com/in/vishalkumara" target="_blank" class="contact-item">
             <div class="contact-icon">
               <i class="fab fa-linkedin"></i>
@@ -1824,13 +1866,18 @@
             </div>
           </a>
         </div>
-        
+
         <div style="text-align: center; margin-top: 3rem;">
           <a href="mailto:vishalkumara.vka@gmail.com" class="btn btn-primary">
             <i class="fas fa-paper-plane"></i> Send Message
           </a>
-          <a href="#" class="btn btn-secondary" style="margin-left: 1rem; margin-top: 1rem;">
+          <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download
+            class="btn btn-secondary" style="margin-left: 1rem;">
             <i class="fas fa-download"></i> Download Resume
+          </a>
+
+          </a>
+          </a>
           </a>
         </div>
       </div>
@@ -1844,7 +1891,7 @@
         <div class="footer-signature">VA</div>
         <p style="color: var(--muted);">Vishal Kumar A | Data Alchemist & Systems Architect</p>
       </div>
-      
+
       <div>
         <h3 style="color: var(--text); margin-bottom: 1rem;">Expertise</h3>
         <p style="color: var(--muted); line-height: 2;">
@@ -1854,17 +1901,19 @@
           Production Deployment
         </p>
       </div>
-      
+
       <div>
         <h3 style="color: var(--text); margin-bottom: 1rem;">Connect</h3>
         <div style="margin-top: 1rem;">
-          <a href="https://github.com/Vishalkumar-tech" target="_blank" style="color: var(--muted); margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-github"></i></a>
-          <a href="https://linkedin.com/in/vishalkumara" target="_blank" style="color: var(--muted); margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/Vishalkumar-tech" target="_blank"
+            style="color: var(--muted); margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/vishalkumara" target="_blank"
+            style="color: var(--muted); margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
           <a href="#" style="color: var(--muted); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
     </div>
-    
+
     <div style="border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 2rem;">
       <p style="color: var(--muted);">
         © 2024 Vishal Kumar A. All rights reserved.
@@ -1876,6 +1925,9 @@
   </footer>
 
   <script>
+
+
+
     // Instagram-style Photo Modal
     const desktopHeaderProfile = document.getElementById('desktopHeaderProfile');
     const mobileHeaderProfile = document.getElementById('mobileHeaderProfile');
@@ -1893,14 +1945,13 @@
         document.body.style.overflow = 'hidden';
       });
     }
-    
+
     if (mobileHeaderProfile) {
       mobileHeaderProfile.addEventListener('click', () => {
         photoModal.classList.add('active');
         document.body.style.overflow = 'hidden';
       });
     }
-
     // Close modal when X is clicked
     closeModal.addEventListener('click', () => {
       photoModal.classList.remove('active');
@@ -1956,7 +2007,7 @@
     function typeWriter(element, text, speed, callback) {
       let i = 0;
       element.innerHTML = '';
-      
+
       function type() {
         if (i < text.length) {
           element.innerHTML += text.charAt(i);
@@ -1978,7 +2029,7 @@
       ];
 
       let current = 0;
-      
+
       function typeNext() {
         if (current < commands.length) {
           typeWriter(commands[current].element, commands[current].text, commands[current].speed, () => {
@@ -1987,7 +2038,7 @@
           });
         }
       }
-      
+
       setTimeout(typeNext, 1000);
     }
 
@@ -2000,7 +2051,7 @@
       ];
 
       let current = 0;
-      
+
       function typeNext() {
         if (current < commands.length) {
           typeWriter(commands[current].element, commands[current].text, commands[current].speed, () => {
@@ -2009,15 +2060,15 @@
           });
         }
       }
-      
+
       setTimeout(typeNext, 1000);
     }
 
     // Header scroll effect for both headers
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       const desktopHeader = document.querySelector('.desktop-header');
       const mobileHeader = document.querySelector('.mobile-header');
-      
+
       if (window.scrollY > 50) {
         if (desktopHeader) desktopHeader.classList.add('scrolled');
         if (mobileHeader) mobileHeader.classList.add('scrolled');
@@ -2030,11 +2081,11 @@
     // Fade-in animation on scroll
     function checkVisibility() {
       const elements = document.querySelectorAll('.fade-in');
-      
+
       elements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const elementVisible = 150;
-        
+
         if (elementTop < window.innerHeight - elementVisible) {
           element.classList.add('visible');
         }
@@ -2043,11 +2094,11 @@
 
     // Smooth scroll for navigation
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
-        
+
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           window.scrollTo({
@@ -2059,7 +2110,7 @@
     });
 
     // Initialize everything
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Initialize terminals based on device
       if (window.innerWidth >= 768) {
         // Desktop
@@ -2072,13 +2123,13 @@
           initMobileTerminal();
         }
       }
-      
+
       // Initial visibility check
       checkVisibility();
-      
+
       // Check visibility on scroll
       window.addEventListener('scroll', checkVisibility);
-      
+
       // Animate progress bars when visible
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -2090,16 +2141,17 @@
           }
         });
       }, { threshold: 0.3 });
-      
+
       document.querySelectorAll('.card').forEach(card => {
         observer.observe(card);
       });
-      
+
       // Handle resize events
-      window.addEventListener('resize', function() {
+      window.addEventListener('resize', function () {
         // Reinitialize terminal if needed (optional)
       });
     });
   </script>
 </body>
+
 </html>
