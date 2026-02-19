@@ -1,0 +1,2756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandas DataFrame Explorer | Vishal Kumar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #2d3748;
+        }
+
+        /* Glass morphism effect */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Header Section */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .title-section h1 {
+            font-size: 2.5em;
+            color: #1a202c;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .title-section h1 span {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #718096;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .subtitle i {
+            color: #667eea;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Search and Filter Section */
+        .search-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            padding: 8px 16px;
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 0.9em;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chip:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .chip.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Table Container */
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .row-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9em;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+
+        .data-table th {
+            background: #f8fafc;
+            color: #1a202c;
+            font-weight: 600;
+            padding: 15px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f7fafc;
+            transition: background 0.3s ease;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* Column badges */
+        .column-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #4a5568;
+            margin: 2px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            color: #4a5568;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            color: #667eea;
+            font-size: 1.5em;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            color: #764ba2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .title-section h1 {
+                font-size: 2em;
+            }
+            
+            .stat-value {
+                font-size: 1.5em;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Tooltip */
+        [data-tooltip] {
+            position: relative;
+            cursor: help;
+        }
+
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 10px;
+            background: #1a202c;
+            color: white;
+            border-radius: 5px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            display: none;
+            z-index: 1000;
+        }
+
+        [data-tooltip]:hover:before {
+            display: block;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5X2YH97MM7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5X2YH97MM7');
+</script>
+<body>
+
+<div class="container">
+    
+    <!-- Header Section -->
+    <div class="header">
+        <div class="profile-section">
+            <div class="profile-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="title-section">
+                <h1>Vishal Kumar <span>|Pandas Handbook</span></h1>
+                <div class="subtitle">
+                    <i class="fas fa-map-marker-alt"></i> Data Scientist & software engineering
+                    <i class="fas fa-code-branch"></i> 10+ Projects
+                    <i class="fas fa-award"></i> Msc in Data Science
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-table"></i></div>
+                <div class="stat-value">437</div>
+                <div class="stat-label">Total Functions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-columns"></i></div>
+                <div class="stat-value">3</div>
+                <div class="stat-label">Data Columns</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+                <div class="stat-value">Python</div>
+                <div class="stat-label">Technology</div>
+            </div>
+        </div>
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search functions..." onkeyup="searchTable()">
+                <i class="fas fa-search" style="align-self: center; margin-left: -40px; color: #a0aec0;"></i>
+            </div>
+            <div class="filter-chips" id="filterChips">
+                <span class="chip active" onclick="filterColumn('all')">All Columns</span><span class="chip" onclick="filterColumn('Function')">Function</span><span class="chip" onclick="filterColumn('Meaning')">Meaning</span><span class="chip" onclick="filterColumn('Example (Python)')">Example (Python)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-container">
+        <div class="table-header">
+            <h2><i class="fas fa-list-alt"></i> Pandas DataFrame Functions Reference</h2>
+            <span class="row-count" id="rowCount">Showing 437 entries</span>
+        </div>
+        <div class="table-wrapper" id="tableWrapper">
+            <table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Function</th>
+      <th>Meaning</th>
+      <th>Example (Python)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>T</td>
+      <td>Pandas DataFrame public function for data manipulation: T</td>
+      <td>df.T()</td>
+    </tr>
+    <tr>
+      <td>_AXIS_LEN</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _AXIS_LEN</td>
+      <td># internal use: _AXIS_LEN</td>
+    </tr>
+    <tr>
+      <td>_AXIS_ORDERS</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _AXIS_ORDERS</td>
+      <td># internal use: _AXIS_ORDERS</td>
+    </tr>
+    <tr>
+      <td>_AXIS_TO_AXIS_NUMBER</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _AXIS_TO_AXIS_NUMBER</td>
+      <td># internal use: _AXIS_TO_AXIS_NUMBER</td>
+    </tr>
+    <tr>
+      <td>_HANDLED_TYPES</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _HANDLED_TYPES</td>
+      <td># internal use: _HANDLED_TYPES</td>
+    </tr>
+    <tr>
+      <td>__abs__</td>
+      <td>Special Python method controlling DataFrame behavior: __abs__</td>
+      <td># automatically used internally: __abs__</td>
+    </tr>
+    <tr>
+      <td>__add__</td>
+      <td>Special Python method controlling DataFrame behavior: __add__</td>
+      <td># automatically used internally: __add__</td>
+    </tr>
+    <tr>
+      <td>__and__</td>
+      <td>Special Python method controlling DataFrame behavior: __and__</td>
+      <td># automatically used internally: __and__</td>
+    </tr>
+    <tr>
+      <td>__annotations__</td>
+      <td>Special Python method controlling DataFrame behavior: __annotations__</td>
+      <td># automatically used internally: __annotations__</td>
+    </tr>
+    <tr>
+      <td>__array__</td>
+      <td>Special Python method controlling DataFrame behavior: __array__</td>
+      <td># automatically used internally: __array__</td>
+    </tr>
+    <tr>
+      <td>__array_priority__</td>
+      <td>Special Python method controlling DataFrame behavior: __array_priority__</td>
+      <td># automatically used internally: __array_priority__</td>
+    </tr>
+    <tr>
+      <td>__array_ufunc__</td>
+      <td>Special Python method controlling DataFrame behavior: __array_ufunc__</td>
+      <td># automatically used internally: __array_ufunc__</td>
+    </tr>
+    <tr>
+      <td>__arrow_c_stream__</td>
+      <td>Special Python method controlling DataFrame behavior: __arrow_c_stream__</td>
+      <td># automatically used internally: __arrow_c_stream__</td>
+    </tr>
+    <tr>
+      <td>__bool__</td>
+      <td>Special Python method controlling DataFrame behavior: __bool__</td>
+      <td># automatically used internally: __bool__</td>
+    </tr>
+    <tr>
+      <td>__class__</td>
+      <td>Special Python method controlling DataFrame behavior: __class__</td>
+      <td># automatically used internally: __class__</td>
+    </tr>
+    <tr>
+      <td>__contains__</td>
+      <td>Special Python method controlling DataFrame behavior: __contains__</td>
+      <td># automatically used internally: __contains__</td>
+    </tr>
+    <tr>
+      <td>__copy__</td>
+      <td>Special Python method controlling DataFrame behavior: __copy__</td>
+      <td># automatically used internally: __copy__</td>
+    </tr>
+    <tr>
+      <td>__dataframe__</td>
+      <td>Special Python method controlling DataFrame behavior: __dataframe__</td>
+      <td># automatically used internally: __dataframe__</td>
+    </tr>
+    <tr>
+      <td>__dataframe_consortium_standard__</td>
+      <td>Special Python method controlling DataFrame behavior: __dataframe_consortium_standard__</td>
+      <td># automatically used internally: __dataframe_consortium_standard__</td>
+    </tr>
+    <tr>
+      <td>__deepcopy__</td>
+      <td>Special Python method controlling DataFrame behavior: __deepcopy__</td>
+      <td># automatically used internally: __deepcopy__</td>
+    </tr>
+    <tr>
+      <td>__delattr__</td>
+      <td>Special Python method controlling DataFrame behavior: __delattr__</td>
+      <td># automatically used internally: __delattr__</td>
+    </tr>
+    <tr>
+      <td>__delitem__</td>
+      <td>Special Python method controlling DataFrame behavior: __delitem__</td>
+      <td># automatically used internally: __delitem__</td>
+    </tr>
+    <tr>
+      <td>__dict__</td>
+      <td>Special Python method controlling DataFrame behavior: __dict__</td>
+      <td># automatically used internally: __dict__</td>
+    </tr>
+    <tr>
+      <td>__dir__</td>
+      <td>Special Python method controlling DataFrame behavior: __dir__</td>
+      <td># automatically used internally: __dir__</td>
+    </tr>
+    <tr>
+      <td>__divmod__</td>
+      <td>Special Python method controlling DataFrame behavior: __divmod__</td>
+      <td># automatically used internally: __divmod__</td>
+    </tr>
+    <tr>
+      <td>__doc__</td>
+      <td>Special Python method controlling DataFrame behavior: __doc__</td>
+      <td># automatically used internally: __doc__</td>
+    </tr>
+    <tr>
+      <td>__eq__</td>
+      <td>Special Python method controlling DataFrame behavior: __eq__</td>
+      <td># automatically used internally: __eq__</td>
+    </tr>
+    <tr>
+      <td>__finalize__</td>
+      <td>Special Python method controlling DataFrame behavior: __finalize__</td>
+      <td># automatically used internally: __finalize__</td>
+    </tr>
+    <tr>
+      <td>__floordiv__</td>
+      <td>Special Python method controlling DataFrame behavior: __floordiv__</td>
+      <td># automatically used internally: __floordiv__</td>
+    </tr>
+    <tr>
+      <td>__format__</td>
+      <td>Special Python method controlling DataFrame behavior: __format__</td>
+      <td># automatically used internally: __format__</td>
+    </tr>
+    <tr>
+      <td>__ge__</td>
+      <td>Special Python method controlling DataFrame behavior: __ge__</td>
+      <td># automatically used internally: __ge__</td>
+    </tr>
+    <tr>
+      <td>__getattr__</td>
+      <td>Special Python method controlling DataFrame behavior: __getattr__</td>
+      <td># automatically used internally: __getattr__</td>
+    </tr>
+    <tr>
+      <td>__getattribute__</td>
+      <td>Special Python method controlling DataFrame behavior: __getattribute__</td>
+      <td># automatically used internally: __getattribute__</td>
+    </tr>
+    <tr>
+      <td>__getitem__</td>
+      <td>Special Python method controlling DataFrame behavior: __getitem__</td>
+      <td># automatically used internally: __getitem__</td>
+    </tr>
+    <tr>
+      <td>__getstate__</td>
+      <td>Special Python method controlling DataFrame behavior: __getstate__</td>
+      <td># automatically used internally: __getstate__</td>
+    </tr>
+    <tr>
+      <td>__gt__</td>
+      <td>Special Python method controlling DataFrame behavior: __gt__</td>
+      <td># automatically used internally: __gt__</td>
+    </tr>
+    <tr>
+      <td>__hash__</td>
+      <td>Special Python method controlling DataFrame behavior: __hash__</td>
+      <td># automatically used internally: __hash__</td>
+    </tr>
+    <tr>
+      <td>__iadd__</td>
+      <td>Special Python method controlling DataFrame behavior: __iadd__</td>
+      <td># automatically used internally: __iadd__</td>
+    </tr>
+    <tr>
+      <td>__iand__</td>
+      <td>Special Python method controlling DataFrame behavior: __iand__</td>
+      <td># automatically used internally: __iand__</td>
+    </tr>
+    <tr>
+      <td>__ifloordiv__</td>
+      <td>Special Python method controlling DataFrame behavior: __ifloordiv__</td>
+      <td># automatically used internally: __ifloordiv__</td>
+    </tr>
+    <tr>
+      <td>__imod__</td>
+      <td>Special Python method controlling DataFrame behavior: __imod__</td>
+      <td># automatically used internally: __imod__</td>
+    </tr>
+    <tr>
+      <td>__imul__</td>
+      <td>Special Python method controlling DataFrame behavior: __imul__</td>
+      <td># automatically used internally: __imul__</td>
+    </tr>
+    <tr>
+      <td>__init__</td>
+      <td>Special Python method controlling DataFrame behavior: __init__</td>
+      <td># automatically used internally: __init__</td>
+    </tr>
+    <tr>
+      <td>__init_subclass__</td>
+      <td>Special Python method controlling DataFrame behavior: __init_subclass__</td>
+      <td># automatically used internally: __init_subclass__</td>
+    </tr>
+    <tr>
+      <td>__invert__</td>
+      <td>Special Python method controlling DataFrame behavior: __invert__</td>
+      <td># automatically used internally: __invert__</td>
+    </tr>
+    <tr>
+      <td>__ior__</td>
+      <td>Special Python method controlling DataFrame behavior: __ior__</td>
+      <td># automatically used internally: __ior__</td>
+    </tr>
+    <tr>
+      <td>__ipow__</td>
+      <td>Special Python method controlling DataFrame behavior: __ipow__</td>
+      <td># automatically used internally: __ipow__</td>
+    </tr>
+    <tr>
+      <td>__isub__</td>
+      <td>Special Python method controlling DataFrame behavior: __isub__</td>
+      <td># automatically used internally: __isub__</td>
+    </tr>
+    <tr>
+      <td>__iter__</td>
+      <td>Special Python method controlling DataFrame behavior: __iter__</td>
+      <td># automatically used internally: __iter__</td>
+    </tr>
+    <tr>
+      <td>__itruediv__</td>
+      <td>Special Python method controlling DataFrame behavior: __itruediv__</td>
+      <td># automatically used internally: __itruediv__</td>
+    </tr>
+    <tr>
+      <td>__ixor__</td>
+      <td>Special Python method controlling DataFrame behavior: __ixor__</td>
+      <td># automatically used internally: __ixor__</td>
+    </tr>
+    <tr>
+      <td>__le__</td>
+      <td>Special Python method controlling DataFrame behavior: __le__</td>
+      <td># automatically used internally: __le__</td>
+    </tr>
+    <tr>
+      <td>__len__</td>
+      <td>Special Python method controlling DataFrame behavior: __len__</td>
+      <td># automatically used internally: __len__</td>
+    </tr>
+    <tr>
+      <td>__lt__</td>
+      <td>Special Python method controlling DataFrame behavior: __lt__</td>
+      <td># automatically used internally: __lt__</td>
+    </tr>
+    <tr>
+      <td>__matmul__</td>
+      <td>Special Python method controlling DataFrame behavior: __matmul__</td>
+      <td># automatically used internally: __matmul__</td>
+    </tr>
+    <tr>
+      <td>__mod__</td>
+      <td>Special Python method controlling DataFrame behavior: __mod__</td>
+      <td># automatically used internally: __mod__</td>
+    </tr>
+    <tr>
+      <td>__module__</td>
+      <td>Special Python method controlling DataFrame behavior: __module__</td>
+      <td># automatically used internally: __module__</td>
+    </tr>
+    <tr>
+      <td>__mul__</td>
+      <td>Special Python method controlling DataFrame behavior: __mul__</td>
+      <td># automatically used internally: __mul__</td>
+    </tr>
+    <tr>
+      <td>__ne__</td>
+      <td>Special Python method controlling DataFrame behavior: __ne__</td>
+      <td># automatically used internally: __ne__</td>
+    </tr>
+    <tr>
+      <td>__neg__</td>
+      <td>Special Python method controlling DataFrame behavior: __neg__</td>
+      <td># automatically used internally: __neg__</td>
+    </tr>
+    <tr>
+      <td>__new__</td>
+      <td>Special Python method controlling DataFrame behavior: __new__</td>
+      <td># automatically used internally: __new__</td>
+    </tr>
+    <tr>
+      <td>__nonzero__</td>
+      <td>Special Python method controlling DataFrame behavior: __nonzero__</td>
+      <td># automatically used internally: __nonzero__</td>
+    </tr>
+    <tr>
+      <td>__or__</td>
+      <td>Special Python method controlling DataFrame behavior: __or__</td>
+      <td># automatically used internally: __or__</td>
+    </tr>
+    <tr>
+      <td>__pandas_priority__</td>
+      <td>Special Python method controlling DataFrame behavior: __pandas_priority__</td>
+      <td># automatically used internally: __pandas_priority__</td>
+    </tr>
+    <tr>
+      <td>__pos__</td>
+      <td>Special Python method controlling DataFrame behavior: __pos__</td>
+      <td># automatically used internally: __pos__</td>
+    </tr>
+    <tr>
+      <td>__pow__</td>
+      <td>Special Python method controlling DataFrame behavior: __pow__</td>
+      <td># automatically used internally: __pow__</td>
+    </tr>
+    <tr>
+      <td>__radd__</td>
+      <td>Special Python method controlling DataFrame behavior: __radd__</td>
+      <td># automatically used internally: __radd__</td>
+    </tr>
+    <tr>
+      <td>__rand__</td>
+      <td>Special Python method controlling DataFrame behavior: __rand__</td>
+      <td># automatically used internally: __rand__</td>
+    </tr>
+    <tr>
+      <td>__rdivmod__</td>
+      <td>Special Python method controlling DataFrame behavior: __rdivmod__</td>
+      <td># automatically used internally: __rdivmod__</td>
+    </tr>
+    <tr>
+      <td>__reduce__</td>
+      <td>Special Python method controlling DataFrame behavior: __reduce__</td>
+      <td># automatically used internally: __reduce__</td>
+    </tr>
+    <tr>
+      <td>__reduce_ex__</td>
+      <td>Special Python method controlling DataFrame behavior: __reduce_ex__</td>
+      <td># automatically used internally: __reduce_ex__</td>
+    </tr>
+    <tr>
+      <td>__repr__</td>
+      <td>Special Python method controlling DataFrame behavior: __repr__</td>
+      <td># automatically used internally: __repr__</td>
+    </tr>
+    <tr>
+      <td>__rfloordiv__</td>
+      <td>Special Python method controlling DataFrame behavior: __rfloordiv__</td>
+      <td># automatically used internally: __rfloordiv__</td>
+    </tr>
+    <tr>
+      <td>__rmatmul__</td>
+      <td>Special Python method controlling DataFrame behavior: __rmatmul__</td>
+      <td># automatically used internally: __rmatmul__</td>
+    </tr>
+    <tr>
+      <td>__rmod__</td>
+      <td>Special Python method controlling DataFrame behavior: __rmod__</td>
+      <td># automatically used internally: __rmod__</td>
+    </tr>
+    <tr>
+      <td>__rmul__</td>
+      <td>Special Python method controlling DataFrame behavior: __rmul__</td>
+      <td># automatically used internally: __rmul__</td>
+    </tr>
+    <tr>
+      <td>__ror__</td>
+      <td>Special Python method controlling DataFrame behavior: __ror__</td>
+      <td># automatically used internally: __ror__</td>
+    </tr>
+    <tr>
+      <td>__round__</td>
+      <td>Special Python method controlling DataFrame behavior: __round__</td>
+      <td># automatically used internally: __round__</td>
+    </tr>
+    <tr>
+      <td>__rpow__</td>
+      <td>Special Python method controlling DataFrame behavior: __rpow__</td>
+      <td># automatically used internally: __rpow__</td>
+    </tr>
+    <tr>
+      <td>__rsub__</td>
+      <td>Special Python method controlling DataFrame behavior: __rsub__</td>
+      <td># automatically used internally: __rsub__</td>
+    </tr>
+    <tr>
+      <td>__rtruediv__</td>
+      <td>Special Python method controlling DataFrame behavior: __rtruediv__</td>
+      <td># automatically used internally: __rtruediv__</td>
+    </tr>
+    <tr>
+      <td>__rxor__</td>
+      <td>Special Python method controlling DataFrame behavior: __rxor__</td>
+      <td># automatically used internally: __rxor__</td>
+    </tr>
+    <tr>
+      <td>__setattr__</td>
+      <td>Special Python method controlling DataFrame behavior: __setattr__</td>
+      <td># automatically used internally: __setattr__</td>
+    </tr>
+    <tr>
+      <td>__setitem__</td>
+      <td>Special Python method controlling DataFrame behavior: __setitem__</td>
+      <td># automatically used internally: __setitem__</td>
+    </tr>
+    <tr>
+      <td>__setstate__</td>
+      <td>Special Python method controlling DataFrame behavior: __setstate__</td>
+      <td># automatically used internally: __setstate__</td>
+    </tr>
+    <tr>
+      <td>__sizeof__</td>
+      <td>Special Python method controlling DataFrame behavior: __sizeof__</td>
+      <td># automatically used internally: __sizeof__</td>
+    </tr>
+    <tr>
+      <td>__str__</td>
+      <td>Special Python method controlling DataFrame behavior: __str__</td>
+      <td># automatically used internally: __str__</td>
+    </tr>
+    <tr>
+      <td>__sub__</td>
+      <td>Special Python method controlling DataFrame behavior: __sub__</td>
+      <td># automatically used internally: __sub__</td>
+    </tr>
+    <tr>
+      <td>__subclasshook__</td>
+      <td>Special Python method controlling DataFrame behavior: __subclasshook__</td>
+      <td># automatically used internally: __subclasshook__</td>
+    </tr>
+    <tr>
+      <td>__truediv__</td>
+      <td>Special Python method controlling DataFrame behavior: __truediv__</td>
+      <td># automatically used internally: __truediv__</td>
+    </tr>
+    <tr>
+      <td>__weakref__</td>
+      <td>Special Python method controlling DataFrame behavior: __weakref__</td>
+      <td># automatically used internally: __weakref__</td>
+    </tr>
+    <tr>
+      <td>__xor__</td>
+      <td>Special Python method controlling DataFrame behavior: __xor__</td>
+      <td># automatically used internally: __xor__</td>
+    </tr>
+    <tr>
+      <td>_accessors</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _accessors</td>
+      <td># internal use: _accessors</td>
+    </tr>
+    <tr>
+      <td>_accum_func</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _accum_func</td>
+      <td># internal use: _accum_func</td>
+    </tr>
+    <tr>
+      <td>_agg_examples_doc</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _agg_examples_doc</td>
+      <td># internal use: _agg_examples_doc</td>
+    </tr>
+    <tr>
+      <td>_agg_see_also_doc</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _agg_see_also_doc</td>
+      <td># internal use: _agg_see_also_doc</td>
+    </tr>
+    <tr>
+      <td>_align_for_op</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _align_for_op</td>
+      <td># internal use: _align_for_op</td>
+    </tr>
+    <tr>
+      <td>_align_frame</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _align_frame</td>
+      <td># internal use: _align_frame</td>
+    </tr>
+    <tr>
+      <td>_align_series</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _align_series</td>
+      <td># internal use: _align_series</td>
+    </tr>
+    <tr>
+      <td>_append</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _append</td>
+      <td># internal use: _append</td>
+    </tr>
+    <tr>
+      <td>_arith_method</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _arith_method</td>
+      <td># internal use: _arith_method</td>
+    </tr>
+    <tr>
+      <td>_arith_method_with_reindex</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _arith_method_with_reindex</td>
+      <td># internal use: _arith_method_with_reindex</td>
+    </tr>
+    <tr>
+      <td>_as_manager</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _as_manager</td>
+      <td># internal use: _as_manager</td>
+    </tr>
+    <tr>
+      <td>_box_col_values</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _box_col_values</td>
+      <td># internal use: _box_col_values</td>
+    </tr>
+    <tr>
+      <td>_can_fast_transpose</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _can_fast_transpose</td>
+      <td># internal use: _can_fast_transpose</td>
+    </tr>
+    <tr>
+      <td>_check_inplace_and_allows_duplicate_labels</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _check_inplace_and_allows_duplicate_labels</td>
+      <td># internal use: _check_inplace_and_allows_duplicate_labels</td>
+    </tr>
+    <tr>
+      <td>_check_is_chained_assignment_possible</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _check_is_chained_assignment_possible</td>
+      <td># internal use: _check_is_chained_assignment_possible</td>
+    </tr>
+    <tr>
+      <td>_check_label_or_level_ambiguity</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _check_label_or_level_ambiguity</td>
+      <td># internal use: _check_label_or_level_ambiguity</td>
+    </tr>
+    <tr>
+      <td>_check_setitem_copy</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _check_setitem_copy</td>
+      <td># internal use: _check_setitem_copy</td>
+    </tr>
+    <tr>
+      <td>_clear_item_cache</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _clear_item_cache</td>
+      <td># internal use: _clear_item_cache</td>
+    </tr>
+    <tr>
+      <td>_clip_with_one_bound</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _clip_with_one_bound</td>
+      <td># internal use: _clip_with_one_bound</td>
+    </tr>
+    <tr>
+      <td>_clip_with_scalar</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _clip_with_scalar</td>
+      <td># internal use: _clip_with_scalar</td>
+    </tr>
+    <tr>
+      <td>_cmp_method</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _cmp_method</td>
+      <td># internal use: _cmp_method</td>
+    </tr>
+    <tr>
+      <td>_combine_frame</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _combine_frame</td>
+      <td># internal use: _combine_frame</td>
+    </tr>
+    <tr>
+      <td>_consolidate</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _consolidate</td>
+      <td># internal use: _consolidate</td>
+    </tr>
+    <tr>
+      <td>_consolidate_inplace</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _consolidate_inplace</td>
+      <td># internal use: _consolidate_inplace</td>
+    </tr>
+    <tr>
+      <td>_construct_axes_dict</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _construct_axes_dict</td>
+      <td># internal use: _construct_axes_dict</td>
+    </tr>
+    <tr>
+      <td>_construct_result</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _construct_result</td>
+      <td># internal use: _construct_result</td>
+    </tr>
+    <tr>
+      <td>_constructor</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _constructor</td>
+      <td># internal use: _constructor</td>
+    </tr>
+    <tr>
+      <td>_constructor_from_mgr</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _constructor_from_mgr</td>
+      <td># internal use: _constructor_from_mgr</td>
+    </tr>
+    <tr>
+      <td>_constructor_sliced</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _constructor_sliced</td>
+      <td># internal use: _constructor_sliced</td>
+    </tr>
+    <tr>
+      <td>_constructor_sliced_from_mgr</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _constructor_sliced_from_mgr</td>
+      <td># internal use: _constructor_sliced_from_mgr</td>
+    </tr>
+    <tr>
+      <td>_create_data_for_split_and_tight_to_dict</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _create_data_for_split_and_tight_to_dict</td>
+      <td># internal use: _create_data_for_split_and_tight_to_dict</td>
+    </tr>
+    <tr>
+      <td>_data</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _data</td>
+      <td># internal use: _data</td>
+    </tr>
+    <tr>
+      <td>_deprecate_downcast</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _deprecate_downcast</td>
+      <td># internal use: _deprecate_downcast</td>
+    </tr>
+    <tr>
+      <td>_dir_additions</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _dir_additions</td>
+      <td># internal use: _dir_additions</td>
+    </tr>
+    <tr>
+      <td>_dir_deletions</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _dir_deletions</td>
+      <td># internal use: _dir_deletions</td>
+    </tr>
+    <tr>
+      <td>_dispatch_frame_op</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _dispatch_frame_op</td>
+      <td># internal use: _dispatch_frame_op</td>
+    </tr>
+    <tr>
+      <td>_drop_axis</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _drop_axis</td>
+      <td># internal use: _drop_axis</td>
+    </tr>
+    <tr>
+      <td>_drop_labels_or_levels</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _drop_labels_or_levels</td>
+      <td># internal use: _drop_labels_or_levels</td>
+    </tr>
+    <tr>
+      <td>_ensure_valid_index</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _ensure_valid_index</td>
+      <td># internal use: _ensure_valid_index</td>
+    </tr>
+    <tr>
+      <td>_find_valid_index</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _find_valid_index</td>
+      <td># internal use: _find_valid_index</td>
+    </tr>
+    <tr>
+      <td>_flex_arith_method</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _flex_arith_method</td>
+      <td># internal use: _flex_arith_method</td>
+    </tr>
+    <tr>
+      <td>_flex_cmp_method</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _flex_cmp_method</td>
+      <td># internal use: _flex_cmp_method</td>
+    </tr>
+    <tr>
+      <td>_from_arrays</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _from_arrays</td>
+      <td># internal use: _from_arrays</td>
+    </tr>
+    <tr>
+      <td>_from_mgr</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _from_mgr</td>
+      <td># internal use: _from_mgr</td>
+    </tr>
+    <tr>
+      <td>_get_agg_axis</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_agg_axis</td>
+      <td># internal use: _get_agg_axis</td>
+    </tr>
+    <tr>
+      <td>_get_axis</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_axis</td>
+      <td># internal use: _get_axis</td>
+    </tr>
+    <tr>
+      <td>_get_axis_name</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_axis_name</td>
+      <td># internal use: _get_axis_name</td>
+    </tr>
+    <tr>
+      <td>_get_axis_number</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_axis_number</td>
+      <td># internal use: _get_axis_number</td>
+    </tr>
+    <tr>
+      <td>_get_axis_resolvers</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_axis_resolvers</td>
+      <td># internal use: _get_axis_resolvers</td>
+    </tr>
+    <tr>
+      <td>_get_block_manager_axis</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_block_manager_axis</td>
+      <td># internal use: _get_block_manager_axis</td>
+    </tr>
+    <tr>
+      <td>_get_bool_data</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_bool_data</td>
+      <td># internal use: _get_bool_data</td>
+    </tr>
+    <tr>
+      <td>_get_cleaned_column_resolvers</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_cleaned_column_resolvers</td>
+      <td># internal use: _get_cleaned_column_resolvers</td>
+    </tr>
+    <tr>
+      <td>_get_column_array</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_column_array</td>
+      <td># internal use: _get_column_array</td>
+    </tr>
+    <tr>
+      <td>_get_index_resolvers</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_index_resolvers</td>
+      <td># internal use: _get_index_resolvers</td>
+    </tr>
+    <tr>
+      <td>_get_item_cache</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_item_cache</td>
+      <td># internal use: _get_item_cache</td>
+    </tr>
+    <tr>
+      <td>_get_label_or_level_values</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_label_or_level_values</td>
+      <td># internal use: _get_label_or_level_values</td>
+    </tr>
+    <tr>
+      <td>_get_numeric_data</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_numeric_data</td>
+      <td># internal use: _get_numeric_data</td>
+    </tr>
+    <tr>
+      <td>_get_value</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_value</td>
+      <td># internal use: _get_value</td>
+    </tr>
+    <tr>
+      <td>_get_values_for_csv</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _get_values_for_csv</td>
+      <td># internal use: _get_values_for_csv</td>
+    </tr>
+    <tr>
+      <td>_getitem_bool_array</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _getitem_bool_array</td>
+      <td># internal use: _getitem_bool_array</td>
+    </tr>
+    <tr>
+      <td>_getitem_multilevel</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _getitem_multilevel</td>
+      <td># internal use: _getitem_multilevel</td>
+    </tr>
+    <tr>
+      <td>_getitem_nocopy</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _getitem_nocopy</td>
+      <td># internal use: _getitem_nocopy</td>
+    </tr>
+    <tr>
+      <td>_getitem_slice</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _getitem_slice</td>
+      <td># internal use: _getitem_slice</td>
+    </tr>
+    <tr>
+      <td>_gotitem</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _gotitem</td>
+      <td># internal use: _gotitem</td>
+    </tr>
+    <tr>
+      <td>_hidden_attrs</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _hidden_attrs</td>
+      <td># internal use: _hidden_attrs</td>
+    </tr>
+    <tr>
+      <td>_indexed_same</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _indexed_same</td>
+      <td># internal use: _indexed_same</td>
+    </tr>
+    <tr>
+      <td>_info_axis</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _info_axis</td>
+      <td># internal use: _info_axis</td>
+    </tr>
+    <tr>
+      <td>_info_axis_name</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _info_axis_name</td>
+      <td># internal use: _info_axis_name</td>
+    </tr>
+    <tr>
+      <td>_info_axis_number</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _info_axis_number</td>
+      <td># internal use: _info_axis_number</td>
+    </tr>
+    <tr>
+      <td>_info_repr</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _info_repr</td>
+      <td># internal use: _info_repr</td>
+    </tr>
+    <tr>
+      <td>_init_mgr</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _init_mgr</td>
+      <td># internal use: _init_mgr</td>
+    </tr>
+    <tr>
+      <td>_inplace_method</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _inplace_method</td>
+      <td># internal use: _inplace_method</td>
+    </tr>
+    <tr>
+      <td>_internal_names</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _internal_names</td>
+      <td># internal use: _internal_names</td>
+    </tr>
+    <tr>
+      <td>_internal_names_set</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _internal_names_set</td>
+      <td># internal use: _internal_names_set</td>
+    </tr>
+    <tr>
+      <td>_is_copy</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _is_copy</td>
+      <td># internal use: _is_copy</td>
+    </tr>
+    <tr>
+      <td>_is_homogeneous_type</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _is_homogeneous_type</td>
+      <td># internal use: _is_homogeneous_type</td>
+    </tr>
+    <tr>
+      <td>_is_label_or_level_reference</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _is_label_or_level_reference</td>
+      <td># internal use: _is_label_or_level_reference</td>
+    </tr>
+    <tr>
+      <td>_is_label_reference</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _is_label_reference</td>
+      <td># internal use: _is_label_reference</td>
+    </tr>
+    <tr>
+      <td>_is_level_reference</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _is_level_reference</td>
+      <td># internal use: _is_level_reference</td>
+    </tr>
+    <tr>
+      <td>_is_mixed_type</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _is_mixed_type</td>
+      <td># internal use: _is_mixed_type</td>
+    </tr>
+    <tr>
+      <td>_is_view</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _is_view</td>
+      <td># internal use: _is_view</td>
+    </tr>
+    <tr>
+      <td>_is_view_after_cow_rules</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _is_view_after_cow_rules</td>
+      <td># internal use: _is_view_after_cow_rules</td>
+    </tr>
+    <tr>
+      <td>_iset_item</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _iset_item</td>
+      <td># internal use: _iset_item</td>
+    </tr>
+    <tr>
+      <td>_iset_item_mgr</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _iset_item_mgr</td>
+      <td># internal use: _iset_item_mgr</td>
+    </tr>
+    <tr>
+      <td>_iset_not_inplace</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _iset_not_inplace</td>
+      <td># internal use: _iset_not_inplace</td>
+    </tr>
+    <tr>
+      <td>_iter_column_arrays</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _iter_column_arrays</td>
+      <td># internal use: _iter_column_arrays</td>
+    </tr>
+    <tr>
+      <td>_ixs</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _ixs</td>
+      <td># internal use: _ixs</td>
+    </tr>
+    <tr>
+      <td>_logical_func</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _logical_func</td>
+      <td># internal use: _logical_func</td>
+    </tr>
+    <tr>
+      <td>_logical_method</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _logical_method</td>
+      <td># internal use: _logical_method</td>
+    </tr>
+    <tr>
+      <td>_maybe_align_series_as_frame</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _maybe_align_series_as_frame</td>
+      <td># internal use: _maybe_align_series_as_frame</td>
+    </tr>
+    <tr>
+      <td>_maybe_cache_changed</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _maybe_cache_changed</td>
+      <td># internal use: _maybe_cache_changed</td>
+    </tr>
+    <tr>
+      <td>_maybe_update_cacher</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _maybe_update_cacher</td>
+      <td># internal use: _maybe_update_cacher</td>
+    </tr>
+    <tr>
+      <td>_metadata</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _metadata</td>
+      <td># internal use: _metadata</td>
+    </tr>
+    <tr>
+      <td>_min_count_stat_function</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _min_count_stat_function</td>
+      <td># internal use: _min_count_stat_function</td>
+    </tr>
+    <tr>
+      <td>_needs_reindex_multi</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _needs_reindex_multi</td>
+      <td># internal use: _needs_reindex_multi</td>
+    </tr>
+    <tr>
+      <td>_pad_or_backfill</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _pad_or_backfill</td>
+      <td># internal use: _pad_or_backfill</td>
+    </tr>
+    <tr>
+      <td>_protect_consolidate</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _protect_consolidate</td>
+      <td># internal use: _protect_consolidate</td>
+    </tr>
+    <tr>
+      <td>_reduce</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _reduce</td>
+      <td># internal use: _reduce</td>
+    </tr>
+    <tr>
+      <td>_reduce_axis1</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _reduce_axis1</td>
+      <td># internal use: _reduce_axis1</td>
+    </tr>
+    <tr>
+      <td>_reindex_axes</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _reindex_axes</td>
+      <td># internal use: _reindex_axes</td>
+    </tr>
+    <tr>
+      <td>_reindex_multi</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _reindex_multi</td>
+      <td># internal use: _reindex_multi</td>
+    </tr>
+    <tr>
+      <td>_reindex_with_indexers</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _reindex_with_indexers</td>
+      <td># internal use: _reindex_with_indexers</td>
+    </tr>
+    <tr>
+      <td>_rename</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _rename</td>
+      <td># internal use: _rename</td>
+    </tr>
+    <tr>
+      <td>_replace_columnwise</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _replace_columnwise</td>
+      <td># internal use: _replace_columnwise</td>
+    </tr>
+    <tr>
+      <td>_repr_data_resource_</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _repr_data_resource_</td>
+      <td># internal use: _repr_data_resource_</td>
+    </tr>
+    <tr>
+      <td>_repr_fits_horizontal_</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _repr_fits_horizontal_</td>
+      <td># internal use: _repr_fits_horizontal_</td>
+    </tr>
+    <tr>
+      <td>_repr_fits_vertical_</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _repr_fits_vertical_</td>
+      <td># internal use: _repr_fits_vertical_</td>
+    </tr>
+    <tr>
+      <td>_repr_html_</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _repr_html_</td>
+      <td># internal use: _repr_html_</td>
+    </tr>
+    <tr>
+      <td>_repr_latex_</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _repr_latex_</td>
+      <td># internal use: _repr_latex_</td>
+    </tr>
+    <tr>
+      <td>_reset_cache</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _reset_cache</td>
+      <td># internal use: _reset_cache</td>
+    </tr>
+    <tr>
+      <td>_reset_cacher</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _reset_cacher</td>
+      <td># internal use: _reset_cacher</td>
+    </tr>
+    <tr>
+      <td>_sanitize_column</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _sanitize_column</td>
+      <td># internal use: _sanitize_column</td>
+    </tr>
+    <tr>
+      <td>_series</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _series</td>
+      <td># internal use: _series</td>
+    </tr>
+    <tr>
+      <td>_set_axis</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _set_axis</td>
+      <td># internal use: _set_axis</td>
+    </tr>
+    <tr>
+      <td>_set_axis_name</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _set_axis_name</td>
+      <td># internal use: _set_axis_name</td>
+    </tr>
+    <tr>
+      <td>_set_axis_nocheck</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _set_axis_nocheck</td>
+      <td># internal use: _set_axis_nocheck</td>
+    </tr>
+    <tr>
+      <td>_set_is_copy</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _set_is_copy</td>
+      <td># internal use: _set_is_copy</td>
+    </tr>
+    <tr>
+      <td>_set_item</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _set_item</td>
+      <td># internal use: _set_item</td>
+    </tr>
+    <tr>
+      <td>_set_item_frame_value</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _set_item_frame_value</td>
+      <td># internal use: _set_item_frame_value</td>
+    </tr>
+    <tr>
+      <td>_set_item_mgr</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _set_item_mgr</td>
+      <td># internal use: _set_item_mgr</td>
+    </tr>
+    <tr>
+      <td>_set_value</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _set_value</td>
+      <td># internal use: _set_value</td>
+    </tr>
+    <tr>
+      <td>_setitem_array</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _setitem_array</td>
+      <td># internal use: _setitem_array</td>
+    </tr>
+    <tr>
+      <td>_setitem_frame</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _setitem_frame</td>
+      <td># internal use: _setitem_frame</td>
+    </tr>
+    <tr>
+      <td>_setitem_slice</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _setitem_slice</td>
+      <td># internal use: _setitem_slice</td>
+    </tr>
+    <tr>
+      <td>_shift_with_freq</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _shift_with_freq</td>
+      <td># internal use: _shift_with_freq</td>
+    </tr>
+    <tr>
+      <td>_should_reindex_frame_op</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _should_reindex_frame_op</td>
+      <td># internal use: _should_reindex_frame_op</td>
+    </tr>
+    <tr>
+      <td>_slice</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _slice</td>
+      <td># internal use: _slice</td>
+    </tr>
+    <tr>
+      <td>_stat_function</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _stat_function</td>
+      <td># internal use: _stat_function</td>
+    </tr>
+    <tr>
+      <td>_stat_function_ddof</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _stat_function_ddof</td>
+      <td># internal use: _stat_function_ddof</td>
+    </tr>
+    <tr>
+      <td>_take_with_is_copy</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _take_with_is_copy</td>
+      <td># internal use: _take_with_is_copy</td>
+    </tr>
+    <tr>
+      <td>_to_dict_of_blocks</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _to_dict_of_blocks</td>
+      <td># internal use: _to_dict_of_blocks</td>
+    </tr>
+    <tr>
+      <td>_to_latex_via_styler</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _to_latex_via_styler</td>
+      <td># internal use: _to_latex_via_styler</td>
+    </tr>
+    <tr>
+      <td>_typ</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _typ</td>
+      <td># internal use: _typ</td>
+    </tr>
+    <tr>
+      <td>_update_inplace</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _update_inplace</td>
+      <td># internal use: _update_inplace</td>
+    </tr>
+    <tr>
+      <td>_validate_dtype</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _validate_dtype</td>
+      <td># internal use: _validate_dtype</td>
+    </tr>
+    <tr>
+      <td>_values</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _values</td>
+      <td># internal use: _values</td>
+    </tr>
+    <tr>
+      <td>_where</td>
+      <td>Internal pandas DataFrame method (not normally used directly): _where</td>
+      <td># internal use: _where</td>
+    </tr>
+    <tr>
+      <td>abs</td>
+      <td>Pandas DataFrame public function for data manipulation: abs</td>
+      <td>df.abs()</td>
+    </tr>
+    <tr>
+      <td>add</td>
+      <td>Pandas DataFrame public function for data manipulation: add</td>
+      <td>df.add()</td>
+    </tr>
+    <tr>
+      <td>add_prefix</td>
+      <td>Pandas DataFrame public function for data manipulation: add_prefix</td>
+      <td>df.add_prefix()</td>
+    </tr>
+    <tr>
+      <td>add_suffix</td>
+      <td>Pandas DataFrame public function for data manipulation: add_suffix</td>
+      <td>df.add_suffix()</td>
+    </tr>
+    <tr>
+      <td>agg</td>
+      <td>Pandas DataFrame public function for data manipulation: agg</td>
+      <td>df.agg()</td>
+    </tr>
+    <tr>
+      <td>aggregate</td>
+      <td>Pandas DataFrame public function for data manipulation: aggregate</td>
+      <td>df.aggregate()</td>
+    </tr>
+    <tr>
+      <td>align</td>
+      <td>Pandas DataFrame public function for data manipulation: align</td>
+      <td>df.align()</td>
+    </tr>
+    <tr>
+      <td>all</td>
+      <td>Pandas DataFrame public function for data manipulation: all</td>
+      <td>df.all()</td>
+    </tr>
+    <tr>
+      <td>any</td>
+      <td>Pandas DataFrame public function for data manipulation: any</td>
+      <td>df.any()</td>
+    </tr>
+    <tr>
+      <td>apply</td>
+      <td>Pandas DataFrame public function for data manipulation: apply</td>
+      <td>df.apply()</td>
+    </tr>
+    <tr>
+      <td>applymap</td>
+      <td>Pandas DataFrame public function for data manipulation: applymap</td>
+      <td>df.applymap()</td>
+    </tr>
+    <tr>
+      <td>asfreq</td>
+      <td>Pandas DataFrame public function for data manipulation: asfreq</td>
+      <td>df.asfreq()</td>
+    </tr>
+    <tr>
+      <td>asof</td>
+      <td>Pandas DataFrame public function for data manipulation: asof</td>
+      <td>df.asof()</td>
+    </tr>
+    <tr>
+      <td>assign</td>
+      <td>Pandas DataFrame public function for data manipulation: assign</td>
+      <td>df.assign()</td>
+    </tr>
+    <tr>
+      <td>astype</td>
+      <td>Pandas DataFrame public function for data manipulation: astype</td>
+      <td>df.astype()</td>
+    </tr>
+    <tr>
+      <td>at</td>
+      <td>Pandas DataFrame public function for data manipulation: at</td>
+      <td>df.at()</td>
+    </tr>
+    <tr>
+      <td>at_time</td>
+      <td>Pandas DataFrame public function for data manipulation: at_time</td>
+      <td>df.at_time()</td>
+    </tr>
+    <tr>
+      <td>attrs</td>
+      <td>Pandas DataFrame public function for data manipulation: attrs</td>
+      <td>df.attrs()</td>
+    </tr>
+    <tr>
+      <td>axes</td>
+      <td>Pandas DataFrame public function for data manipulation: axes</td>
+      <td>df.axes()</td>
+    </tr>
+    <tr>
+      <td>backfill</td>
+      <td>Pandas DataFrame public function for data manipulation: backfill</td>
+      <td>df.backfill()</td>
+    </tr>
+    <tr>
+      <td>between_time</td>
+      <td>Pandas DataFrame public function for data manipulation: between_time</td>
+      <td>df.between_time()</td>
+    </tr>
+    <tr>
+      <td>bfill</td>
+      <td>Pandas DataFrame public function for data manipulation: bfill</td>
+      <td>df.bfill()</td>
+    </tr>
+    <tr>
+      <td>bool</td>
+      <td>Pandas DataFrame public function for data manipulation: bool</td>
+      <td>df.bool()</td>
+    </tr>
+    <tr>
+      <td>boxplot</td>
+      <td>Pandas DataFrame public function for data manipulation: boxplot</td>
+      <td>df.boxplot()</td>
+    </tr>
+    <tr>
+      <td>clip</td>
+      <td>Pandas DataFrame public function for data manipulation: clip</td>
+      <td>df.clip()</td>
+    </tr>
+    <tr>
+      <td>columns</td>
+      <td>Pandas DataFrame public function for data manipulation: columns</td>
+      <td>df.columns()</td>
+    </tr>
+    <tr>
+      <td>combine</td>
+      <td>Pandas DataFrame public function for data manipulation: combine</td>
+      <td>df.combine()</td>
+    </tr>
+    <tr>
+      <td>combine_first</td>
+      <td>Pandas DataFrame public function for data manipulation: combine_first</td>
+      <td>df.combine_first()</td>
+    </tr>
+    <tr>
+      <td>compare</td>
+      <td>Pandas DataFrame public function for data manipulation: compare</td>
+      <td>df.compare()</td>
+    </tr>
+    <tr>
+      <td>convert_dtypes</td>
+      <td>Pandas DataFrame public function for data manipulation: convert_dtypes</td>
+      <td>df.convert_dtypes()</td>
+    </tr>
+    <tr>
+      <td>copy</td>
+      <td>Pandas DataFrame public function for data manipulation: copy</td>
+      <td>df.copy()</td>
+    </tr>
+    <tr>
+      <td>corr</td>
+      <td>Pandas DataFrame public function for data manipulation: corr</td>
+      <td>df.corr()</td>
+    </tr>
+    <tr>
+      <td>corrwith</td>
+      <td>Pandas DataFrame public function for data manipulation: corrwith</td>
+      <td>df.corrwith()</td>
+    </tr>
+    <tr>
+      <td>count</td>
+      <td>Pandas DataFrame public function for data manipulation: count</td>
+      <td>df.count()</td>
+    </tr>
+    <tr>
+      <td>cov</td>
+      <td>Pandas DataFrame public function for data manipulation: cov</td>
+      <td>df.cov()</td>
+    </tr>
+    <tr>
+      <td>cummax</td>
+      <td>Pandas DataFrame public function for data manipulation: cummax</td>
+      <td>df.cummax()</td>
+    </tr>
+    <tr>
+      <td>cummin</td>
+      <td>Pandas DataFrame public function for data manipulation: cummin</td>
+      <td>df.cummin()</td>
+    </tr>
+    <tr>
+      <td>cumprod</td>
+      <td>Pandas DataFrame public function for data manipulation: cumprod</td>
+      <td>df.cumprod()</td>
+    </tr>
+    <tr>
+      <td>cumsum</td>
+      <td>Pandas DataFrame public function for data manipulation: cumsum</td>
+      <td>df.cumsum()</td>
+    </tr>
+    <tr>
+      <td>describe</td>
+      <td>Pandas DataFrame public function for data manipulation: describe</td>
+      <td>df.describe()</td>
+    </tr>
+    <tr>
+      <td>diff</td>
+      <td>Pandas DataFrame public function for data manipulation: diff</td>
+      <td>df.diff()</td>
+    </tr>
+    <tr>
+      <td>div</td>
+      <td>Pandas DataFrame public function for data manipulation: div</td>
+      <td>df.div()</td>
+    </tr>
+    <tr>
+      <td>divide</td>
+      <td>Pandas DataFrame public function for data manipulation: divide</td>
+      <td>df.divide()</td>
+    </tr>
+    <tr>
+      <td>dot</td>
+      <td>Pandas DataFrame public function for data manipulation: dot</td>
+      <td>df.dot()</td>
+    </tr>
+    <tr>
+      <td>drop</td>
+      <td>Pandas DataFrame public function for data manipulation: drop</td>
+      <td>df.drop()</td>
+    </tr>
+    <tr>
+      <td>drop_duplicates</td>
+      <td>Pandas DataFrame public function for data manipulation: drop_duplicates</td>
+      <td>df.drop_duplicates()</td>
+    </tr>
+    <tr>
+      <td>droplevel</td>
+      <td>Pandas DataFrame public function for data manipulation: droplevel</td>
+      <td>df.droplevel()</td>
+    </tr>
+    <tr>
+      <td>dropna</td>
+      <td>Pandas DataFrame public function for data manipulation: dropna</td>
+      <td>df.dropna()</td>
+    </tr>
+    <tr>
+      <td>dtypes</td>
+      <td>Pandas DataFrame public function for data manipulation: dtypes</td>
+      <td>df.dtypes()</td>
+    </tr>
+    <tr>
+      <td>duplicated</td>
+      <td>Pandas DataFrame public function for data manipulation: duplicated</td>
+      <td>df.duplicated()</td>
+    </tr>
+    <tr>
+      <td>empty</td>
+      <td>Pandas DataFrame public function for data manipulation: empty</td>
+      <td>df.empty()</td>
+    </tr>
+    <tr>
+      <td>eq</td>
+      <td>Pandas DataFrame public function for data manipulation: eq</td>
+      <td>df.eq()</td>
+    </tr>
+    <tr>
+      <td>equals</td>
+      <td>Pandas DataFrame public function for data manipulation: equals</td>
+      <td>df.equals()</td>
+    </tr>
+    <tr>
+      <td>eval</td>
+      <td>Pandas DataFrame public function for data manipulation: eval</td>
+      <td>df.eval()</td>
+    </tr>
+    <tr>
+      <td>ewm</td>
+      <td>Pandas DataFrame public function for data manipulation: ewm</td>
+      <td>df.ewm()</td>
+    </tr>
+    <tr>
+      <td>expanding</td>
+      <td>Pandas DataFrame public function for data manipulation: expanding</td>
+      <td>df.expanding()</td>
+    </tr>
+    <tr>
+      <td>explode</td>
+      <td>Pandas DataFrame public function for data manipulation: explode</td>
+      <td>df.explode()</td>
+    </tr>
+    <tr>
+      <td>ffill</td>
+      <td>Pandas DataFrame public function for data manipulation: ffill</td>
+      <td>df.ffill()</td>
+    </tr>
+    <tr>
+      <td>fillna</td>
+      <td>Pandas DataFrame public function for data manipulation: fillna</td>
+      <td>df.fillna()</td>
+    </tr>
+    <tr>
+      <td>filter</td>
+      <td>Pandas DataFrame public function for data manipulation: filter</td>
+      <td>df.filter()</td>
+    </tr>
+    <tr>
+      <td>first</td>
+      <td>Pandas DataFrame public function for data manipulation: first</td>
+      <td>df.first()</td>
+    </tr>
+    <tr>
+      <td>first_valid_index</td>
+      <td>Pandas DataFrame public function for data manipulation: first_valid_index</td>
+      <td>df.first_valid_index()</td>
+    </tr>
+    <tr>
+      <td>flags</td>
+      <td>Pandas DataFrame public function for data manipulation: flags</td>
+      <td>df.flags()</td>
+    </tr>
+    <tr>
+      <td>floordiv</td>
+      <td>Pandas DataFrame public function for data manipulation: floordiv</td>
+      <td>df.floordiv()</td>
+    </tr>
+    <tr>
+      <td>from_dict</td>
+      <td>Pandas DataFrame public function for data manipulation: from_dict</td>
+      <td>df.from_dict()</td>
+    </tr>
+    <tr>
+      <td>from_records</td>
+      <td>Pandas DataFrame public function for data manipulation: from_records</td>
+      <td>df.from_records()</td>
+    </tr>
+    <tr>
+      <td>ge</td>
+      <td>Pandas DataFrame public function for data manipulation: ge</td>
+      <td>df.ge()</td>
+    </tr>
+    <tr>
+      <td>get</td>
+      <td>Pandas DataFrame public function for data manipulation: get</td>
+      <td>df.get()</td>
+    </tr>
+    <tr>
+      <td>groupby</td>
+      <td>Pandas DataFrame public function for data manipulation: groupby</td>
+      <td>df.groupby()</td>
+    </tr>
+    <tr>
+      <td>gt</td>
+      <td>Pandas DataFrame public function for data manipulation: gt</td>
+      <td>df.gt()</td>
+    </tr>
+    <tr>
+      <td>head</td>
+      <td>Pandas DataFrame public function for data manipulation: head</td>
+      <td>df.head()</td>
+    </tr>
+    <tr>
+      <td>hist</td>
+      <td>Pandas DataFrame public function for data manipulation: hist</td>
+      <td>df.hist()</td>
+    </tr>
+    <tr>
+      <td>iat</td>
+      <td>Pandas DataFrame public function for data manipulation: iat</td>
+      <td>df.iat()</td>
+    </tr>
+    <tr>
+      <td>idxmax</td>
+      <td>Pandas DataFrame public function for data manipulation: idxmax</td>
+      <td>df.idxmax()</td>
+    </tr>
+    <tr>
+      <td>idxmin</td>
+      <td>Pandas DataFrame public function for data manipulation: idxmin</td>
+      <td>df.idxmin()</td>
+    </tr>
+    <tr>
+      <td>iloc</td>
+      <td>Pandas DataFrame public function for data manipulation: iloc</td>
+      <td>df.iloc()</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td>Pandas DataFrame public function for data manipulation: index</td>
+      <td>df.index()</td>
+    </tr>
+    <tr>
+      <td>infer_objects</td>
+      <td>Pandas DataFrame public function for data manipulation: infer_objects</td>
+      <td>df.infer_objects()</td>
+    </tr>
+    <tr>
+      <td>info</td>
+      <td>Pandas DataFrame public function for data manipulation: info</td>
+      <td>df.info()</td>
+    </tr>
+    <tr>
+      <td>insert</td>
+      <td>Pandas DataFrame public function for data manipulation: insert</td>
+      <td>df.insert()</td>
+    </tr>
+    <tr>
+      <td>interpolate</td>
+      <td>Pandas DataFrame public function for data manipulation: interpolate</td>
+      <td>df.interpolate()</td>
+    </tr>
+    <tr>
+      <td>isetitem</td>
+      <td>Pandas DataFrame public function for data manipulation: isetitem</td>
+      <td>df.isetitem()</td>
+    </tr>
+    <tr>
+      <td>isin</td>
+      <td>Pandas DataFrame public function for data manipulation: isin</td>
+      <td>df.isin()</td>
+    </tr>
+    <tr>
+      <td>isna</td>
+      <td>Pandas DataFrame public function for data manipulation: isna</td>
+      <td>df.isna()</td>
+    </tr>
+    <tr>
+      <td>isnull</td>
+      <td>Pandas DataFrame public function for data manipulation: isnull</td>
+      <td>df.isnull()</td>
+    </tr>
+    <tr>
+      <td>items</td>
+      <td>Pandas DataFrame public function for data manipulation: items</td>
+      <td>df.items()</td>
+    </tr>
+    <tr>
+      <td>iterrows</td>
+      <td>Pandas DataFrame public function for data manipulation: iterrows</td>
+      <td>df.iterrows()</td>
+    </tr>
+    <tr>
+      <td>itertuples</td>
+      <td>Pandas DataFrame public function for data manipulation: itertuples</td>
+      <td>df.itertuples()</td>
+    </tr>
+    <tr>
+      <td>join</td>
+      <td>Pandas DataFrame public function for data manipulation: join</td>
+      <td>df.join()</td>
+    </tr>
+    <tr>
+      <td>keys</td>
+      <td>Pandas DataFrame public function for data manipulation: keys</td>
+      <td>df.keys()</td>
+    </tr>
+    <tr>
+      <td>kurt</td>
+      <td>Pandas DataFrame public function for data manipulation: kurt</td>
+      <td>df.kurt()</td>
+    </tr>
+    <tr>
+      <td>kurtosis</td>
+      <td>Pandas DataFrame public function for data manipulation: kurtosis</td>
+      <td>df.kurtosis()</td>
+    </tr>
+    <tr>
+      <td>last</td>
+      <td>Pandas DataFrame public function for data manipulation: last</td>
+      <td>df.last()</td>
+    </tr>
+    <tr>
+      <td>last_valid_index</td>
+      <td>Pandas DataFrame public function for data manipulation: last_valid_index</td>
+      <td>df.last_valid_index()</td>
+    </tr>
+    <tr>
+      <td>le</td>
+      <td>Pandas DataFrame public function for data manipulation: le</td>
+      <td>df.le()</td>
+    </tr>
+    <tr>
+      <td>loc</td>
+      <td>Pandas DataFrame public function for data manipulation: loc</td>
+      <td>df.loc()</td>
+    </tr>
+    <tr>
+      <td>lt</td>
+      <td>Pandas DataFrame public function for data manipulation: lt</td>
+      <td>df.lt()</td>
+    </tr>
+    <tr>
+      <td>map</td>
+      <td>Pandas DataFrame public function for data manipulation: map</td>
+      <td>df.map()</td>
+    </tr>
+    <tr>
+      <td>mask</td>
+      <td>Pandas DataFrame public function for data manipulation: mask</td>
+      <td>df.mask()</td>
+    </tr>
+    <tr>
+      <td>max</td>
+      <td>Pandas DataFrame public function for data manipulation: max</td>
+      <td>df.max()</td>
+    </tr>
+    <tr>
+      <td>mean</td>
+      <td>Pandas DataFrame public function for data manipulation: mean</td>
+      <td>df.mean()</td>
+    </tr>
+    <tr>
+      <td>median</td>
+      <td>Pandas DataFrame public function for data manipulation: median</td>
+      <td>df.median()</td>
+    </tr>
+    <tr>
+      <td>melt</td>
+      <td>Pandas DataFrame public function for data manipulation: melt</td>
+      <td>df.melt()</td>
+    </tr>
+    <tr>
+      <td>memory_usage</td>
+      <td>Pandas DataFrame public function for data manipulation: memory_usage</td>
+      <td>df.memory_usage()</td>
+    </tr>
+    <tr>
+      <td>merge</td>
+      <td>Pandas DataFrame public function for data manipulation: merge</td>
+      <td>df.merge()</td>
+    </tr>
+    <tr>
+      <td>min</td>
+      <td>Pandas DataFrame public function for data manipulation: min</td>
+      <td>df.min()</td>
+    </tr>
+    <tr>
+      <td>mod</td>
+      <td>Pandas DataFrame public function for data manipulation: mod</td>
+      <td>df.mod()</td>
+    </tr>
+    <tr>
+      <td>mode</td>
+      <td>Pandas DataFrame public function for data manipulation: mode</td>
+      <td>df.mode()</td>
+    </tr>
+    <tr>
+      <td>mul</td>
+      <td>Pandas DataFrame public function for data manipulation: mul</td>
+      <td>df.mul()</td>
+    </tr>
+    <tr>
+      <td>multiply</td>
+      <td>Pandas DataFrame public function for data manipulation: multiply</td>
+      <td>df.multiply()</td>
+    </tr>
+    <tr>
+      <td>ndim</td>
+      <td>Pandas DataFrame public function for data manipulation: ndim</td>
+      <td>df.ndim()</td>
+    </tr>
+    <tr>
+      <td>ne</td>
+      <td>Pandas DataFrame public function for data manipulation: ne</td>
+      <td>df.ne()</td>
+    </tr>
+    <tr>
+      <td>nlargest</td>
+      <td>Pandas DataFrame public function for data manipulation: nlargest</td>
+      <td>df.nlargest()</td>
+    </tr>
+    <tr>
+      <td>notna</td>
+      <td>Pandas DataFrame public function for data manipulation: notna</td>
+      <td>df.notna()</td>
+    </tr>
+    <tr>
+      <td>notnull</td>
+      <td>Pandas DataFrame public function for data manipulation: notnull</td>
+      <td>df.notnull()</td>
+    </tr>
+    <tr>
+      <td>nsmallest</td>
+      <td>Pandas DataFrame public function for data manipulation: nsmallest</td>
+      <td>df.nsmallest()</td>
+    </tr>
+    <tr>
+      <td>nunique</td>
+      <td>Pandas DataFrame public function for data manipulation: nunique</td>
+      <td>df.nunique()</td>
+    </tr>
+    <tr>
+      <td>pad</td>
+      <td>Pandas DataFrame public function for data manipulation: pad</td>
+      <td>df.pad()</td>
+    </tr>
+    <tr>
+      <td>pct_change</td>
+      <td>Pandas DataFrame public function for data manipulation: pct_change</td>
+      <td>df.pct_change()</td>
+    </tr>
+    <tr>
+      <td>pipe</td>
+      <td>Pandas DataFrame public function for data manipulation: pipe</td>
+      <td>df.pipe()</td>
+    </tr>
+    <tr>
+      <td>pivot</td>
+      <td>Pandas DataFrame public function for data manipulation: pivot</td>
+      <td>df.pivot()</td>
+    </tr>
+    <tr>
+      <td>pivot_table</td>
+      <td>Pandas DataFrame public function for data manipulation: pivot_table</td>
+      <td>df.pivot_table()</td>
+    </tr>
+    <tr>
+      <td>plot</td>
+      <td>Pandas DataFrame public function for data manipulation: plot</td>
+      <td>df.plot()</td>
+    </tr>
+    <tr>
+      <td>pop</td>
+      <td>Pandas DataFrame public function for data manipulation: pop</td>
+      <td>df.pop()</td>
+    </tr>
+    <tr>
+      <td>pow</td>
+      <td>Pandas DataFrame public function for data manipulation: pow</td>
+      <td>df.pow()</td>
+    </tr>
+    <tr>
+      <td>prod</td>
+      <td>Pandas DataFrame public function for data manipulation: prod</td>
+      <td>df.prod()</td>
+    </tr>
+    <tr>
+      <td>product</td>
+      <td>Pandas DataFrame public function for data manipulation: product</td>
+      <td>df.product()</td>
+    </tr>
+    <tr>
+      <td>quantile</td>
+      <td>Pandas DataFrame public function for data manipulation: quantile</td>
+      <td>df.quantile()</td>
+    </tr>
+    <tr>
+      <td>query</td>
+      <td>Pandas DataFrame public function for data manipulation: query</td>
+      <td>df.query()</td>
+    </tr>
+    <tr>
+      <td>radd</td>
+      <td>Pandas DataFrame public function for data manipulation: radd</td>
+      <td>df.radd()</td>
+    </tr>
+    <tr>
+      <td>rank</td>
+      <td>Pandas DataFrame public function for data manipulation: rank</td>
+      <td>df.rank()</td>
+    </tr>
+    <tr>
+      <td>rdiv</td>
+      <td>Pandas DataFrame public function for data manipulation: rdiv</td>
+      <td>df.rdiv()</td>
+    </tr>
+    <tr>
+      <td>reindex</td>
+      <td>Pandas DataFrame public function for data manipulation: reindex</td>
+      <td>df.reindex()</td>
+    </tr>
+    <tr>
+      <td>reindex_like</td>
+      <td>Pandas DataFrame public function for data manipulation: reindex_like</td>
+      <td>df.reindex_like()</td>
+    </tr>
+    <tr>
+      <td>rename</td>
+      <td>Pandas DataFrame public function for data manipulation: rename</td>
+      <td>df.rename()</td>
+    </tr>
+    <tr>
+      <td>rename_axis</td>
+      <td>Pandas DataFrame public function for data manipulation: rename_axis</td>
+      <td>df.rename_axis()</td>
+    </tr>
+    <tr>
+      <td>reorder_levels</td>
+      <td>Pandas DataFrame public function for data manipulation: reorder_levels</td>
+      <td>df.reorder_levels()</td>
+    </tr>
+    <tr>
+      <td>replace</td>
+      <td>Pandas DataFrame public function for data manipulation: replace</td>
+      <td>df.replace()</td>
+    </tr>
+    <tr>
+      <td>resample</td>
+      <td>Pandas DataFrame public function for data manipulation: resample</td>
+      <td>df.resample()</td>
+    </tr>
+    <tr>
+      <td>reset_index</td>
+      <td>Pandas DataFrame public function for data manipulation: reset_index</td>
+      <td>df.reset_index()</td>
+    </tr>
+    <tr>
+      <td>rfloordiv</td>
+      <td>Pandas DataFrame public function for data manipulation: rfloordiv</td>
+      <td>df.rfloordiv()</td>
+    </tr>
+    <tr>
+      <td>rmod</td>
+      <td>Pandas DataFrame public function for data manipulation: rmod</td>
+      <td>df.rmod()</td>
+    </tr>
+    <tr>
+      <td>rmul</td>
+      <td>Pandas DataFrame public function for data manipulation: rmul</td>
+      <td>df.rmul()</td>
+    </tr>
+    <tr>
+      <td>rolling</td>
+      <td>Pandas DataFrame public function for data manipulation: rolling</td>
+      <td>df.rolling()</td>
+    </tr>
+    <tr>
+      <td>round</td>
+      <td>Pandas DataFrame public function for data manipulation: round</td>
+      <td>df.round()</td>
+    </tr>
+    <tr>
+      <td>rpow</td>
+      <td>Pandas DataFrame public function for data manipulation: rpow</td>
+      <td>df.rpow()</td>
+    </tr>
+    <tr>
+      <td>rsub</td>
+      <td>Pandas DataFrame public function for data manipulation: rsub</td>
+      <td>df.rsub()</td>
+    </tr>
+    <tr>
+      <td>rtruediv</td>
+      <td>Pandas DataFrame public function for data manipulation: rtruediv</td>
+      <td>df.rtruediv()</td>
+    </tr>
+    <tr>
+      <td>sample</td>
+      <td>Pandas DataFrame public function for data manipulation: sample</td>
+      <td>df.sample()</td>
+    </tr>
+    <tr>
+      <td>select_dtypes</td>
+      <td>Pandas DataFrame public function for data manipulation: select_dtypes</td>
+      <td>df.select_dtypes()</td>
+    </tr>
+    <tr>
+      <td>sem</td>
+      <td>Pandas DataFrame public function for data manipulation: sem</td>
+      <td>df.sem()</td>
+    </tr>
+    <tr>
+      <td>set_axis</td>
+      <td>Pandas DataFrame public function for data manipulation: set_axis</td>
+      <td>df.set_axis()</td>
+    </tr>
+    <tr>
+      <td>set_flags</td>
+      <td>Pandas DataFrame public function for data manipulation: set_flags</td>
+      <td>df.set_flags()</td>
+    </tr>
+    <tr>
+      <td>set_index</td>
+      <td>Pandas DataFrame public function for data manipulation: set_index</td>
+      <td>df.set_index()</td>
+    </tr>
+    <tr>
+      <td>shape</td>
+      <td>Pandas DataFrame public function for data manipulation: shape</td>
+      <td>df.shape()</td>
+    </tr>
+    <tr>
+      <td>shift</td>
+      <td>Pandas DataFrame public function for data manipulation: shift</td>
+      <td>df.shift()</td>
+    </tr>
+    <tr>
+      <td>size</td>
+      <td>Pandas DataFrame public function for data manipulation: size</td>
+      <td>df.size()</td>
+    </tr>
+    <tr>
+      <td>skew</td>
+      <td>Pandas DataFrame public function for data manipulation: skew</td>
+      <td>df.skew()</td>
+    </tr>
+    <tr>
+      <td>sort_index</td>
+      <td>Pandas DataFrame public function for data manipulation: sort_index</td>
+      <td>df.sort_index()</td>
+    </tr>
+    <tr>
+      <td>sort_values</td>
+      <td>Pandas DataFrame public function for data manipulation: sort_values</td>
+      <td>df.sort_values()</td>
+    </tr>
+    <tr>
+      <td>sparse</td>
+      <td>Pandas DataFrame public function for data manipulation: sparse</td>
+      <td>df.sparse()</td>
+    </tr>
+    <tr>
+      <td>squeeze</td>
+      <td>Pandas DataFrame public function for data manipulation: squeeze</td>
+      <td>df.squeeze()</td>
+    </tr>
+    <tr>
+      <td>stack</td>
+      <td>Pandas DataFrame public function for data manipulation: stack</td>
+      <td>df.stack()</td>
+    </tr>
+    <tr>
+      <td>std</td>
+      <td>Pandas DataFrame public function for data manipulation: std</td>
+      <td>df.std()</td>
+    </tr>
+    <tr>
+      <td>style</td>
+      <td>Pandas DataFrame public function for data manipulation: style</td>
+      <td>df.style()</td>
+    </tr>
+    <tr>
+      <td>sub</td>
+      <td>Pandas DataFrame public function for data manipulation: sub</td>
+      <td>df.sub()</td>
+    </tr>
+    <tr>
+      <td>subtract</td>
+      <td>Pandas DataFrame public function for data manipulation: subtract</td>
+      <td>df.subtract()</td>
+    </tr>
+    <tr>
+      <td>sum</td>
+      <td>Pandas DataFrame public function for data manipulation: sum</td>
+      <td>df.sum()</td>
+    </tr>
+    <tr>
+      <td>swapaxes</td>
+      <td>Pandas DataFrame public function for data manipulation: swapaxes</td>
+      <td>df.swapaxes()</td>
+    </tr>
+    <tr>
+      <td>swaplevel</td>
+      <td>Pandas DataFrame public function for data manipulation: swaplevel</td>
+      <td>df.swaplevel()</td>
+    </tr>
+    <tr>
+      <td>tail</td>
+      <td>Pandas DataFrame public function for data manipulation: tail</td>
+      <td>df.tail()</td>
+    </tr>
+    <tr>
+      <td>take</td>
+      <td>Pandas DataFrame public function for data manipulation: take</td>
+      <td>df.take()</td>
+    </tr>
+    <tr>
+      <td>to_clipboard</td>
+      <td>Pandas DataFrame public function for data manipulation: to_clipboard</td>
+      <td>df.to_clipboard()</td>
+    </tr>
+    <tr>
+      <td>to_csv</td>
+      <td>Pandas DataFrame public function for data manipulation: to_csv</td>
+      <td>df.to_csv()</td>
+    </tr>
+    <tr>
+      <td>to_dict</td>
+      <td>Pandas DataFrame public function for data manipulation: to_dict</td>
+      <td>df.to_dict()</td>
+    </tr>
+    <tr>
+      <td>to_excel</td>
+      <td>Pandas DataFrame public function for data manipulation: to_excel</td>
+      <td>df.to_excel()</td>
+    </tr>
+    <tr>
+      <td>to_feather</td>
+      <td>Pandas DataFrame public function for data manipulation: to_feather</td>
+      <td>df.to_feather()</td>
+    </tr>
+    <tr>
+      <td>to_gbq</td>
+      <td>Pandas DataFrame public function for data manipulation: to_gbq</td>
+      <td>df.to_gbq()</td>
+    </tr>
+    <tr>
+      <td>to_hdf</td>
+      <td>Pandas DataFrame public function for data manipulation: to_hdf</td>
+      <td>df.to_hdf()</td>
+    </tr>
+    <tr>
+      <td>to_html</td>
+      <td>Pandas DataFrame public function for data manipulation: to_html</td>
+      <td>df.to_html()</td>
+    </tr>
+    <tr>
+      <td>to_json</td>
+      <td>Pandas DataFrame public function for data manipulation: to_json</td>
+      <td>df.to_json()</td>
+    </tr>
+    <tr>
+      <td>to_latex</td>
+      <td>Pandas DataFrame public function for data manipulation: to_latex</td>
+      <td>df.to_latex()</td>
+    </tr>
+    <tr>
+      <td>to_markdown</td>
+      <td>Pandas DataFrame public function for data manipulation: to_markdown</td>
+      <td>df.to_markdown()</td>
+    </tr>
+    <tr>
+      <td>to_numpy</td>
+      <td>Pandas DataFrame public function for data manipulation: to_numpy</td>
+      <td>df.to_numpy()</td>
+    </tr>
+    <tr>
+      <td>to_orc</td>
+      <td>Pandas DataFrame public function for data manipulation: to_orc</td>
+      <td>df.to_orc()</td>
+    </tr>
+    <tr>
+      <td>to_parquet</td>
+      <td>Pandas DataFrame public function for data manipulation: to_parquet</td>
+      <td>df.to_parquet()</td>
+    </tr>
+    <tr>
+      <td>to_period</td>
+      <td>Pandas DataFrame public function for data manipulation: to_period</td>
+      <td>df.to_period()</td>
+    </tr>
+    <tr>
+      <td>to_pickle</td>
+      <td>Pandas DataFrame public function for data manipulation: to_pickle</td>
+      <td>df.to_pickle()</td>
+    </tr>
+    <tr>
+      <td>to_records</td>
+      <td>Pandas DataFrame public function for data manipulation: to_records</td>
+      <td>df.to_records()</td>
+    </tr>
+    <tr>
+      <td>to_sql</td>
+      <td>Pandas DataFrame public function for data manipulation: to_sql</td>
+      <td>df.to_sql()</td>
+    </tr>
+    <tr>
+      <td>to_stata</td>
+      <td>Pandas DataFrame public function for data manipulation: to_stata</td>
+      <td>df.to_stata()</td>
+    </tr>
+    <tr>
+      <td>to_string</td>
+      <td>Pandas DataFrame public function for data manipulation: to_string</td>
+      <td>df.to_string()</td>
+    </tr>
+    <tr>
+      <td>to_timestamp</td>
+      <td>Pandas DataFrame public function for data manipulation: to_timestamp</td>
+      <td>df.to_timestamp()</td>
+    </tr>
+    <tr>
+      <td>to_xarray</td>
+      <td>Pandas DataFrame public function for data manipulation: to_xarray</td>
+      <td>df.to_xarray()</td>
+    </tr>
+    <tr>
+      <td>to_xml</td>
+      <td>Pandas DataFrame public function for data manipulation: to_xml</td>
+      <td>df.to_xml()</td>
+    </tr>
+    <tr>
+      <td>transform</td>
+      <td>Pandas DataFrame public function for data manipulation: transform</td>
+      <td>df.transform()</td>
+    </tr>
+    <tr>
+      <td>transpose</td>
+      <td>Pandas DataFrame public function for data manipulation: transpose</td>
+      <td>df.transpose()</td>
+    </tr>
+    <tr>
+      <td>truediv</td>
+      <td>Pandas DataFrame public function for data manipulation: truediv</td>
+      <td>df.truediv()</td>
+    </tr>
+    <tr>
+      <td>truncate</td>
+      <td>Pandas DataFrame public function for data manipulation: truncate</td>
+      <td>df.truncate()</td>
+    </tr>
+    <tr>
+      <td>tz_convert</td>
+      <td>Pandas DataFrame public function for data manipulation: tz_convert</td>
+      <td>df.tz_convert()</td>
+    </tr>
+    <tr>
+      <td>tz_localize</td>
+      <td>Pandas DataFrame public function for data manipulation: tz_localize</td>
+      <td>df.tz_localize()</td>
+    </tr>
+    <tr>
+      <td>unstack</td>
+      <td>Pandas DataFrame public function for data manipulation: unstack</td>
+      <td>df.unstack()</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td>Pandas DataFrame public function for data manipulation: update</td>
+      <td>df.update()</td>
+    </tr>
+    <tr>
+      <td>value_counts</td>
+      <td>Pandas DataFrame public function for data manipulation: value_counts</td>
+      <td>df.value_counts()</td>
+    </tr>
+    <tr>
+      <td>values</td>
+      <td>Pandas DataFrame public function for data manipulation: values</td>
+      <td>df.values()</td>
+    </tr>
+    <tr>
+      <td>var</td>
+      <td>Pandas DataFrame public function for data manipulation: var</td>
+      <td>df.var()</td>
+    </tr>
+    <tr>
+      <td>where</td>
+      <td>Pandas DataFrame public function for data manipulation: where</td>
+      <td>df.where()</td>
+    </tr>
+    <tr>
+      <td>xs</td>
+      <td>Pandas DataFrame public function for data manipulation: xs</td>
+      <td>df.xs()</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </div>
+
+    <!-- Column Information -->
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px;">
+        <span class="column-badge"><i class="fas fa-tag"></i> Function</span><span class="column-badge"><i class="fas fa-tag"></i> Meaning</span><span class="column-badge"><i class="fas fa-tag"></i> Example (Python)</span>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>Created for education <i class="fas fa-university"></i> by Vishal Kumar </p>
+        <p><i class="fas fa-calendar-alt"></i> Last Updated: February 2026</p>
+        <div class="social-links">
+            <a href="https://github.com/Vishalkumar-tech" class="social-link" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/vishalkumara/" class="social-link" data-tooltip="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="http://vishalk.me/" class="social-link" data-tooltip="Portfolio"><i class="fas fa-globe"></i></a>
+        </div>
+    </div>
+</div>
+
+<script>
+
+  
+    // Search functionality
+    function searchTable() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const table = document.querySelector('.data-table');
+        const rows = table.getElementsByTagName('tr');
+        let visibleCount = 0;
+
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const text = row.textContent.toLowerCase();
+            if (text.includes(filter)) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        }
+        
+        document.getElementById('rowCount').textContent = `Showing ${visibleCount} entries`;
+    }
+
+    // Filter by column
+    function filterColumn(columnName) {
+        const chips = document.querySelectorAll('.chip');
+        chips.forEach(chip => chip.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Add your column filtering logic here
+        console.log('Filtering by:', columnName);
+    }
+
+    // Copy table to clipboard
+    function copyToClipboard() {
+        const table = document.querySelector('.data-table');
+        const range = document.createRange();
+        range.selectNode(table);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        
+        try {
+            document.execCommand('copy');
+            alert('Table copied to clipboard!');
+        } catch (err) {
+            alert('Failed to copy table');
+        }
+        
+        window.getSelection().removeAllRanges();
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Add loading animation on download
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            if(this.classList.contains('btn-primary')) {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<span class="loading"></span> Downloading...';
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                }, 2000);
+            }
+        });
+    });
+  
+</script>
+
+</body>
+</html>
