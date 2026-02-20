@@ -4,33 +4,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vishal Kumar A | Data Scientist & Systems Architect</title>
-  <meta name="description"
-    content="Vishal Kumar A - Transforming raw data into intelligent systems that scale. Data Alchemist, ML Engineer & Scalable Systems Architect." />
-  <meta name="keywords"
-    content="Data Alchemist, Systems Architect, ML Engineer, Python, Scalable Systems, AI Infrastructure" />
+  <title>Vishal Kumar A | Data Scientist & ML Engineer</title>
+  <meta name="description" content="Data Scientist at JK Tyres R&D | Building intelligent systems with ML & scalable architecture" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #3a86ff;
-      --secondary: #8338ec;
-      --tertiary: #ff006e;
-      --accent: #fb5607;
-      --dark: #0a0a12;
-      --darker: #07070b;
-      --card-bg: rgba(15, 15, 25, 0.7);
-      --text: #f0f0ff;
-      --muted: #a0a0c0;
-      --light-bg: rgba(255, 255, 255, 0.03);
-      --border: rgba(255, 255, 255, 0.08);
-      --radius: 12px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      --glow: 0 0 30px rgba(58, 134, 255, 0.15);
+      /* Modern, vibrant color palette */
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #818cf8;
+      --secondary: #ec4899;
+      --accent: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      
+      /* Background & text */
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-light: #334155;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --border-light: #f1f5f9;
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6);
+      --gradient-secondary: linear-gradient(135deg, #ec4899, #f43f5e);
+      --gradient-accent: linear-gradient(135deg, #06b6d4, #3b82f6);
+      
+      /* Effects */
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+      --shadow: 0 4px 12px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-lg: 0 20px 30px -10px rgba(0,0,0,0.1);
+      --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.15);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --radius-lg: 32px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     * {
@@ -39,2128 +52,1452 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-      background: var(--darker);
-    }
-
     body {
-      font-family: 'Inter', sans-serif;
-      background:
-        radial-gradient(circle at 10% 20%, rgba(58, 134, 255, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(131, 56, 236, 0.05) 0%, transparent 40%),
-        linear-gradient(180deg, var(--darker) 0%, var(--dark) 100%);
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
-      min-height: 100vh;
-      position: relative;
       line-height: 1.6;
     }
 
-    /* Subtle grid background */
-    .grid-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(rgba(58, 134, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(58, 134, 255, 0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      z-index: -1;
-      opacity: 0.3;
-      pointer-events: none;
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
     }
 
-    /* ================================================ */
-    /* DESKTOP HEADER (768px and above) */
-    /* ================================================ */
-    .desktop-header {
-      padding: 1.2rem 5%;
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      z-index: 50;
+    }
+
+    .header-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(10, 10, 18, 0.85);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      transition: var(--transition);
+      padding: 16px 32px;
+      max-width: 1280px;
+      margin: 0 auto;
     }
 
-    .desktop-header.scrolled {
-      padding: 0.8rem 5%;
-      background: rgba(10, 10, 18, 0.95);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    /* ================================================ */
-    /* MOBILE HEADER (767px and below) */
-    /* ================================================ */
-    .mobile-header {
-      padding: 1rem 4%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(10, 10, 18, 0.95);
-      backdrop-filter: blur(15px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      transition: var(--transition);
-      min-height: 70px;
-    }
-
-    .mobile-header.scrolled {
-      padding: 0.7rem 4%;
-      background: rgba(10, 10, 18, 0.98);
-    }
-
-    /* Initially hide both headers */
-    .desktop-header,
-    .mobile-header {
-      display: none;
-    }
-
-    .header-left {
+    .profile {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
-    }
-
-    /* Profile Photo in Header */
-    .header-profile-container {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
+      gap: 16px;
       cursor: pointer;
-      transition: var(--transition);
-      padding: 0.3rem 0.8rem;
-      border-radius: 50px;
-    }
-
-    .header-profile-container:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .header-profile-photo {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid transparent;
-      background: linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
-      box-shadow: var(--glow);
+      padding: 6px 12px 6px 6px;
+      border-radius: 60px;
+      background: linear-gradient(white, white) padding-box,
+                  var(--gradient-primary) border-box;
+      border: 2px solid transparent;
       transition: var(--transition);
     }
 
-    .header-profile-container:hover .header-profile-photo {
-      transform: scale(1.1);
-      box-shadow: 0 0 25px rgba(58, 134, 255, 0.4);
+    .profile:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
     }
 
-    .header-profile-info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .header-profile-name {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--text);
-    }
-
-    .header-profile-title {
-      font-size: 0.8rem;
-      color: var(--primary);
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 1px;
-      margin-top: 2px;
-    }
-
-    /* Logo */
-    .logo {
+    .profile-img {
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      color: white;
-      font-size: 1.3rem;
-      box-shadow: var(--glow);
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
     }
 
-    /* ================================================ */
-    /* DESKTOP NAVIGATION */
-    /* ================================================ */
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-    }
-
-    /* ================================================ */
-    /* MOBILE NAVIGATION */
-    /* ================================================ */
-    .mobile-nav {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      height: 100vh;
-      width: 85%;
-      max-width: 320px;
-      background: rgba(10, 10, 18, 0.98);
-      backdrop-filter: blur(20px);
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      padding: 2rem;
-      transition: right 0.4s ease;
-      z-index: 1000;
-      border-left: 1px solid var(--border);
-      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
-      display: flex;
-    }
-
-    .mobile-nav.active {
-      right: 0;
-    }
-
-    /* Mobile Menu Toggle Button */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
+    .profile-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
       color: var(--text);
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: var(--radius);
-      transition: var(--transition);
-      z-index: 1001;
-      background: rgba(255, 255, 255, 0.05);
-      width: 44px;
-      height: 44px;
-      align-items: center;
-      justify-content: center;
+      line-height: 1.3;
     }
 
-    .menu-toggle:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .profile-info p {
+      font-size: 0.8rem;
       color: var(--primary);
-    }
-
-    .desktop-nav a,
-    .mobile-nav a {
-      color: var(--muted);
       font-weight: 500;
-      position: relative;
-      padding: 0.5rem 0;
-      font-size: 0.9rem;
-      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-link {
       text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      position: relative;
     }
 
-    .desktop-nav a:hover,
-    .mobile-nav a:hover {
-      color: var(--text);
-    }
-
-    .desktop-nav a:after,
-    .mobile-nav a:after {
+    .nav-link::after {
       content: '';
       position: absolute;
       bottom: 0;
       left: 0;
       width: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: var(--gradient-primary);
       transition: var(--transition);
     }
 
-    .desktop-nav a:hover:after,
-    .mobile-nav a:hover:after {
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link:hover::after {
       width: 100%;
     }
 
-    /* Instagram-style Modal */
-    .photo-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.95);
-      z-index: 2000;
-      justify-content: center;
+    .nav-link i {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    /* Resume Button */
+    .btn-resume {
+      display: inline-flex;
       align-items: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .photo-modal.active {
-      display: flex;
-      opacity: 1;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    .modal-content {
-      position: relative;
-      max-width: 90%;
-      max-height: 90%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .modal-image {
-      max-width: 100%;
-      max-height: 70vh;
-      border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      animation: zoomIn 0.3s ease;
-    }
-
-    @keyframes zoomIn {
-      from {
-        transform: scale(0.9);
-        opacity: 0;
-      }
-
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    .modal-info {
-      text-align: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: var(--gradient-primary);
       color: white;
-      max-width: 600px;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      margin-left: 8px;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
 
-    .modal-info h3 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--text), var(--primary));
+    .btn-resume:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-resume i {
+      font-size: 0.9rem;
+    }
+
+    .menu-btn {
+      display: none;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 80px 0 40px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.05), transparent 50%);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+      color: var(--primary);
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 32px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--text), var(--primary));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    .modal-info .title {
+    .hero-highlight {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    /* ===== STATS ===== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto 48px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: var(--transition);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--primary);
       font-size: 1.3rem;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 2px;
-      margin-bottom: 1rem;
     }
 
-    .modal-info .description {
-      color: #ccc;
-      font-size: 1.1rem;
-      line-height: 1.6;
+    .stat-content {
+      text-align: left;
     }
 
-    .close-modal {
-      position: absolute;
-      top: 25px;
-      right: 30px;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 2.8rem;
-      cursor: pointer;
-      transition: var(--transition);
-      width: 55px;
-      height: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .close-modal:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: rotate(90deg);
-    }
-
-    /* ================================================ */
-    /* DESKTOP BODY CONTAINER (768px and above) */
-    /* ================================================ */
-    .desktop-body-container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 5%;
-      position: relative;
-      padding-top: 100px;
-      /* Account for fixed header */
-    }
-
-    /* ================================================ */
-    /* MOBILE BODY CONTAINER (767px and below) */
-    /* ================================================ */
-    .mobile-body-container {
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 4%;
-      position: relative;
-      padding-top: 80px;
-      /* Account for fixed header */
-    }
-
-    /* Initially hide both containers */
-    .desktop-body-container,
-    .mobile-body-container {
-      display: none;
-    }
-
-    /* Hero Section - Different for desktop/mobile */
-    .hero-section {
-      padding: 14rem 0 8rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      min-height: 100vh;
-    }
-
-    .hero-content h1 {
-      font-size: 3.5rem;
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, var(--text), var(--primary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-tagline {
-      font-size: 1.25rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      line-height: 1.6;
-      max-width: 90%;
-    }
-
-    .highlight {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    .highlight-2 {
-      color: var(--secondary);
-      font-weight: 600;
-    }
-
-    .highlight-3 {
-      color: var(--tertiary);
-      font-weight: 600;
-    }
-
-    /* Terminal Display */
-    .terminal-display {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.5rem;
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-
-    .terminal-display:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    }
-
-    .terminal-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .terminal-dots {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .terminal-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .dot-red {
-      background: #ff5f57;
-    }
-
-    .dot-yellow {
-      background: #ffbd2e;
-    }
-
-    .dot-green {
-      background: #28ca42;
-    }
-
-    .terminal-title {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--primary);
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-    }
-
-    .terminal-content {
-      font-family: 'JetBrains Mono', monospace;
-      line-height: 1.8;
-    }
-
-    .terminal-line {
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .prompt {
-      color: var(--tertiary);
-      font-weight: 600;
-    }
-
-    .command {
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
       color: var(--text);
+      line-height: 1.2;
     }
 
-    .blink {
-      animation: blink 1s infinite;
-      color: var(--primary);
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
     }
 
-    @keyframes blink {
-
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0;
-      }
-    }
-
-    /* Buttons */
+    /* ===== BUTTONS ===== */
     .btn-group {
       display: flex;
-      gap: 1rem;
-      margin-top: 2.5rem;
-      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 32px;
     }
 
     .btn {
-      padding: 1rem 2rem;
-      border-radius: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
       font-weight: 600;
-      font-size: 0.95rem;
-      position: relative;
-      overflow: hidden;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       transition: var(--transition);
       border: none;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.7rem;
     }
 
     .btn-primary {
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      background: var(--gradient-primary);
       color: white;
-      box-shadow: 0 5px 20px rgba(58, 134, 255, 0.3);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
+      background: white;
       color: var(--text);
       border: 1px solid var(--border);
     }
 
-    .btn:hover {
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
       transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(58, 134, 255, 0.4);
+      box-shadow: var(--shadow);
     }
 
-    /* Sections */
-    .section {
-      padding: 6rem 0;
-      position: relative;
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 80px 0;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 60px;
     }
 
     .section-label {
       display: inline-block;
-      padding: 0.5rem 1.5rem;
-      background: rgba(58, 134, 255, 0.1);
+      padding: 6px 16px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
       color: var(--primary);
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      border-radius: 50px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
     }
 
     .section-title {
-      font-size: 2.8rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
       color: var(--text);
+      margin-bottom: 16px;
     }
 
-    .section-subtitle {
-      color: var(--muted);
-      max-width: 700px;
-      margin: 0 auto;
+    .section-desc {
+      color: var(--text-muted);
       font-size: 1.1rem;
-      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    /* Cards */
-    .card-grid {
+    /* ===== CARDS ===== */
+    .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2.5rem;
+      gap: 30px;
     }
 
     .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
+      background: var(--card);
       border-radius: var(--radius);
-      padding: 2.5rem;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-light);
       transition: var(--transition);
-      backdrop-filter: blur(10px);
       position: relative;
       overflow: hidden;
     }
 
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
     .card:hover {
-      transform: translateY(-10px);
-      border-color: rgba(58, 134, 255, 0.3);
-      box-shadow: var(--shadow), var(--glow);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: transparent;
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card-icon {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--text-light);
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    /* ===== TAGS ===== */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 4px 12px;
+      background: var(--bg-alt);
+      color: var(--text-light);
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+    }
+
+    .tag-primary {
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--primary);
+      border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 24px;
+      padding: 24px;
+      background: var(--card);
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(10px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--gradient-primary);
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 2rem;
-      font-size: 1.8rem;
       color: white;
-      box-shadow: 0 10px 30px rgba(58, 134, 255, 0.3);
+      font-size: 1.4rem;
+      flex-shrink: 0;
     }
 
-    .card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
-      color: var(--text);
-    }
-
-    .card p {
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Skill Matrix */
-    .skill-matrix {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .skill-cell {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: var(--transition);
-    }
-
-    .skill-cell:hover {
-      background: rgba(58, 134, 255, 0.1);
-      border-color: var(--primary);
-      transform: translateY(-3px);
-    }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      max-width: 800px;
-      margin: 3rem auto;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: var(--transition);
-    }
-
-    .timeline-item:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
+    .timeline-content {
+      flex: 1;
     }
 
     .timeline-date {
+      display: inline-block;
+      padding: 4px 12px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
       color: var(--primary);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
     }
 
-    /* Progress Bars */
-    .skill-progress {
-      margin: 1.5rem 0;
+    .timeline-content h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
     }
 
-    .progress-bar {
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
-      margin-bottom: 0.5rem;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      border-radius: 3px;
-      position: relative;
-      animation: progressFill 1.5s ease-out;
-    }
-
-    @keyframes progressFill {
-      from {
-        width: 0%;
-      }
-    }
-
-    /* Contact Terminal */
-    .contact-terminal {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 3rem;
-      max-width: 800px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
-    }
-
-    .contact-info {
-      display: grid;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .contact-item {
+    .timeline-sub {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 1.2rem;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 8px;
+      gap: 8px;
+    }
+
+    .timeline-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .skill-category {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-light);
+    }
+
+    .skill-category h3 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      font-size: 1.2rem;
+    }
+
+    .skill-category h3 i {
+      color: var(--primary);
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-item {
+      padding: 8px 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: var(--text-light);
       transition: var(--transition);
     }
 
-    .contact-item:hover {
-      background: rgba(58, 134, 255, 0.1);
+    .skill-item:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
     }
 
-    .contact-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 10px;
+    /* ===== PROJECT CARDS ===== */
+    .project-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .project-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-primary);
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
     }
 
-    /* Footer */
-    footer {
-      padding: 4rem 5%;
+    .project-badge {
+      padding: 4px 12px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .project-metrics {
+      display: flex;
+      gap: 24px;
+      margin: 24px 0;
+      padding: 20px 0;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .metric {
+      flex: 1;
       text-align: center;
-      border-top: 1px solid var(--border);
-      background: rgba(10, 10, 18, 0.8);
+    }
+
+    .metric-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== EDUCATION CARDS ===== */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .edu-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-light);
+      display: flex;
+      gap: 20px;
+      transition: var(--transition);
+    }
+
+    .edu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .edu-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--gradient-primary);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.6rem;
+    }
+
+    .edu-content h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .edu-degree {
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .edu-place {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ===== CONTACT GRID ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-card i {
+      font-size: 2rem;
+      color: var(--primary);
+    }
+
+    .contact-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .contact-card p {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      padding: 60px 0 30px;
+      margin-top: 80px;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
-      margin-bottom: 3rem;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 40px;
     }
 
-    .footer-signature {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--text);
-      margin-bottom: 1rem;
+    .footer-brand {
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 16px;
     }
 
-    /* Backdrop for mobile menu */
-    .menu-backdrop {
+    .footer-social {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .footer-social a {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .footer-social a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-links h4 {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 999;
-      backdrop-filter: blur(3px);
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
     }
 
-    .menu-backdrop.active {
+    .modal.active {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 20px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 3rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100vh;
+      background: white;
+      z-index: 1001;
+      padding: 80px 24px;
+      transition: right 0.3s ease;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .mobile-nav.active {
+      right: 0;
+    }
+
+    .mobile-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .backdrop.active {
       display: block;
     }
 
-    /* Animation for cards on scroll */
-    .fade-in {
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .edu-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        display: none;
+      }
+      
+      .menu-btn {
+        display: flex;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .fade-up {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .fade-in.visible {
+    .fade-up.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    /* ================================================ */
-    /* RESPONSIVE DESIGN */
-    /* ================================================ */
-
-    /* DESKTOP VIEW (768px and above) */
-    @media (min-width: 768px) {
-
-      /* Show desktop header, hide mobile header */
-      .desktop-header {
-        display: flex;
-      }
-
-      .mobile-header {
-        display: none;
-      }
-
-      /* Show desktop body container, hide mobile */
-      .desktop-body-container {
-        display: block;
-      }
-
-      .mobile-body-container {
-        display: none;
-      }
-
-      /* Desktop navigation */
-      .desktop-nav {
-        display: flex;
-      }
-
-      /* Desktop hero layout */
-      .hero-section {
-        grid-template-columns: 1fr 1fr;
-        padding: 14rem 0 8rem;
-        gap: 4rem;
-      }
-
-      .hero-content h1 {
-        font-size: 3.5rem;
-      }
-
-      .hero-tagline {
-        max-width: 90%;
-      }
-
-      .btn-group {
-        justify-content: flex-start;
-      }
-    }
-
-    /* Large Desktop View (1200px and above) */
-    @media (min-width: 1200px) {
-      .hero-section {
-        min-height: 100vh;
-      }
-    }
-
-    /* MOBILE VIEW (767px and below) */
-    @media (max-width: 767px) {
-
-      /* Show mobile header, hide desktop header */
-      .mobile-header {
-        display: flex;
-      }
-
-      .desktop-header {
-        display: none;
-      }
-
-      /* Show mobile body container, hide desktop */
-      .mobile-body-container {
-        display: block;
-      }
-
-      .desktop-body-container {
-        display: none;
-      }
-
-      /* Mobile menu toggle button */
-      .menu-toggle {
-        display: flex;
-      }
-
-      /* Mobile hero layout */
-      .hero-section {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 8rem 0 4rem;
-        min-height: auto;
-      }
-
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-
-      .hero-tagline {
-        font-size: 1.1rem;
-        max-width: 100%;
-        margin: 0 auto 2rem;
-      }
-
-      .btn-group {
-        justify-content: center;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      /* Mobile card adjustments */
-      .card {
-        padding: 1.5rem;
-      }
-
-      .card-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      /* Mobile section adjustments */
-      .section {
-        padding: 4rem 0;
-      }
-
-      .section-title {
-        font-size: 2.2rem;
-      }
-
-      .section-subtitle {
-        font-size: 1rem;
-        padding: 0 1rem;
-      }
-
-      /* Mobile header adjustments */
-      .header-profile-info {
-        display: flex;
-      }
-
-      .header-profile-name {
-        font-size: 1rem;
-      }
-
-      .header-profile-title {
-        font-size: 0.7rem;
-      }
-
-      /* Mobile terminal adjustments */
-      .terminal-display {
-        padding: 1.5rem;
-      }
-
-      /* Mobile contact adjustments */
-      .contact-terminal {
-        padding: 1.5rem;
-      }
-
-      .contact-info {
-        grid-template-columns: 1fr;
-      }
-
-      /* Hide profile info on very small screens */
-      @media (max-width: 480px) {
-        .header-profile-info {
-          display: none;
-        }
-
-        .hero-content h1 {
-          font-size: 2rem;
-        }
-
-        .section-title {
-          font-size: 1.8rem;
-        }
-
-        .card-icon {
-          width: 60px;
-          height: 60px;
-          font-size: 1.5rem;
-        }
-
-        .mobile-body-container {
-          padding: 0 3%;
-        }
-      }
-    }
-
-    /* Tablet View (between 768px and 992px) */
-    @media (min-width: 768px) and (max-width: 992px) {
-      .hero-content h1 {
-        font-size: 3rem;
-      }
-
-      .hero-tagline {
-        font-size: 1.1rem;
-      }
-
-      .card-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      }
     }
   </style>
 </head>
 
 <body>
-  <!-- Background Grid -->
-  <div class="grid-bg"></div>
-
-  <!-- Instagram-style Photo Modal -->
-  <div class="photo-modal" id="photoModal">
-    <button class="close-modal" id="closeModal">&times;</button>
-    <div class="modal-content">
-      <img src="profile.jpeg" alt="Vishal Kumar A" class="modal-image" id="modalImage">
-      <div class="modal-info">
-        <h3>Vishal Kumar A</h3>
-        <div class="title">Data Scientist & SYSTEMS ARCHITECT</div>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <div class="profile" id="profileTrigger">
+        <img src="profile.jpeg" alt="Vishal Kumar A" class="profile-img">
+        <div class="profile-info">
+          <h3>Vishal Kumar A</h3>
+          <p><i class="fas fa-bolt"></i> Data Scientist @ JK Tyres R&D</p>
+        </div>
       </div>
+
+      <div class="nav">
+        <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
+        <a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i> Experience</a>
+        <a href="#skills" class="nav-link"><i class="fas fa-code"></i> Skills</a>
+        <a href="#projects" class="nav-link"><i class="fas fa-rocket"></i> Projects</a>
+        <a href="#https://vishalk.me/pandas-data.html" class="nav-link"><i class="fa-solid fa-book"></i> Pandas Handbook</a>
+        
+        <!-- Resume Download Button -->
+        <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download class="btn-resume">
+          <i class="fas fa-download"></i> Resume
+        </a>
+      </div>
+
+      <button class="menu-btn" id="menuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
   </div>
 
-  <!-- ================================================ -->
-  <!-- DESKTOP HEADER (only visible on desktop) -->
-  <!-- ================================================ -->
-  <header class="desktop-header">
-    <div class="header-left">
-      <div class="header-profile-container" id="desktopHeaderProfile">
-        <img src="profile.jpeg" alt="Vishal Kumar A" class="header-profile-photo">
-        <div class="header-profile-info">
-          <div class="header-profile-name">Vishal Kumar A</div>
-          <div class="header-profile-title">DATA ALCHEMIST</div>
+  <!-- Mobile Menu -->
+  <div class="backdrop" id="backdrop"></div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about"><i class="fas fa-user"></i> About</a>
+    <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
+    <a href="#skills"><i class="fas fa-code"></i> Skills</a>
+    <a href="#projects"><i class="fas fa-rocket"></i> Projects</a>
+    <a href="https://vishalk.me/pandas-data.html"><i class="fa-solid fa-book"></i> Pandas Handbook</a>
+    <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download style="color: var(--primary);">
+      <i class="fas fa-download"></i> Download Resume
+    </a>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="photoModal">
+    <button class="modal-close" id="closeModal">&times;</button>
+    <img src="profile.jpeg" alt="Vishal Kumar A">
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="badge fade-up">
+        <i class="fas fa-microchip"></i> Data Scientist & ML Engineer
+      </div>
+
+      <h1 class="fade-up">
+        Turning Data Into<br>
+        <span class="hero-highlight">Intelligent Decisions</span>
+      </h1>
+
+      <p class="fade-up">
+        Currently building ML solutions at JK Tyres R&D · Previously engineered scalable web systems
+      </p>
+
+      <div class="stats-grid fade-up">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-flask"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">Current</div>
+            <div class="stat-label">JK Tyres R&D Intern</div>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">2.3 yrs</div>
+            <div class="stat-label">Data Scientist and Web Engineering</div>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">MSc</div>
+            <div class="stat-label">Data Science</div>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="stat-content">
+            <div class="stat-value">BSc</div>
+            <div class="stat-label">Data Science & Cyber Security</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-group fade-up">
+        <a href="#projects" class="btn btn-primary">
+          <i class="fas fa-rocket"></i> View My Work
+        </a>
+        <a href="#contact" class="btn btn-secondary">
+          <i class="fas fa-paper-plane"></i> Let's Connect
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label fade-up">EXPERIENCE</div>
+        <h2 class="section-title fade-up">Professional Journey</h2>
+        <p class="section-desc fade-up">From research to production</p>
+      </div>
+
+      <div class="timeline">
+        <!-- Current Role -->
+        <div class="timeline-item fade-up">
+          <div class="timeline-icon"><i class="fas fa-microchip"></i></div>
+          <div class="timeline-content">
+            <span class="timeline-date">Sep 2025 - Present</span>
+            <h4>Data Scientist Intern</h4>
+            <div class="timeline-sub">
+              <i class="fas fa-building"></i> JK Tyres Research & Development
+              <i class="fas fa-map-pin" style="margin-left: 16px;"></i> Mysore
+            </div>
+            <p class="timeline-desc">
+              Building ML models for tire manufacturing optimization · Predictive maintenance · Quality control analytics
+            </p>
+            <div class="tags" style="margin-top: 12px;">
+              <span class="tag tag-primary">Python</span>
+              <span class="tag tag-primary">Scikit-learn</span>
+              <span class="tag tag-primary">Pandas</span>
+              <span class="tag tag-primary">TensorFlow</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Previous Role -->
+        <div class="timeline-item fade-up">
+          <div class="timeline-icon"><i class="fas fa-globe"></i></div>
+          <div class="timeline-content">
+            <span class="timeline-date">Jan 2023 - Sep 2024 · 1 yr 9 mos</span>
+            <h4>Web & Software Engineer</h4>
+            <div class="timeline-sub">
+              <i class="fas fa-building"></i> Email On Business · Freelance
+              <i class="fas fa-map-pin" style="margin-left: 16px;"></i> San Jose, CA · Remote
+            </div>
+            <p class="timeline-desc">
+              Built scalable email verification systems · Architected distributed worker pools · 100K+ emails/batch processing
+            </p>
+            <div class="tags" style="margin-top: 12px;">
+              <span class="tag">Python</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Celery</span>
+              <span class="tag">Redis</span>
+              <span class="tag">Docker</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Desktop Navigation -->
-    <nav class="desktop-nav">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#architecture">Architecture</a>
-      <a href="https://vishalk.me/pandas-data.html">Pandas Handbook</a>
-  </header>
+  <!-- Education Section -->
+  <section style="background: var(--bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label fade-up">EDUCATION</div>
+        <h2 class="section-title fade-up">Academic Background</h2>
+        <p class="section-desc fade-up">Where I built my foundation</p>
+      </div>
 
-  <!-- ================================================ -->
-  <!-- MOBILE HEADER (only visible on mobile) -->
-  <!-- ================================================ -->
-  <header class="mobile-header">
-    <div class="header-left">
-      <div class="header-profile-container" id="mobileHeaderProfile">
-        <img src="profile.jpeg" alt="Vishal Kumar A" class="header-profile-photo">
-        <div class="header-profile-info">
-          <div class="header-profile-name">Vishal Kumar A</div>
-          <div class="header-profile-title">DATA ALCHEMIST</div>
+      <div class="edu-grid">
+        <div class="edu-card fade-up">
+          <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="edu-content">
+            <h4>JSS Science and Technology</h4>
+            <div class="edu-degree">MSc Data Science</div>
+            <div class="edu-place">Mysore · 2024-2026</div>
+          </div>
+        </div>
+
+        <div class="edu-card fade-up">
+          <div class="edu-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="edu-content">
+            <h4>Garden City College</h4>
+            <div class="edu-degree">BSc Data Science & Cyber Security</div>
+            <div class="edu-place">Bangalore · 2021-2024</div>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Mobile Menu Toggle -->
-    <button class="menu-toggle" id="menuToggle">
-      <i class="fas fa-bars"></i>
-    </button>
-
-    <!-- Mobile Navigation -->
-    <div class="menu-backdrop" id="menuBackdrop"></div>
-    <nav class="mobile-nav" id="mobileNav">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#architecture">Architecture</a>
-      <a href="https://vishalk.me/pandas-data.html">Pandas Handbook</a>
-    </nav>
-  </header>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5X2YH97MM7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5X2YH97MM7');
-</script>
-
-  <!-- ================================================ -->
-  <!-- DESKTOP BODY CONTAINER -->
-  <!-- ================================================ -->
-  <div class="desktop-body-container">
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="hero-content">
-        <h1>Transforming Data Into Intelligent Systems</h1>
-        <div class="hero-tagline">
-          I architect <span class="highlight">scalable systems</span> that transform raw data into
-          <span class="highlight-2">intelligent solutions</span>, blending
-          <span class="highlight-3">ML engineering</span> with production-grade infrastructure.
-        </div>
-
-        <div class="btn-group">
-          <a href="#projects" class="btn btn-primary">
-            <i class="fas fa-rocket"></i> View Projects
-          </a>
-          <a href="#contact" class="btn btn-secondary">
-            <i class="fas fa-envelope"></i> Contact Me
-          </a>
-        </div>
-      </div>
-
-      <div class="terminal-display fade-in">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <div class="terminal-dot dot-red"></div>
-            <div class="terminal-dot dot-yellow"></div>
-            <div class="terminal-dot dot-green"></div>
-          </div>
-          <div class="terminal-title">SYSTEM TERMINAL</div>
-        </div>
-
-        <div class="terminal-content">
-          <div class="terminal-line">
-            <span class="prompt">$</span>
-            <span class="command" id="cmd1-desktop"></span>
-          </div>
-          <div class="terminal-line">
-            <span class="prompt">></span>
-            <span id="output1-desktop">Vishal Kumar A - Data Alchemist & Systems Architect</span>
-          </div>
-
-          <div class="terminal-line">
-            <span class="prompt">$</span>
-            <span class="command" id="cmd2-desktop"></span>
-          </div>
-          <div class="terminal-line">
-            <span class="prompt">></span>
-            <span id="output2-desktop">✓ Processing: 100K+ concurrent tasks</span>
-          </div>
-          <div class="terminal-line">
-            <span class="prompt">></span>
-            <span id="output3-desktop">✓ Architecture: Distributed & Scalable</span>
-          </div>
-          <div class="terminal-line">
-            <span class="prompt">$</span>
-            <span class="command" id="cmd3-desktop"></span><span class="blink">_</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section">
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
       <div class="section-header">
-        <div class="section-label">About Me</div>
-        <h2 class="section-title">The Data Alchemist</h2>
-        <p class="section-subtitle">
-          Transforming abstract data into tangible intelligence through advanced systems architecture
-          and machine learning engineering.
-        </p>
+        <div class="section-label fade-up">SKILLS</div>
+        <h2 class="section-title fade-up">Technical Arsenal</h2>
+        <p class="section-desc fade-up">Tools I use to build & scale</p>
       </div>
 
-      <div class="card-grid">
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-atom"></i>
-          </div>
-          <h3>Core Philosophy</h3>
-          <p>
-            Data is the new alchemy. I transform raw, chaotic information into structured intelligence
-            through systematic architecture and scalable engineering.
-          </p>
-          <div class="skill-progress">
-            <div>Data Transformation</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 95%"></div>
-            </div>
-            <div>System Architecture</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 92%"></div>
-            </div>
-            <div>ML Engineering</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 88%"></div>
-            </div>
+      <div class="skills-grid">
+        <div class="skill-category fade-up">
+          <h3><i class="fas fa-brain"></i> Data Science</h3>
+          <div class="skill-items">
+            <span class="skill-item">Python</span>
+            <span class="skill-item">Pandas</span>
+            <span class="skill-item">NumPy</span>
+            <span class="skill-item">Scikit-learn</span>
+            <span class="skill-item">TensorFlow</span>
+            <span class="skill-item">ML Pipelines</span>
           </div>
         </div>
 
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-server"></i>
+        <div class="skill-category fade-up">
+          <h3><i class="fas fa-server"></i> Backend</h3>
+          <div class="skill-items">
+            <span class="skill-item">Flask</span>
+            <span class="skill-item">FastAPI</span>
+            <span class="skill-item">Celery</span>
+            <span class="skill-item">Redis</span>
+            <span class="skill-item">PostgreSQL</span>
+            <span class="skill-item">REST APIs</span>
           </div>
-          <h3>Technical Arsenal</h3>
-          <p>
-            Specialized in building resilient systems that process millions of data points,
-            with expertise spanning from algorithm design to production deployment.
-          </p>
-          <div class="skill-matrix">
-            <div class="skill-cell">Python</div>
-            <div class="skill-cell">Flask</div>
-            <div class="skill-cell">DevOps</div>
-            <div class="skill-cell">Linux</div>
-            <div class="skill-cell">SQL</div>
-            <div class="skill-cell">Docker</div>
-            <div class="skill-cell">Celery</div>
-            <div class="skill-cell">Power BI</div>
-            <div class="skill-cell">ML Pipelines</div>
+        </div>
+
+        <div class="skill-category fade-up">
+          <h3><i class="fas fa-cloud"></i> DevOps & Tools</h3>
+          <div class="skill-items">
+            <span class="skill-item">Docker</span>
+            <span class="skill-item">Linux</span>
+            <span class="skill-item">Git</span>
+            <span class="skill-item">Nginx</span>
+            <span class="skill-item">AWS</span>
+            <span class="skill-item">CI/CD</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="section">
+  <!-- Projects Section -->
+  <section id="projects" style="background: var(--bg-alt);">
+    <div class="container">
       <div class="section-header">
-        <div class="section-label">Technical Expertise</div>
-        <h2 class="section-title">Engineering Stack</h2>
-        <p class="section-subtitle">
-          A comprehensive toolkit for building intelligent, scalable systems from ground up.
-        </p>
+        <div class="section-label fade-up">PROJECTS</div>
+        <h2 class="section-title fade-up">Featured Work</h2>
+        <p class="section-desc fade-up">Production systems I've built</p>
       </div>
 
-      <div class="card-grid">
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fab fa-python"></i>
-          </div>
-          <h3>Backend Engineering</h3>
-          <ul style="color: var(--muted); line-height: 2; margin-top: 1rem; padding-left: 1.2rem;">
-            <li>Python 3.9+ (Expert)</li>
-            <li>Flask & FastAPI</li>
-            <li>Celery for async tasks</li>
-            <li>Redis & RabbitMQ</li>
-            <li>PostgreSQL & MySQL</li>
-            <li>REST & GraphQL APIs</li>
-          </ul>
-        </div>
-
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-robot"></i>
-          </div>
-          <h3>ML & Data Science</h3>
-          <ul style="color: var(--muted); line-height: 2; margin-top: 1rem; padding-left: 1.2rem;">
-            <li>Scikit-learn & TensorFlow</li>
-            <li>Pandas & NumPy</li>
-            <li>ML pipeline design</li>
-            <li>Feature engineering</li>
-            <li>Model deployment</li>
-            <li>Data visualization</li>
-          </ul>
-        </div>
-
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-cloud"></i>
-          </div>
-          <h3>DevOps & Cloud</h3>
-          <ul style="color: var(--muted); line-height: 2; margin-top: 1rem; padding-left: 1.2rem;">
-            <li>Docker & Kubernetes</li>
-            <li>AWS & GCP</li>
-            <li>CI/CD pipelines</li>
-            <li>Linux server management</li>
-            <li>Nginx configuration</li>
-            <li>Monitoring & logging</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-      <div class="section-header">
-        <div class="section-label">Projects</div>
-        <h2 class="section-title">Architected Solutions</h2>
-        <p class="section-subtitle">
-          Production-grade systems designed for scale, reliability, and intelligent data processing.
-        </p>
-      </div>
-
-      <div class="card-grid">
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-envelope"></i>
+      <div class="cards-grid">
+        <div class="project-card fade-up">
+          <div class="project-header">
+            <div class="project-icon"><i class="fas fa-envelope"></i></div>
+            <span class="project-badge">Production</span>
           </div>
           <h3>Quantum Verification Engine</h3>
-          <p><strong>System Load:</strong> 100K+ emails/batch</p>
-          <p><strong>Latency:</strong> &lt; 50ms average</p>
-          <p><strong>Tech Stack:</strong> Python, Celery, Redis, SMTP/DNS</p>
-          <p><strong>Architecture:</strong> Distributed worker pools, credit-based billing, real-time monitoring</p>
+          <p>Bulk email validation system with distributed processing</p>
+          <div class="project-metrics">
+            <div class="metric">
+              <div class="metric-value">100K+</div>
+              <div class="metric-label">Emails/Batch</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value"><50ms</div>
+              <div class="metric-label">Latency</div>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Celery</span>
+            <span class="tag">Redis</span>
+          </div>
         </div>
 
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-file-contract"></i>
+        <div class="project-card fade-up">
+          <div class="project-header">
+            <div class="project-icon"><i class="fas fa-file-invoice"></i></div>
+            <span class="project-badge">Automation</span>
           </div>
           <h3>Data Extraction Matrix</h3>
-          <p><strong>Efficiency:</strong> 80% manual work reduction</p>
-          <p><strong>Accuracy:</strong> 99.2% extraction rate</p>
-          <p><strong>Tech Stack:</strong> PyPDF2, Regex, Pandas, Flask</p>
-          <p><strong>Process:</strong> PDF → Web → Excel automation with validation workflows</p>
+          <p>PDF to structured data extraction pipeline</p>
+          <div class="project-metrics">
+            <div class="metric">
+              <div class="metric-value">80%</div>
+              <div class="metric-label">Manual Work ↓</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">99.2%</div>
+              <div class="metric-label">Accuracy</div>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">BeautiFulSoup</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Flask</span>
+            <span class="tag">ML</span>
+            <span class="tag">Data Pipeline</span>
+          </div>
         </div>
 
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-chart-line"></i>
+        <div class="project-card fade-up">
+          <div class="project-header">
+            <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+            <span class="project-badge">Analytics</span>
           </div>
           <h3>Revenue Intelligence Hub</h3>
-          <p><strong>Data Volume:</strong> ₹984M+ revenue analyzed</p>
-          <p><strong>Records:</strong> 2M+ data points processed</p>
-          <p><strong>Tech Stack:</strong> Power BI, DAX, Excel</p>
-          <p><strong>Insights:</strong> KPI tracking, regional analytics, predictive modeling</p>
+          <p>Business intelligence & predictive analytics</p>
+          <div class="project-metrics">
+            <div class="metric">
+              <div class="metric-value">₹984M+</div>
+              <div class="metric-label">Revenue Analyzed</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">2M+</div>
+              <div class="metric-label">Data Points</div>
+            </div>
+          </div>
+          <div class="tags">
+            <span class="tag">Power BI</span>
+            <span class="tag">DAX</span>
+            <span class="tag">SQL</span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Architecture Section -->
-    <section id="architecture" class="section">
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
       <div class="section-header">
-        <div class="section-label">Architecture</div>
-        <h2 class="section-title">Production Blueprint</h2>
-        <p class="section-subtitle">
-          Scalable, fault-tolerant architecture designed for high-volume data processing and real-time analytics.
-        </p>
+        <div class="section-label fade-up">CONTACT</div>
+        <h2 class="section-title fade-up">Let's Connect</h2>
+        <p class="section-desc fade-up">Open to collaborations & opportunities</p>
       </div>
 
-      <div class="card-grid">
-        <div class="card fade-in">
-          <h3><i class="fas fa-layer-group"></i> Multi-Layer Architecture</h3>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-date">LAYER 1</div>
-              <h4>Edge Layer</h4>
-              <p>Cloudflare + DNS for traffic optimization, DDoS protection, SSL termination</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">LAYER 2</div>
-              <h4>Proxy Layer</h4>
-              <p>Nginx for load balancing, request throttling, static file delivery</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">LAYER 3</div>
-              <h4>Application Layer</h4>
-              <p>Flask + Gunicorn for REST APIs, authentication, business logic</p>
-            </div>
-          </div>
-        </div>
+      <div class="contact-grid">
+        <a href="mailto:vishalkumara.vka@gmail.com" class="contact-card fade-up">
+          <i class="fas fa-envelope"></i>
+          <h4>Email</h4>
+          <p>vishalkumara.vka</p>
+        </a>
 
-        <div class="card fade-in">
-          <h3><i class="fas fa-expand-arrows-alt"></i> Scaling & System Architecture</h3>
-          <ul>
-            <li><strong>Horizontal Scaling:</strong> Celery worker pool architecture</li>
-            <li><strong>Queue Management:</strong> Redis-based distributed task queues</li>
-            <li><strong>Fault Tolerance:</strong> Automatic retry and failure recovery</li>
-            <li><strong>Load Balancing:</strong> Nginx reverse proxy and round-robin routing</li>
-            <li><strong>High Availability:</strong> Multi-instance Flask deployment</li>
-            <li><strong>Monitoring:</strong> System logs and real-time performance tracking</li>
-            <br>
-            <h3><i class="fas fa-server"></i> Backend & API Engineering</h3>
-            <li><strong>REST API Design:</strong> Modular Flask-based API architecture</li>
-            <li><strong>Database Design:</strong> MySQL relational schema optimization</li>
-            <li><strong>Authentication:</strong> OTP-based secure user verification</li>
-            <li><strong>File Processing:</strong> Bulk CSV upload and parsing pipelines</li>
-            <li><strong>Async Processing:</strong> Background task execution with Celery</li>
-            <li><strong>Session Management:</strong> Token-based user session handling</li>
-          </ul>
-        </div>
+        <a href="https://linkedin.com/in/vishalkumara" target="_blank" class="contact-card fade-up">
+          <i class="fab fa-linkedin"></i>
+          <h4>LinkedIn</h4>
+          <p>in/vishalkumara</p>
+        </a>
 
-        <!-- Machine Learning & AI Systems -->
-        <div class="card fade-in">
-          <h3><i class="fas fa-brain"></i> Machine Learning & AI Systems</h3>
-          <ul>
-            <li><strong>ML Deployment:</strong> Flask-integrated prediction endpoints</li>
-            <li><strong>Deep Learning:</strong> GAN-based Virtual Try-On (VITON / TryOnGAN)</li>
-            <li><strong>Feature Engineering:</strong> Spotify audio mood classification</li>
-            <li><strong>Predictive Modeling:</strong> Pokémon battle prediction ML system</li>
-            <li><strong>Data Pipeline:</strong> Automated preprocessing and cleaning workflows</li>
-            <li><strong>Model Training:</strong> Supervised ML classification & regression</li>
-            <br>
-            <h3><i class="fas fa-flask"></i> Research & Engineering Projects</h3>
-            <li><strong>Email Verification System:</strong> Bulk validation SaaS platform</li>
-            <li><strong>Virtual Try-On AI:</strong> Deep learning clothing simulation system</li>
-            <li><strong>Spotify Mood Predictor:</strong> ML-based emotion detection system</li>
-            <li><strong>Pokémon ML Battle Engine:</strong> Data-driven battle prediction</li>
-            <li><strong>Physiotherapy AI:</strong> Rehab recommendation ML framework</li>
-            <li><strong>Portfolio SaaS Platform:</strong> Scalable Flask-based personal platform</li>
-          </ul>
-        </div>
+        <a href="https://github.com/Vishalkumar-tech" target="_blank" class="contact-card fade-up">
+          <i class="fab fa-github"></i>
+          <h4>GitHub</h4>
+          <p>@Vishalkumar-tech</p>
+        </a>
+
+        <a href="tel:+917760752108" class="contact-card fade-up">
+          <i class="fas fa-phone"></i>
+          <h4>Phone</h4>
+          <p>+91 77607 52108</p>
+        </a>
       </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-      <div class="section-header">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-subtitle">
-          Ready to architect intelligent systems. Let's transform data into competitive advantage.
-        </p>
-      </div>
-
-      <div class="contact-terminal fade-in">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <div class="terminal-dot dot-red"></div>
-            <div class="terminal-dot dot-yellow"></div>
-            <div class="terminal-dot dot-green"></div>
-          </div>
-          <div class="terminal-title">CONTACT TERMINAL</div>
-        </div>
-
-        <div class="contact-info">
-          <a href="mailto:vishalkumara.vka@gmail.com" class="contact-item">
-            <div class="contact-icon">
-              <i class="fas fa-envelope"></i>
-            </div>
-            <div>
-              <div style="font-weight: 600;">Email</div>
-              <div style="color: var(--muted); font-size: 0.95rem;">vishalkumara.vka@gmail.com</div>
-            </div>
-          </a>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <i class="fas fa-phone"></i>
-            </div>
-            <div>
-              <div style="font-weight: 600;">Phone</div>
-              <div style="color: var(--muted); font-size: 0.95rem;">+91 7760752108</div>
-            </div>
-          </div>
-
-          <a href="https://github.com/Vishalkumar-tech" target="_blank" class="contact-item">
-            <div class="contact-icon">
-              <i class="fab fa-github"></i>
-            </div>
-            <div>
-              <div style="font-weight: 600;">GitHub</div>
-              <div style="color: var(--muted); font-size: 0.95rem;">github.com/Vishalkumar-tech</div>
-            </div>
-          </a>
-
-          <a href="https://linkedin.com/in/vishalkumara" target="_blank" class="contact-item">
-            <div class="contact-icon">
-              <i class="fab fa-linkedin"></i>
-            </div>
-            <div>
-              <div style="font-weight: 600;">LinkedIn</div>
-              <div style="color: var(--muted); font-size: 0.95rem;">linkedin.com/in/vishalkumara</div>
-            </div>
-          </a>
-        </div>
-
-        <div style="text-align: center; margin-top: 3rem;">
-          <a href="mailto:vishalkumara.vka@gmail.com" class="btn btn-primary">
-            <i class="fas fa-paper-plane"></i> Send Message
-          </a>
-          <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download
-            class="btn btn-secondary" style="margin-left: 1rem;">
-            <i class="fas fa-download"></i> Download Resume
-          </a>
-
-          </a>
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
-  <!-- ================================================ -->
-  <!-- MOBILE BODY CONTAINER -->
-  <!-- ================================================ -->
-  <div class="mobile-body-container">
-    <!-- Hero Section (Mobile) -->
-    <section class="hero-section">
-      <div class="hero-content">
-        <h1>Transforming Data Into Intelligent Systems</h1>
-        <div class="hero-tagline">
-          I architect <span class="highlight">scalable systems</span> that transform raw data into
-          <span class="highlight-2">intelligent solutions</span>, blending
-          <span class="highlight-3">ML engineering</span> with production-grade infrastructure.
-        </div>
-
-        <div class="btn-group">
-          <a href="#projects" class="btn btn-primary">
-            <i class="fas fa-rocket"></i> View Projects
-          </a>
-          <a href="#contact" class="btn btn-secondary">
-            <i class="fas fa-envelope"></i> Contact Me
-          </a>
-        </div>
-      </div>
-
-      <div class="terminal-display fade-in">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <div class="terminal-dot dot-red"></div>
-            <div class="terminal-dot dot-yellow"></div>
-            <div class="terminal-dot dot-green"></div>
-          </div>
-          <div class="terminal-title">SYSTEM TERMINAL</div>
-        </div>
-
-        <div class="terminal-content">
-          <div class="terminal-line">
-            <span class="prompt">$</span>
-            <span class="command" id="cmd1-mobile"></span>
-          </div>
-          <div class="terminal-line">
-            <span class="prompt">></span>
-            <span id="output1-mobile">Vishal Kumar A - Data Alchemist & Systems Architect</span>
-          </div>
-
-          <div class="terminal-line">
-            <span class="prompt">$</span>
-            <span class="command" id="cmd2-mobile"></span>
-          </div>
-          <div class="terminal-line">
-            <span class="prompt">></span>
-            <span id="output2-mobile">✓ Processing: 100K+ concurrent tasks</span>
-          </div>
-          <div class="terminal-line">
-            <span class="prompt">></span>
-            <span id="output3-mobile">✓ Architecture: Distributed & Scalable</span>
-          </div>
-          <div class="terminal-line">
-            <span class="prompt">$</span>
-            <span class="command" id="cmd3-mobile"></span><span class="blink">_</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section (Mobile) -->
-    <section id="about" class="section">
-      <div class="section-header">
-        <div class="section-label">About Me</div>
-        <h2 class="section-title">The Data Alchemist</h2>
-        <p class="section-subtitle">
-          Transforming abstract data into tangible intelligence through advanced systems architecture
-          and machine learning engineering.
-        </p>
-      </div>
-
-      <div class="card-grid">
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-atom"></i>
-          </div>
-          <h3>Core Philosophy</h3>
-          <p>
-            Data is the new alchemy. I transform raw, chaotic information into structured intelligence
-            through systematic architecture and scalable engineering.
-          </p>
-          <div class="skill-progress">
-            <div>Data Transformation</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 95%"></div>
-            </div>
-            <div>System Architecture</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 92%"></div>
-            </div>
-            <div>ML Engineering</div>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 88%"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-server"></i>
-          </div>
-          <h3>Technical Arsenal</h3>
-          <p>
-            Specialized in building resilient systems that process millions of data points,
-            with expertise spanning from algorithm design to production deployment.
-          </p>
-          <div class="skill-matrix">
-            <div class="skill-cell">Python</div>
-            <div class="skill-cell">Flask</div>
-            <div class="skill-cell">DevOps</div>
-            <div class="skill-cell">Linux</div>
-            <div class="skill-cell">SQL</div>
-            <div class="skill-cell">Docker</div>
-            <div class="skill-cell">Celery</div>
-            <div class="skill-cell">Power BI</div>
-            <div class="skill-cell">ML Pipelines</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section (Mobile) -->
-    <section id="skills" class="section">
-      <div class="section-header">
-        <div class="section-label">Technical Expertise</div>
-        <h2 class="section-title">Engineering Stack</h2>
-        <p class="section-subtitle">
-          A comprehensive toolkit for building intelligent, scalable systems from ground up.
-        </p>
-      </div>
-
-      <div class="card-grid">
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fab fa-python"></i>
-          </div>
-          <h3>Backend Engineering</h3>
-          <ul style="color: var(--muted); line-height: 2; margin-top: 1rem; padding-left: 1.2rem;">
-            <li>Python 3.9+ (Expert)</li>
-            <li>Flask & FastAPI</li>
-            <li>Celery for async tasks</li>
-            <li>Redis & RabbitMQ</li>
-            <li>PostgreSQL & MySQL</li>
-            <li>REST & GraphQL APIs</li>
-          </ul>
-        </div>
-
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-robot"></i>
-          </div>
-          <h3>ML & Data Science</h3>
-          <ul style="color: var(--muted); line-height: 2; margin-top: 1rem; padding-left: 1.2rem;">
-            <li>Scikit-learn & TensorFlow</li>
-            <li>Pandas & NumPy</li>
-            <li>ML pipeline design</li>
-            <li>Feature engineering</li>
-            <li>Model deployment</li>
-            <li>Data visualization</li>
-          </ul>
-        </div>
-
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-cloud"></i>
-          </div>
-          <h3>DevOps & Cloud</h3>
-          <ul style="color: var(--muted); line-height: 2; margin-top: 1rem; padding-left: 1.2rem;">
-            <li>Docker & Kubernetes</li>
-            <li>AWS & GCP</li>
-            <li>CI/CD pipelines</li>
-            <li>Linux server management</li>
-            <li>Nginx configuration</li>
-            <li>Monitoring & logging</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section (Mobile) -->
-    <section id="projects" class="section">
-      <div class="section-header">
-        <div class="section-label">Projects</div>
-        <h2 class="section-title">Architected Solutions</h2>
-        <p class="section-subtitle">
-          Production-grade systems designed for scale, reliability, and intelligent data processing.
-        </p>
-      </div>
-
-      <div class="card-grid">
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <h3>Quantum Verification Engine</h3>
-          <p><strong>System Load:</strong> 100K+ emails/batch</p>
-          <p><strong>Latency:</strong> &lt; 50ms average</p>
-          <p><strong>Tech Stack:</strong> Python, Celery, Redis, SMTP/DNS</p>
-          <p><strong>Architecture:</strong> Distributed worker pools, credit-based billing, real-time monitoring</p>
-        </div>
-
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-file-contract"></i>
-          </div>
-          <h3>Data Extraction Matrix</h3>
-          <p><strong>Efficiency:</strong> 80% manual work reduction</p>
-          <p><strong>Accuracy:</strong> 99.2% extraction rate</p>
-          <p><strong>Tech Stack:</strong> PyPDF2, Regex, Pandas, Flask</p>
-          <p><strong>Process:</strong> PDF → Web → Excel automation with validation workflows</p>
-        </div>
-
-        <div class="card fade-in">
-          <div class="card-icon">
-            <i class="fas fa-analytics"></i>
-          </div>
-          <h3>Revenue Intelligence Hub</h3>
-          <p><strong>Data Volume:</strong> ₹984M+ revenue analyzed</p>
-          <p><strong>Records:</strong> 2M+ data points processed</p>
-          <p><strong>Tech Stack:</strong> Power BI, DAX, Excel</p>
-          <p><strong>Insights:</strong> KPI tracking, regional analytics, predictive modeling</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Architecture Section (Mobile) -->
-    <section id="architecture" class="section">
-      <div class="section-header">
-        <div class="section-label">Architecture</div>
-        <h2 class="section-title">Production Blueprint</h2>
-        <p class="section-subtitle">
-          Scalable, fault-tolerant architecture designed for high-volume data processing and real-time analytics.
-        </p>
-      </div>
-
-      <div class="card-grid">
-        <div class="card fade-in">
-          <h3><i class="fas fa-layer-group"></i> Multi-Layer Architecture</h3>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-date">LAYER 1</div>
-              <h4>Edge Layer</h4>
-              <p>Cloudflare + DNS for traffic optimization, DDoS protection, SSL termination</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">LAYER 2</div>
-              <h4>Proxy Layer</h4>
-              <p>Nginx for load balancing, request throttling, static file delivery</p>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-date">LAYER 3</div>
-              <h4>Application Layer</h4>
-              <p>Flask + Gunicorn for REST APIs, authentication, business logic</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="card fade-in">
-          <h3><i class="fas fa-expand-arrows-alt"></i> Scaling Protocol</h3>
-          <ul style="color: var(--muted); line-height: 2; margin-top: 1rem; padding-left: 1.2rem;">
-            <li><strong>Horizontal Scaling:</strong> Celery worker pools</li>
-            <li><strong>Queue Management:</strong> Redis-based task distribution</li>
-            <li><strong>Fault Tolerance:</strong> Automatic retry mechanisms</li>
-            <li><strong>Load Balancing:</strong> Nginx round-robin distribution</li>
-            <li><strong>Monitoring:</strong> Real-time system health tracking</li>
-            <li><strong>Security:</strong> Multi-layer protection protocols</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section (Mobile) -->
-    <section id="contact" class="section">
-      <div class="section-header">
-        <div class="section-label">Contact</div>
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-subtitle">
-          Ready to architect intelligent systems. Let's transform data into competitive advantage.
-        </p>
-      </div>
-
-      <div class="contact-terminal fade-in">
-        <div class="terminal-header">
-          <div class="terminal-dots">
-            <div class="terminal-dot dot-red"></div>
-            <div class="terminal-dot dot-yellow"></div>
-            <div class="terminal-dot dot-green"></div>
-          </div>
-          <div class="terminal-title">CONTACT TERMINAL</div>
-        </div>
-
-        <div class="contact-info">
-          <a href="mailto:vishalkumara.vka@gmail.com" class="contact-item">
-            <div class="contact-icon">
-              <i class="fas fa-envelope"></i>
-            </div>
-            <div>
-              <div style="font-weight: 600;">Email</div>
-              <div style="color: var(--muted); font-size: 0.95rem;">vishalkumara.vka@gmail.com</div>
-            </div>
-          </a>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <i class="fas fa-phone"></i>
-            </div>
-            <div>
-              <div style="font-weight: 600;">Phone</div>
-              <div style="color: var(--muted); font-size: 0.95rem;">+91 7760752108</div>
-            </div>
-          </div>
-
-          <a href="https://github.com/Vishalkumar-tech" target="_blank" class="contact-item">
-            <div class="contact-icon">
-              <i class="fab fa-github"></i>
-            </div>
-            <div>
-              <div style="font-weight: 600;">GitHub</div>
-              <div style="color: var(--muted); font-size: 0.95rem;">github.com/Vishalkumar-tech</div>
-            </div>
-          </a>
-
-          <a href="https://linkedin.com/in/vishalkumara" target="_blank" class="contact-item">
-            <div class="contact-icon">
-              <i class="fab fa-linkedin"></i>
-            </div>
-            <div>
-              <div style="font-weight: 600;">LinkedIn</div>
-              <div style="color: var(--muted); font-size: 0.95rem;">linkedin.com/in/vishalkumara</div>
-            </div>
-          </a>
-        </div>
-
-        <div style="text-align: center; margin-top: 3rem;">
-          <a href="mailto:vishalkumara.vka@gmail.com" class="btn btn-primary">
-            <i class="fas fa-paper-plane"></i> Send Message
-          </a>
-          <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download
-            class="btn btn-secondary" style="margin-left: 1rem;">
-            <i class="fas fa-download"></i> Download Resume
-          </a>
-
-          </a>
-          </a>
-          </a>
-        </div>
-      </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <div class="footer-grid">
-      <div>
-        <div class="footer-signature">VA</div>
-        <p style="color: var(--muted);">Vishal Kumar A | Data Alchemist & Systems Architect</p>
-      </div>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">VK</div>
+          <p style="color: rgba(255,255,255,0.7);">Data Scientist · ML Engineer · Systems Architect</p>
+          <div class="footer-social">
+            <a href="https://github.com/Vishalkumar-tech"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/vishalkumara"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
 
-      <div>
-        <h3 style="color: var(--text); margin-bottom: 1rem;">Expertise</h3>
-        <p style="color: var(--muted); line-height: 2;">
-          ML Engineering<br>
-          System Architecture<br>
-          Data Transformation<br>
-          Production Deployment
-        </p>
-      </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+            <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
+            <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
+            <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
+          </ul>
+        </div>
 
-      <div>
-        <h3 style="color: var(--text); margin-bottom: 1rem;">Connect</h3>
-        <div style="margin-top: 1rem;">
-          <a href="https://github.com/Vishalkumar-tech" target="_blank"
-            style="color: var(--muted); margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-github"></i></a>
-          <a href="https://linkedin.com/in/vishalkumara" target="_blank"
-            style="color: var(--muted); margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
-          <a href="#" style="color: var(--muted); font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://vishalk.me/pandas-data.html"><i class="fas fa-chevron-right"></i> Pandas Handbook</a></li>
+            <li><a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download><i class="fas fa-chevron-right"></i> Resume</a></li>
+          </ul>
         </div>
       </div>
-    </div>
 
-    <div style="border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 2rem;">
-      <p style="color: var(--muted);">
-        © 2024 Vishal Kumar A. All rights reserved.
-      </p>
-      <p style="color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem;">
-        Click on my photo in the header for a closer look
-      </p>
+      <div class="copyright">
+        <p>© 2024 Vishal Kumar A · Built with ⚡ at JK Tyres R&D</p>
+      </div>
     </div>
   </footer>
 
   <script>
-
-
-
-    // Instagram-style Photo Modal
-    const desktopHeaderProfile = document.getElementById('desktopHeaderProfile');
-    const mobileHeaderProfile = document.getElementById('mobileHeaderProfile');
-    const photoModal = document.getElementById('photoModal');
+    // Modal
+    const profileTrigger = document.getElementById('profileTrigger');
+    const modal = document.getElementById('photoModal');
     const closeModal = document.getElementById('closeModal');
-    const modalImage = document.getElementById('modalImage');
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileNav = document.getElementById('mobileNav');
-    const menuBackdrop = document.getElementById('menuBackdrop');
 
-    // Open modal when header profile is clicked (both desktop and mobile)
-    if (desktopHeaderProfile) {
-      desktopHeaderProfile.addEventListener('click', () => {
-        photoModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-    }
+    profileTrigger.addEventListener('click', () => {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
 
-    if (mobileHeaderProfile) {
-      mobileHeaderProfile.addEventListener('click', () => {
-        photoModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-    }
-    // Close modal when X is clicked
     closeModal.addEventListener('click', () => {
-      photoModal.classList.remove('active');
+      modal.classList.remove('active');
       document.body.style.overflow = 'auto';
     });
 
-    // Close modal when clicking outside the image
-    photoModal.addEventListener('click', (e) => {
-      if (e.target === photoModal) {
-        photoModal.classList.remove('active');
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
         document.body.style.overflow = 'auto';
       }
     });
 
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && photoModal.classList.contains('active')) {
-        photoModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
+    // Mobile Menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const backdrop = document.getElementById('backdrop');
+
+    menuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('active');
+      backdrop.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
     });
 
-    // Mobile menu toggle
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        mobileNav.classList.toggle('active');
-        menuBackdrop.classList.toggle('active');
-        document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
-      });
-    }
+    backdrop.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      backdrop.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
 
-    // Close mobile menu when clicking backdrop
-    if (menuBackdrop) {
-      menuBackdrop.addEventListener('click', () => {
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => {
         mobileNav.classList.remove('active');
-        menuBackdrop.classList.remove('active');
+        backdrop.classList.remove('active');
         document.body.style.overflow = 'auto';
       });
-    }
-
-    // Close mobile menu when clicking a link
-    if (mobileNav) {
-      document.querySelectorAll('.mobile-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileNav.classList.remove('active');
-          menuBackdrop.classList.remove('active');
-          document.body.style.overflow = 'auto';
-        });
-      });
-    }
-
-    // Terminal typing animation
-    function typeWriter(element, text, speed, callback) {
-      let i = 0;
-      element.innerHTML = '';
-
-      function type() {
-        if (i < text.length) {
-          element.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        } else if (callback) {
-          callback();
-        }
-      }
-      type();
-    }
-
-    // Initialize desktop terminal animations
-    function initDesktopTerminal() {
-      const commands = [
-        { element: document.getElementById('cmd1-desktop'), text: 'whoami', speed: 100 },
-        { element: document.getElementById('cmd2-desktop'), text: 'system_status --check', speed: 80 },
-        { element: document.getElementById('cmd3-desktop'), text: 'ready_for_protocol', speed: 60 }
-      ];
-
-      let current = 0;
-
-      function typeNext() {
-        if (current < commands.length) {
-          typeWriter(commands[current].element, commands[current].text, commands[current].speed, () => {
-            current++;
-            setTimeout(typeNext, 500);
-          });
-        }
-      }
-
-      setTimeout(typeNext, 1000);
-    }
-
-    // Initialize mobile terminal animations
-    function initMobileTerminal() {
-      const commands = [
-        { element: document.getElementById('cmd1-mobile'), text: 'whoami', speed: 100 },
-        { element: document.getElementById('cmd2-mobile'), text: 'system_status --check', speed: 80 },
-        { element: document.getElementById('cmd3-mobile'), text: 'ready_for_protocol', speed: 60 }
-      ];
-
-      let current = 0;
-
-      function typeNext() {
-        if (current < commands.length) {
-          typeWriter(commands[current].element, commands[current].text, commands[current].speed, () => {
-            current++;
-            setTimeout(typeNext, 500);
-          });
-        }
-      }
-
-      setTimeout(typeNext, 1000);
-    }
-
-    // Header scroll effect for both headers
-    window.addEventListener('scroll', function () {
-      const desktopHeader = document.querySelector('.desktop-header');
-      const mobileHeader = document.querySelector('.mobile-header');
-
-      if (window.scrollY > 50) {
-        if (desktopHeader) desktopHeader.classList.add('scrolled');
-        if (mobileHeader) mobileHeader.classList.add('scrolled');
-      } else {
-        if (desktopHeader) desktopHeader.classList.remove('scrolled');
-        if (mobileHeader) mobileHeader.classList.remove('scrolled');
-      }
     });
 
-    // Fade-in animation on scroll
-    function checkVisibility() {
-      const elements = document.querySelectorAll('.fade-in');
-
-      elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('visible');
-        }
-      });
-    }
-
-    // Smooth scroll for navigation
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
 
-    // Initialize everything
-    document.addEventListener('DOMContentLoaded', function () {
-      // Initialize terminals based on device
-      if (window.innerWidth >= 768) {
-        // Desktop
-        if (document.getElementById('cmd1-desktop')) {
-          initDesktopTerminal();
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
         }
-      } else {
-        // Mobile
-        if (document.getElementById('cmd1-mobile')) {
-          initMobileTerminal();
-        }
-      }
-
-      // Initial visibility check
-      checkVisibility();
-
-      // Check visibility on scroll
-      window.addEventListener('scroll', checkVisibility);
-
-      // Animate progress bars when visible
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const progressBars = entry.target.querySelectorAll('.progress-fill');
-            progressBars.forEach(bar => {
-              bar.style.animation = 'progressFill 1.5s ease-out';
-            });
-          }
-        });
-      }, { threshold: 0.3 });
-
-      document.querySelectorAll('.card').forEach(card => {
-        observer.observe(card);
       });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-      // Handle resize events
-      window.addEventListener('resize', function () {
-        // Reinitialize terminal if needed (optional)
-      });
-    });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   </script>
 </body>
-
 </html>
