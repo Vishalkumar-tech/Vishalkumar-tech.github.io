@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why AI is our ally, not our enemy | Vishal Kumar A</title>
+  <meta name="description" content="AI is transforming daily life – here's why we should embrace it, use it as a tool, and stop fearing the future." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #818cf8;
+      --secondary: #ec4899;
+      --accent: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-light: #334155;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --border-light: #f1f5f9;
+      
+      --gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6);
+      --gradient-secondary: linear-gradient(135deg, #ec4899, #f43f5e);
+      --gradient-accent: linear-gradient(135deg, #06b6d4, #3b82f6);
+      
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+      --shadow: 0 4px 12px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.05);
+      --shadow-lg: 0 20px 30px -10px rgba(0,0,0,0.1);
+      --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.15);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --radius-lg: 32px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ===== HEADER (simplified: Home, Blog, Contact) ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      z-index: 50;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      padding: 6px 12px 6px 6px;
+      border-radius: 60px;
+      background: linear-gradient(white, white) padding-box,
+                  var(--gradient-primary) border-box;
+      border: 2px solid transparent;
+      transition: var(--transition);
+    }
+
+    .profile:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .profile-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    .profile-info h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .profile-info p {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 1rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link i {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    .btn-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: var(--gradient-primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      margin-left: 8px;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-resume:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .menu-btn {
+      display: none;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* ===== REDESIGNED HERO (single post hero) ===== */
+    .post-hero {
+      padding: 60px 0 20px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.05), transparent 70%);
+    }
+
+    .post-hero .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+      color: var(--primary);
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .post-hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      max-width: 900px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--text), var(--primary-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .post-hero .post-meta {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    .post-hero .post-meta i {
+      color: var(--primary);
+      margin-right: 6px;
+    }
+
+    /* ===== REDESIGNED BLOG CARD (full article) ===== */
+    .blog-full {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .blog-full-image {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .blog-full-content {
+      padding: 48px 56px;
+    }
+
+    .blog-full-content .lead {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-light);
+      line-height: 1.6;
+    }
+
+    .blog-body {
+      color: var(--text-light);
+      font-size: 1.1rem;
+    }
+
+    .blog-body p {
+      margin-bottom: 24px;
+      line-height: 1.8;
+    }
+
+    .blog-body strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .blog-body .highlight {
+      background: linear-gradient(145deg, var(--bg-alt), white);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin: 40px 0;
+      border-left: 6px solid var(--primary);
+      box-shadow: var(--shadow);
+      font-size: 1.1rem;
+    }
+
+    .blog-footer-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 40px 0 24px;
+    }
+
+    .blog-footer-tags .tag {
+      padding: 8px 18px;
+      background: var(--bg-alt);
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .blog-footer-tags .tag:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .share-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      margin: 40px 0;
+    }
+
+    .share-section span {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .share-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-alt);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      transition: var(--transition);
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 1px solid var(--border);
+    }
+
+    .share-icon:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .author-bio {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: var(--bg-alt);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin: 40px 0;
+    }
+
+    .author-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+    }
+
+    .author-info h4 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .author-info p {
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .author-social a {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-right: 16px;
+      transition: var(--transition);
+    }
+
+    .author-social a:hover {
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ===== CONTACT FORM SECTION (refined) ===== */
+    #contact {
+      scroll-margin-top: 100px;
+    }
+
+    .contact-card {
+      background: linear-gradient(145deg, var(--bg-alt), white);
+      border-radius: var(--radius-lg);
+      padding: 64px 48px;
+      text-align: center;
+      border: 1px solid var(--border-light);
+      margin: 80px 0;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-card h2 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .contact-card p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      transition: var(--transition);
+      background: white;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+      outline: none;
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .contact-form button {
+      width: 100%;
+      padding: 16px 32px;
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 8px 18px rgba(99,102,241,0.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .contact-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(99,102,241,0.4);
+    }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      padding: 60px 0 30px;
+      margin-top: 80px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand {
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .footer-social a {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: var(--transition);
+    }
+
+    .footer-social a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-links h4 {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: white;
+      transform: translateX(5px);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 20px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 3rem;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 300px;
+      height: 100vh;
+      background: white;
+      z-index: 1001;
+      padding: 80px 24px;
+      transition: right 0.3s ease;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .mobile-nav.active {
+      right: 0;
+    }
+
+    .mobile-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .backdrop.active {
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .menu-btn { display: flex; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .blog-full-content { padding: 32px 24px; }
+      .post-hero h1 { font-size: 2.5rem; }
+      .contact-card { padding: 40px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .author-bio { flex-direction: column; text-align: center; }
+      .share-section { flex-wrap: wrap; }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <div class="profile" id="profileTrigger">
+        <img src="profile.jpeg" alt="Vishal Kumar A" class="profile-img">
+        <div class="profile-info">
+          <h3>Vishal Kumar A</h3>
+          <p><i class="fas fa-bolt"></i> Data Scientist @ JK Tyres R&D</p>
+        </div>
+      </div>
+
+      <div class="nav">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="#" class="nav-link"><i class="fas fa-pen-fancy"></i> Blog</a>
+        <a href="#contact" class="nav-link"><i class="fas fa-paper-plane"></i> Contact</a>
+        <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download class="btn-resume">
+          <i class="fas fa-download"></i> Resume
+        </a>
+      </div>
+
+      <button class="menu-btn" id="menuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- mobile nav -->
+  <div class="backdrop" id="backdrop"></div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="#"><i class="fas fa-pen-fancy"></i> Blog</a>
+    <a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a>
+    <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download><i class="fas fa-download"></i> Resume</a>
+  </div>
+
+  <!-- Modal for profile -->
+  <div class="modal" id="photoModal">
+    <button class="modal-close" id="closeModal">&times;</button>
+    <img src="profile.jpeg" alt="Vishal Kumar A">
+  </div>
+
+  <!-- Redesigned Post Hero -->
+  <section class="post-hero">
+    <div class="container">
+      <div class="badge fade-up">
+        <i class="fas fa-pen-nib"></i> featured post · machine learning
+      </div>
+      <h1 class="fade-up">Why AI is our ally, not our enemy</h1>
+      <div class="post-meta fade-up">
+        <span><i class="far fa-calendar-alt"></i> Feb 23, 2026</span>
+        <span><i class="far fa-clock"></i> 5 min read</span>
+        <span><i class="far fa-user"></i> Vishal Kumar A</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Blog Article (redesigned layout) -->
+  <div class="container">
+    <article class="blog-full fade-up">
+      <img 
+        src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop" 
+        alt="Abstract AI brain with neural network" 
+        class="blog-full-image"
+      >
+      <div class="blog-full-content">
+        <p class="lead">
+          When we hear the word Artificial Intelligence, most of us think about movies like Terminator or Avengers: Age of Ultron. Machines taking over the world, robots replacing humans that’s what cinema showed us. But those were fantasy stories created for thrill and entertainment.
+        </p>
+        
+        <div class="blog-body">
+          <p>
+            <strong>The reality of AI is very different.</strong> AI is not a robot trying to control us. It is more like a virtual assistant or a helpful friend. Its main job is simple to look at patterns and help us do our work better, faster, and easier.
+          </p>
+
+          <p>
+            To be honest, I’m personally weak at spelling. But I’m good at coding, machine learning, and verbal communication. When I want to explain my ideas clearly to everyone, I take help from AI. It helps correct my spelling, improve my sentences, and present my thoughts better.
+          </p>
+
+          <p>
+            What AI does is not magic. It looks at patterns from large amounts of data and predicts the most correct or helpful result. It doesn’t replace my thinking it improves how I express it.
+          </p>
+
+          <p>
+            The same concept applies in bigger situations too. For example, imagine predicting who might win a race. Our brain naturally considers factors like height, weight, speed, and past performance. These factors are called features. Based on them, we make an educated guess.
+          </p>
+
+          <p>
+            AI does the same thing but on a much larger scale, analyzing thousands or millions of examples in seconds.
+          </p>
+
+          <p>
+            AI is simply a tool that helps humans make better decisions.
+          </p>
+
+          <div class="highlight">
+            <i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 10px;"></i>
+            <strong>But there is one very important thing everyone must remember: your confidential data.</strong>
+            <p style="margin-top: 16px; margin-bottom: 0;">
+              Your personal information, passwords, private files, and business secrets should be protected like a dark secret. Don’t blindly share sensitive information with any AI tool. Always think twice.
+            </p>
+          </div>
+
+          <p>
+            AI itself is not “looking” for your secrets. For AI, data is just input just features. But the people and systems behind the tools must be used responsibly. That’s why it’s important for us, as users, to be aware and careful.
+          </p>
+
+          <p>
+            Use AI as a helper. Not as a place to store your secrets.
+          </p>
+
+          <p style="font-size: 1.2rem; font-weight: 500; margin-top: 40px;">
+            AI is powerful.<br>
+            AI is helpful.<br>
+            But awareness makes it safe.
+          </p>
+
+          <p style="margin-top: 30px;">
+            Stay tuned for more simple explanations about AI and Machine Learning.<br>
+            <strong>Happy Learning.</strong>
+          </p>
+        </div>
+
+        <!-- Tags -->
+        <div class="blog-footer-tags">
+          <span class="tag">#AI</span>
+          <span class="tag">#machinelearning</span>
+          <span class="tag">#privacy</span>
+          <span class="tag">#productivity</span>
+          <span class="tag">#humanplusAI</span>
+        </div>
+
+        <!-- Share -->
+        <div class="share-section">
+          <span>Share this post:</span>
+          <a href="#" class="share-icon"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="share-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="share-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="share-icon"><i class="fas fa-envelope"></i></a>
+        </div>
+
+        <!-- Author bio -->
+        <div class="author-bio">
+          <img src="profile.jpeg" alt="Vishal Kumar A" class="author-img">
+          <div class="author-info">
+            <h4>Vishal Kumar A</h4>
+            <p>Data Scientist at JK Tyres R&D. Building ML systems, writing about tech & life, and always learning.</p>
+            <div class="author-social">
+              <a href="#"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Contact Form Section -->
+    <div id="contact" class="contact-card fade-up">
+      <h2>Send me a note</h2>
+      <p>Have a question, feedback, or just want to say hello? Drop me a message and I'll get back to you.</p>
+      
+      <form class="contact-form" action="mailto:vishalkumara.vka@gmail.com" method="POST" enctype="text/plain">
+        <div class="form-group">
+          <label for="name">Your name</label>
+          <input type="text" id="name" name="Name" placeholder="Vishal Kumar A" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Your email</label>
+          <input type="email" id="email" name="Email" placeholder="vishalkumara.vka@gmail.com" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Your message</label>
+          <textarea id="message" name="Message" placeholder="What would you like to say?" required></textarea>
+        </div>
+        
+        <button type="submit">
+          <i class="fas fa-paper-plane"></i> Send message
+        </button>
+        <div class="form-note">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">VK</div>
+          <p style="color: rgba(255,255,255,0.7);">Data Scientist · ML Engineer · Systems Architect</p>
+          <div class="footer-social">
+            <a href="https://github.com/Vishalkumar-tech"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/vishalkumara"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul>
+            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="https://vishalk.me/pandas-data.html"><i class="fas fa-chevron-right"></i> Pandas Handbook</a></li>
+            <li><a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download><i class="fas fa-chevron-right"></i> Resume</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2026 Designed & Developed by Vishal Kumar A. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // profile modal
+    const profileTrigger = document.getElementById('profileTrigger');
+    const modal = document.getElementById('photoModal');
+    const closeModal = document.getElementById('closeModal');
+
+    profileTrigger.addEventListener('click', () => {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const backdrop = document.getElementById('backdrop');
+
+    menuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('active');
+      backdrop.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+    });
+
+    backdrop.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      backdrop.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('active');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+    });
+
+    // smooth scroll for internal links (especially #contact)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
