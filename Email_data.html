@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Explorer | Vishal Kumar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary: #ec4899;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --text-light: #334155;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6);
+            --gradient-secondary: linear-gradient(135deg, #ec4899, #f43f5e);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+            --shadow: 0 4px 12px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 30px -10px rgba(0,0,0,0.1);
+            --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.15);
+            --radius: 24px;
+            --radius-sm: 16px;
+            --radius-lg: 32px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .header {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            transform: rotate(-3deg);
+            transition: var(--transition);
+        }
+
+        .profile-icon:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .title-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .title-section h1 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .subtitle i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .subtitle-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-alt);
+            padding: 6px 16px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-section {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            padding: 8px 20px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chip:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .chip.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+        }
+
+        .table-container {
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-light);
+            margin-bottom: 30px;
+        }
+
+        .table-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .table-header h2 i {
+            font-size: 1.8rem;
+            opacity: 0.9;
+        }
+
+        .row-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--border);
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: var(--border);
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            background: var(--bg-alt);
+            color: var(--text);
+            font-weight: 600;
+            padding: 16px 20px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 2px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .data-table th i {
+            margin-right: 8px;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .data-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-light);
+            max-width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .data-table td code {
+            background: var(--bg-alt);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: var(--primary);
+        }
+
+        .data-table tbody tr {
+            transition: var(--transition);
+        }
+
+        .data-table tbody tr:hover {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background: var(--bg-alt);
+        }
+
+        .column-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .column-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .column-badge:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .column-badge i {
+            color: var(--primary);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: var(--card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow);
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer i {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.4rem;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-5px) rotate(5deg);
+            border-color: transparent;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        [data-tooltip] {
+            position: relative;
+            cursor: help;
+        }
+
+        [data-tooltip]:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 12px;
+            background: var(--text);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            display: none;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        [data-tooltip]:hover:before {
+            display: block;
+        }
+
+        .export-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .title-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                justify-content: center;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .table-header h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 10px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .profile-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 30px;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Header Section -->
+    <div class="header fade-up">
+        <div class="profile-section">
+            <div class="profile-icon">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="title-section">
+                <h1>Vishal Kumar <span>| Data Explorer</span></h1>
+                <div class="subtitle">
+                    <span class="subtitle-item"><i class="fas fa-map-marker-alt"></i> Data Scientist</span>
+                    <span class="subtitle-item"><i class="fas fa-code-branch"></i> 10+ Projects</span>
+                    <span class="subtitle-item"><i class="fas fa-award"></i> MSc Data Science</span>
+                    <span class="subtitle-item"><i class="fas fa-university"></i> JK Tyres R&D</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-table"></i></div>
+                <div class="stat-content">
+                    <div class="stat-value">2,888</div>
+                    <div class="stat-label">Total Rows</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-columns"></i></div>
+                <div class="stat-content">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Data Columns</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+                <div class="stat-content">
+                    <div class="stat-value">Python</div>
+                    <div class="stat-label">Technology</div>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search in all columns..." onkeyup="searchTable()">
+            </div>
+            <div class="filter-chips" id="filterChips">
+                <span class="chip active" onclick="filterColumn('all')"><i class="fas fa-list"></i> All Columns</span>
+                <span class="chip" onclick="filterColumn('Email')"><i class="fas fa-tag"></i> Email</span><span class="chip" onclick="filterColumn('Result')"><i class="fas fa-tag"></i> Result</span><span class="chip" onclick="filterColumn('Score')"><i class="fas fa-tag"></i> Score</span><span class="chip" onclick="filterColumn('Unnamed: 3')"><i class="fas fa-tag"></i> Unnamed: 3</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-container fade-up">
+        <div class="table-header">
+            <h2><i class="fas fa-list-alt"></i> Data Explorer Email verification</h2>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span class="row-count" id="rowCount">Showing 2,888 of 2,888 entries</span>
+            </div>
+        </div>
+        <div class="table-wrapper" id="tableWrapper">
+            <table class="data-table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-tag"></i> Email</th><th><i class="fas fa-tag"></i> Result</th><th><i class="fas fa-tag"></i> Score</th><th><i class="fas fa-tag"></i> Unnamed: 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2204014albertacorp@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>3ddavis@sympatico.ca</td><td><code>SMTP error: (554, b'Access Denied')</code></td><td>0</td><td></td></tr><tr><td>a.clarke@maamawatali.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>a.frias@metrocarehealth.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>aamna.siddiqui@i3institute.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>abcolumbiacourt@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>abelisle@upa.qc.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>aboniferro@reynoldstokes.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>acatalano@ldawe.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>accounting@huckabones.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>accounting@keltechltd.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>accounting@lallibrosexpress.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>accounting@qpharm.ca</td><td>SMTP error: Connection unexpectedly closed: timed out</td><td>0</td><td></td></tr><tr><td>accounting@slewmaster.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>accounts@cabincountry.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ada.cheng@zachinteg.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>adam@eternalsparksconsulting.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>admin@aldersgatevillage.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>admin@autismconnections.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>admin@cad-asc.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>admin@canadawestltd.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>admin@commotioncreek.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>admin@fer-construction.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>admin@inlinebraces.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>admin@northperthcommunityhospice.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>admin@officelinx.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>admin@ritewayrenos.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>admin@rjsonsbuilders.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>admin@SimcoeDHumane.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>admin@survivornet.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>admin@willowellness.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>administrator@brantfordsymphony.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>adnan.shaikh@gsheli.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>adriennev@siksikanation.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ahmed@littleguysdelivery.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ainsley@harpandfin.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>akposadonkie@taylorautogroup.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>akumari@sccss.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>alane@oacl.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>albertchildcare@hotmail.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>aleighbell@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>alex@stone-tucker.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>alisegaiseredwards@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>alison@carmellamarketing.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>allistonpotatofestival@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>alpha@kilbarryhill.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>amanda.julyponds@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>amartyn@inter-medico.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>amber.kunde@yahoo.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>amy@manaadvisorygroup.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>andrea.kasneci@northstarmanagement.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>andrea.leiba@clintar.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>andrea@chokechaerrystudios.com</td><td>Not Checked</td><td>0</td><td></td></tr><tr><td>andreasugrue@hotmail.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>andree@civillibertiesbar.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>andressa@malaspinaconsultants.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>andrew@bouldermountainresort.ca</td><td>Rejected by server policy</td><td>100</td><td></td></tr><tr><td>andrew@elliottmumfordcontracting.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>andrew@royeraccounting.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>andy@balickisigns.com</td><td><code>SMTP error: (550, b'5.5.0 137.184.115.241 is blocklisted by FortiGuard. This email from IP  has been rejected. The email message was detected as spam.')</code></td><td>0</td><td></td></tr><tr><td>angelina.mudry@fraserhealth.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>angie@cresthotelbc.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>angie@quantumpassivhaus.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>anika@ariessecurity.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>anill@easylifehomecare.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>anita.ng@vgw.co</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>anita@childrenshouselethbridge.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>anne.mcdonald@interface.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>annette.muleka@innotech-execaire.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>anthea.v.s@avasoft.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>anu@canfin.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>anusha.anantha@omron.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ap@londonislamicschool.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ap@ocwmetalworks.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>arbie.fru@chly.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>arlenegrierson@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>arshad.rashed@century21.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>asharma@pacelawfirm.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ashley-brandt@outlook.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>ashley.hayes@phoenixenergy.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ashley.lawrence@theattaingroup.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ashley.parker@linck.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ashwini.kumari@primeeng.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>aysh.shabbir@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ayuen@cdnangus.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>baccordino@pattisonoutdoor.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>baljit.smt@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>balmond@agsights.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>barefootbellringer@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>barryp@accts.ca</td><td>Rejected by server policy</td><td>100</td><td></td></tr><tr><td>bbarber@wcas.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>bdm@iaeglobal.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>beckym@heavymetalequipment.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>beetondental@live.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>belinda.cruz@thrc.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>bello.muibat@bolttelecommunications.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>beuermann@yahoo.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bevens@stockiechrysler.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>beverly.splane@nursenextdoor.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bfm.ap.ar@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bhartix@mcmaster.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>bhat9040@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bhhsociety@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>biggraphic@shaw.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bill@productivemaintenancegroup.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>bimbury@yahoo.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bites_dim_0k@icloud.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>blackwolfenergyservices@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>blair.antler@athabascahotel.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>BlakeC@canada.viscofan.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>blata.aaron@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bonarparkdale@rogers.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bonnecherefinefoods@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bradburyfamilyfarm@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>brent@glacierwater.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bret.pollard@outlook.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>brian.hobbs@peelsb.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>brian@experienceyourblueprint.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>brian@qualitycarsales.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>brigitte.drouin@allstarcs.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>bryan@loottrading.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>btreble@westlincoln.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>burksfallsunited147@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>c.forster@gretabar.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>caelen@gummiboutique.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cal@gerrysroofing.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>calicosaints@rogers.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cam@highlinerhotel.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>Cambridge@rogers.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cameron@brightpathstrategies.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>camila.cordovez@rockymountainadaptive.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>camille@burundiwewant.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>candace@khdental.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>candace@onebowl.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>canoelakerdi@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>canpak2000@gmail.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>cao@gitxaalanation.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>careers@myethnicrentals.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>carey@totemresorts.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>carmine@firstwork.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>cassandrabaccardax@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>catday@lks.net</td><td>SMTP error: [Errno 111] Connection refused</td><td>0</td><td></td></tr><tr><td>caterine.camacho@hotspex.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>cathy@gsplc.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cballard@idealwarehouse.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cbauer@arcanehorizon.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cbeauvais@municipalityofkillarney.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ccfkingston@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>centralguelphdentistry@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ceo@albertawildlifefederation.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>cesar@georginafoodpantry.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>cfung604@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cgibson@slrr.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>cguerin@inuusiq.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chad@agencyatlas.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chaddubanow@hotmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chapleaupc1@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>charleneallard49@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chelsea@canorth.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cheri-lin.crandon@nva.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>cherie.cox@eqraz.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chetwyndacdental@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chidiogoezenwaka@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chirag@northplusnexus.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>chorlock19@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chouse@walesmclelland.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>chris.conley@dwel.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>chris@metamorphosiscentre.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>christian.tjia@openshine.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>christina.b@mountainviewresidence.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>christina@digalittledeeper.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>christine.miller@seiuwest.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>chriswaesler@hotmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cindy@gymexpress.net</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>claire@sousla.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>clark@scotswoodlinks.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>claude-anne@ssisc.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cmorgenrood@clachurch.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>colleen@hardshipacres.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>colleen@soundyouthcounselling.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>connie@castlefuels.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>connie@designersprinting.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>contact@1churchstreetbarandgrill.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>contact@kristagrear.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>coordinator@communities4families.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>coordinator@inuvikgreenhouse.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cory@wheatonkia.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>couleesigns@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>courtmanager@efrynorthernalberta.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>courtney@duttonchildcare.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>courtneyh@uecan.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cparlette@rogers.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>cpatel@emcn.ab.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>cpfs@kos.net</td><td>SMTP error: [Errno 111] Connection refused</td><td>0</td><td></td></tr><tr><td>craso@resolvecounselling.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>creatingtogether@rogers.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>crystal@northviewchurch.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>curator@aurorahs.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>curiona@880cities.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>daimacannabis@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>daisyfreshcleaningservice@outlook.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>damien@muskokarecovery.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dan@arcuspower.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>dan@supremetechinsulation.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>darren@irpro.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dave@timberprocoatings.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>davejpaull@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>daversabakery@outlook.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>dawsonauto@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dboardman@cldc.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ddelaventura@tiley.on.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>debbieschatkowsky@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>debra@rootscs.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>denisd@interiorvisions.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>denise@dsquaredgroup.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>dennis@gochetwynd.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dennyskingston@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>deonic.lee@banalogic.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>devilishdetailsinfo@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>devin.metz@krrcfs.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>devon.griffith@kafkasec.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dg@tvc22.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dgotobed@town.killam.ab.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dilaniskodithuwakku@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>director@charlottestreetarts.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>director@harmonyhousews.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>director@inglewoodchilddevelopment.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>director@risingsuntreatment.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>director@tppelc.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>director@whistlergymnastics.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dispatch@westfrontconstruction.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>divita@acecardsupply.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>djkw905@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dkennedy@irprubber.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dlupul11@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dmdca@telus.net</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dmdsu82chang@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>doggyhotelandspa@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>donald.zinger@xpera.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>donna@classteel.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>dooyum.omokaro@seiuwest.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>doug@emscadets.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>doug@wolverinepm.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dq_kenora@hotmail.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>drichards@1valet.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>drkarklean@shaw.ca</td><td><code>SMTP error: (554, b'shw-ibgw-4002a.ext.cloudfilter.net cmsmtp Connection Rejected - see http://www.spamhaus.org/query/ip/137.184.115.241 AUP#BL')</code></td><td>0</td><td></td></tr><tr><td>drravi.Santhigram@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dsc_admin@mymts.net</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dsitnik@eitzchaim.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dtripp@ontarc.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dturbitt@salvisgroup.com</td><td><code>SMTP error: please run connect() first</code></td><td>0</td><td></td></tr><tr><td>dwills@iwh.on.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>dylanviddal@marnics.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>dzakharia@workforcewindsoressex.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ecollrin@vulcanauto.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ed@albertastudents.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ed@scwb.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ed@scyhsa.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>egleb@arpartners.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>egliroger@hotmail.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>ekundayo.dehinbo@ccochousing.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>elaine@calbombayministries.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>elizabeth.leston@hotmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ella@rcdrichmond.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>elmagoral@wawel.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>emfotso13@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>emilia@capitaltransferagency.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>emiliev@weenusk.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>emily@korehvac.ca</td><td>Unhandled SMTP code 450</td><td>0</td><td></td></tr><tr><td>erin@oldschoolipnl.com</td><td>Not Checked</td><td>0</td><td></td></tr><tr><td>eringoheen@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>erinr@techframing.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>erminai@hotmail.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>esmith@mapleleafdisposal.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>essexahtechs@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>estimating@avosconstruction.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ethuo@edudeo.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>evie.ribble@signsalive.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>exec.director@klwcf.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>execassistant@wedgewoodhotel.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>execdir@blindcanadians.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>execdir@outlinesforlife.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>executivedirector@mtans.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>executivedirector@saccwindsor.net</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>executivedirector@theville.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>fairyshah@onedentaltoronto.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>fikayo.oyesomi@andersontherapy.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>fil@ffcanada.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>finance@coinations.net</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>finance@rootsofempowerment.org</td><td>Not Checked</td><td>0</td><td></td></tr><tr><td>finance@sugarbarebodybar.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>firstcrcreddeer@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>flowersbythelake@icloud.com</td><td>Unhandled SMTP code 503</td><td>0</td><td></td></tr><tr><td>fmalik@jemscoating.com</td><td>Rejected by server policy</td><td>100</td><td></td></tr><tr><td>fnuziale@peridotsupply.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>freshmart53847@hotmail.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>fundraising@jcaontario.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>g.zimmerman@emotrans-canada.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>gasbar@gitanyowband.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>gchristian@nswpb.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>george.gafrey@xediton.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>gilbert.bong@zelosglobal.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>gildaalvarez51@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>gillian@trugreens.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>glenda@dentistryatarnprior.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>glenn@remingtonwindowfashions.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>gm@brewstermountainlodge.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>gm@daysinnvictoriauptown.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>gm@victoriarl.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>gpederson@placemaillardville.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>graham.mcewan@comfortinngoderich.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>grahame@jmelvinassociates.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>greg@byronunited.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>gregory@theboathousekenora.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>gryan00@hotmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>guptaandassociates@yahoo.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>haclinic@telus.net</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hairflair.chatham@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>haroon@demandhub.co</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>harsha@pcgroup.ca</td><td>Rejected by server policy</td><td>100</td><td></td></tr><tr><td>harvey@rosehillwoodcrafters.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>harvinder@proactiveaccountants.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>heartlandhomedelivery@outlook.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>hello@swans-in-a-row.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>henry.nukenge@neximcare.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>heritagemetalrestoration@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hey@mosswood.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hha@csnpei.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hharris-jones@diofton.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>hilary@theroc.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>hooversmaple@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hortonsconcrete@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hr@alsaroad.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>hr@cccpeel.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hr@hakimoptical.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hr@macsi.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>hr@mvacl.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hr@nextleveldrilling.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hr@nichetalentsource.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>hr@peggys-cove.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hr@turningpointrecovery.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>hr@wemust.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>hr@wemust.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hrmanager@2spirits.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>humanresources@barrietrim.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>humanresources@centracam.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>humanresources@momentumabaservices.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>humanresources@nawash.ca</td><td>Unhandled SMTP code 451</td><td>0</td><td></td></tr><tr><td>hvaghasiya@empoweredfutures.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>hvalentine@marymound.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ian.filips@century21.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ian@amces.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>ida@peharbour.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ihechi@ulula.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@amnshop.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>info@bethelalive.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@billmartins.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>info@clubink.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>info@dentbaybaking.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@echovibes.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@fxnphysio.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@georgianbaytrailer.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@georgianmedicalaesthetics.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@highrivergiftofmusic.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@laromaottawa.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@livinglightelectric.ca</td><td>Blocked due to anti-spam policy</td><td>100</td><td></td></tr><tr><td>Info@londonperformingartsacademy.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@newlifebrampton.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@plgbuilders.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@renfrewchiropractic.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@segss.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@shivaalayam.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@speedpronorth.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@suryamedspa.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>info@thedenchetwynd.com</td><td>Rejected by server policy</td><td>100</td><td></td></tr><tr><td>info@thelandbetween.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@vancouverislandsocialjusticesociety.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>info@wolfden.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>integrityfireprotectionltd@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>invermacbiz@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>irene@rodcoen.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>isaiahabazal@vibraclean.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>iubaministries2018@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>j.pikk@albatrans.com</td><td><code>SMTP error: (554, b'Blocked - see https://ipcheck.proofpoint.com/?ip=164.92.73.64')</code></td><td>0</td><td></td></tr><tr><td>j.serguiev@hotmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jacinto.rose@adventist.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jag@capexcpa.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jaimewagg@kw.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>james@prettybusy.ca</td><td>Rejected by server policy</td><td>100</td><td></td></tr><tr><td>jane.desplenter.rose@outlook.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>janet.groen@sjhospicelondon.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>janet@edss.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>janetdodge1@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>janice@cbdc.parrysound.on.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>janicecao0307@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jasjeet@safiant.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jason@gripitclimbing.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>jason@ironrangebus.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jason@segwayofontario.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jason@vadiumsecurity.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jason@verticallyinclined.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jasondzd@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jatinderrdoll@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jbcwind@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jbear@neoss.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jbeer@pathwayscentre.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jcherry@potenciatech.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jdenitz@mnsinfo.org</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jefthimiopoulos@smclean.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jen@gforcecustomfab.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jenna@bewiseacademy.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jennifer@bosspro.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jennifer@kingpacificlodge.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jennifer@thetruckoutfitters.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jennifer@wandertheresort.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jennyfer@pursuitocr.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jeremy.f@soulmechanical.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jeremy@gwcgroup.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jess.coutts@weiss-johnson.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jess.vanes@justworking.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jessica-mayela@hotmail.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>jessica@guelphwishfund.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jessica@rmoptometry.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jessica@systemfence.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jessie.r@rblogistics.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jfee@ywcapeterborough.org</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jfercho@applied.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jhack@onetrix.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jhayes@nswc.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jigar.master@keyush.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jill@paragonproperty.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jim@accuratefire.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jim@vellenoweth.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jkirby@vitalpartnersinc.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jlowe@share.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jmallard@bevanbros.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jmarr@aurorapl.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jmatheson@sigrecruiting.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jmelanson@mcmunnandyates.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jmvachon@hearst.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>joanb@vsac.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>joanna.midwife@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>joby.lee@bartels-group.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jocelyn@wolsey.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>joefredmoran@hotmail.com</td><td>SMTP error: Connection unexpectedly closed</td><td>0</td><td></td></tr><tr><td>joel@fortpark.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>johannab@willemployment.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>john@pennerbuilders.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>john@tretan.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jonathan@zzeem.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>josee.toupin@cecdj.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>josephsonenter@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>joshoconnor@navaconinc.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>josiah.timmerman@jancosteel.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>joy@aerotecengines.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jparnell@pwu.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>jrogers@sdecb.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jtsang@gvcss.bc.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>judy@mardamanagement.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>julia@itmevents.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>juliamonforton@remax.net</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>julie.lemon@lnnprotection.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>justin@uwarchitecture.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>jyanishewski@harmony.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>k_wong@jea.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kanchan.shukla@net-effect.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kapil.sachin@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>karine@alleloconsulting.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>karmstrong@carvss.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>karrie@bishopwater.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kat.jutras-gordon@metron-us.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kat.sharp@retailpropertymgmt.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>kate@ethosclimbing.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>katelyne@ballco.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>katharine@greenwaystrust.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>katherine.gignac@hotmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kathleen@bigcountryraw.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>kathryn.dorey@cbtsc.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>kathy.warner@ptbocfc.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>kathymroz123@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>katie@wildernesstours.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>katrina.overton@haico.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kay@londonfoods.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>keith@aimcosolrec.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kelly@lilaclaneequestrian.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kelsey@circularrubber.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>kelsy@impel.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>ken@shockinglygood.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kenoramanager@naturesinn.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kerianne@kaienrefrigeration.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kgourley@admastonbromley.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kimberlyd@brenex.com</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>kirstin.mathison@ppcu.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>kmcgonegal@whitewaterregion.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kmumford@dougtarryhomes.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>knittlelogisticssolutions25@gmail.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kpapke@hockeyalberta.ca</td><td>User does not exist</td><td>0</td><td></td></tr><tr><td>kpires@mlemporio.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kristin@entreprenorth.ca</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr><tr><td>kristina.peters@parisjewellerscanada.com</td><td>Mailbox exists and accepted</td><td>100</td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Column Information -->
+    <div class="column-badges">
+        <span class="column-badge"><i class="fas fa-tag"></i> Email</span><span class="column-badge"><i class="fas fa-tag"></i> Result</span><span class="column-badge"><i class="fas fa-tag"></i> Score</span><span class="column-badge"><i class="fas fa-tag"></i> Unnamed: 3</span>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><i class="fas fa-university"></i> Created for education by Vishal Kumar</p>
+        <p><i class="fas fa-calendar-alt"></i> Last Updated: March 2026</p>
+        <div class="social-links">
+            <a href="https://github.com/Vishalkumar-tech" class="social-link" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/vishalkumara/" class="social-link" data-tooltip="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="http://vishalk.me/" class="social-link" data-tooltip="Portfolio"><i class="fas fa-globe"></i></a>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentFilter = 'all';
+    let searchTerm = '';
+
+    function searchTable() {
+        const input = document.getElementById('searchInput');
+        searchTerm = input.value.toLowerCase();
+        filterData();
+    }
+
+    function filterColumn(columnName) {
+        const chips = document.querySelectorAll('.chip');
+        chips.forEach(chip => chip.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        currentFilter = columnName;
+        filterData();
+    }
+
+    function filterData() {
+        const table = document.getElementById('dataTable');
+        const rows = table.getElementsByTagName('tr');
+        let visibleCount = 0;
+
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            let showRow = false;
+            
+            if (currentFilter === 'all') {
+                const rowText = row.textContent.toLowerCase();
+                showRow = rowText.includes(searchTerm);
+            } else {
+                const columnIndex = Array.from(table.rows[0].cells).findIndex(
+                    cell => cell.textContent.trim() === currentFilter
+                );
+                
+                if (columnIndex !== -1) {
+                    const cellText = row.cells[columnIndex]?.textContent.toLowerCase() || '';
+                    showRow = cellText.includes(searchTerm);
+                }
+            }
+            
+            if (showRow) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        }
+        
+        document.getElementById('rowCount').textContent = `Showing ${visibleCount} entries`;
+    }
+
+    function exportToCSV() {
+        const table = document.getElementById('dataTable');
+        const rows = table.getElementsByTagName('tr');
+        let csv = [];
+        
+        // Get headers
+        let headers = [];
+        for (let cell of rows[0].cells) {
+            headers.push(cell.textContent.trim());
+        }
+        csv.push(headers.join(','));
+        
+        // Get data rows
+        for (let i = 1; i < rows.length; i++) {
+            let row = [];
+            for (let cell of rows[i].cells) {
+                let text = cell.textContent.trim();
+                // Escape commas and quotes
+                if (text.includes(',') || text.includes('"') || text.includes('\n')) {
+                    text = '"' + text.replace(/"/g, '""') + '"';
+                }
+                row.push(text);
+            }
+            csv.push(row.join(','));
+        }
+        
+        // Download
+        const csvContent = csv.join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'exported_data.csv';
+        a.click();
+        window.URL.revokeObjectURL(url);
+    }
+
+    function copyToClipboard() {
+        const table = document.querySelector('.data-table');
+        const range = document.createRange();
+        range.selectNode(table);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        
+        try {
+            document.execCommand('copy');
+            alert('Table copied to clipboard!');
+        } catch (err) {
+            alert('Failed to copy table');
+        }
+        
+        window.getSelection().removeAllRanges();
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
