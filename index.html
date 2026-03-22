@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Vishal Kumar | Data Scientist | Machine Learning Engineer | JK Tyre R&D</title>
   <meta name="description" content="Vishal Kumar - Data Scientist and Machine Learning Engineer with experience at JK Tyre R&D. Specializing in ML models, data pipelines, and real-world analytics.">
   <meta name="keywords" content="Vishal Kumar, Data Scientist, Machine Learning Engineer, Python, Data Engineering, JK Tyre, ML Projects">
@@ -21,7 +21,6 @@
 
   <style>
     :root {
-      /* Modern, vibrant color palette */
       --primary: #6366f1;
       --primary-dark: #4f46e5;
       --primary-light: #818cf8;
@@ -29,8 +28,6 @@
       --accent: #06b6d4;
       --success: #10b981;
       --warning: #f59e0b;
-      
-      /* Background & text */
       --bg: #ffffff;
       --bg-alt: #f8fafc;
       --card: #ffffff;
@@ -39,13 +36,9 @@
       --text-muted: #64748b;
       --border: #e2e8f0;
       --border-light: #f1f5f9;
-      
-      /* Gradients */
       --gradient-primary: linear-gradient(135deg, #6366f1, #8b5cf6);
       --gradient-secondary: linear-gradient(135deg, #ec4899, #f43f5e);
       --gradient-accent: linear-gradient(135deg, #06b6d4, #3b82f6);
-      
-      /* Effects */
       --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
       --shadow: 0 4px 12px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.05);
       --shadow-lg: 0 20px 30px -10px rgba(0,0,0,0.1);
@@ -67,6 +60,7 @@
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     .container {
@@ -179,7 +173,6 @@
       opacity: 0.7;
     }
 
-    /* Resume Button */
     .btn-resume {
       display: inline-flex;
       align-items: center;
@@ -201,10 +194,6 @@
     .btn-resume:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
-    }
-
-    .btn-resume i {
-      font-size: 0.9rem;
     }
 
     .menu-btn {
@@ -405,7 +394,7 @@
       margin: 0 auto;
     }
 
-    /* ===== COMPANY LOGOS HORIZONTAL SCROLL SECTION ===== */
+    /* ===== COMPANY LOGOS HORIZONTAL SCROLL SECTION - NO SCROLLBAR, INFINITE LOOP ===== */
     .logos-section {
       background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);
       padding: 50px 0;
@@ -419,16 +408,20 @@
       width: 100%;
       overflow: hidden;
       position: relative;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
     }
 
     .logos-track {
       display: flex;
       align-items: center;
-      animation: scrollLogos 28s linear infinite;
       width: max-content;
+      animation: scrollLogosInfinite 30s linear infinite;
+      will-change: transform;
     }
 
-    .logos-track:hover {
+    /* Pause on hover for better UX */
+    .logos-section:hover .logos-track {
       animation-play-state: paused;
     }
 
@@ -441,6 +434,7 @@
       transition: transform 0.3s ease;
       filter: grayscale(15%);
       opacity: 0.9;
+      flex-shrink: 0;
     }
 
     .logo-item:hover {
@@ -471,9 +465,10 @@
       border-radius: 40px;
       font-family: 'Space Grotesk', sans-serif;
       letter-spacing: -0.2px;
+      white-space: nowrap;
     }
 
-    @keyframes scrollLogos {
+    @keyframes scrollLogosInfinite {
       0% {
         transform: translateX(0);
       }
@@ -482,6 +477,7 @@
       }
     }
 
+    /* Mobile-specific logo adjustments - scrollbar hidden, animation smooth */
     @media (max-width: 768px) {
       .logo-img {
         height: 60px;
@@ -506,6 +502,9 @@
       }
       .logo-item {
         margin: 0 18px;
+      }
+      .logos-track {
+        animation-duration: 18s;
       }
     }
 
@@ -561,18 +560,6 @@
       font-size: 1.5rem;
       margin-bottom: 24px;
       box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
-    }
-
-    .card h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .card p {
-      color: var(--text-light);
-      margin-bottom: 20px;
-      font-size: 0.95rem;
     }
 
     /* ===== TAGS ===== */
@@ -664,6 +651,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .timeline-desc {
@@ -741,6 +729,8 @@
       justify-content: space-between;
       align-items: flex-start;
       margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .project-icon {
@@ -771,11 +761,13 @@
       padding: 20px 0;
       border-top: 1px solid var(--border-light);
       border-bottom: 1px solid var(--border-light);
+      flex-wrap: wrap;
     }
 
     .metric {
       flex: 1;
       text-align: center;
+      min-width: 80px;
     }
 
     .metric-value {
@@ -1052,15 +1044,12 @@
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
       .skills-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
       .edu-grid {
         grid-template-columns: 1fr;
       }
-      
       .contact-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1070,41 +1059,61 @@
       .nav {
         display: none;
       }
-      
       .menu-btn {
         display: flex;
       }
-      
       .footer-grid {
         grid-template-columns: 1fr;
         gap: 40px;
+        text-align: center;
+      }
+      .footer-social {
+        justify-content: center;
+      }
+      .footer-links ul {
+        text-align: center;
+      }
+      .footer-links a {
+        justify-content: center;
       }
     }
 
     @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
       .hero h1 {
         font-size: 2.8rem;
       }
-      
       .stats-grid {
         grid-template-columns: 1fr;
       }
-      
       .skills-grid {
         grid-template-columns: 1fr;
       }
-      
       .btn-group {
         flex-direction: column;
       }
-      
       .btn {
         width: 100%;
         justify-content: center;
       }
-      
       .contact-grid {
         grid-template-columns: 1fr;
+      }
+      .timeline-item {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .timeline-icon {
+        width: 48px;
+        height: 48px;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      section {
+        padding: 60px 0;
       }
     }
 
@@ -1132,17 +1141,15 @@
 </head>
 
 <body>
-  <!-- Header -->
   <div class="header">
     <div class="header-content">
       <div class="profile" id="profileTrigger">
-        <img src="profile.jpeg" alt="Vishal Kumar A" class="profile-img">
+        <img src="profile.jpeg" alt="Vishal Kumar A" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=VK&background=6366f1&color=fff'">
         <div class="profile-info">
           <h3>Vishal Kumar A</h3>
           <p><i class="fas fa-bolt"></i> Data Scientist @ JK Tyres R&D</p>
         </div>
       </div>
-      <!-- Google tag (gtag.js) -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-E4HM57SES4"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
@@ -1161,13 +1168,10 @@
           <i class="fas fa-download"></i> Resume
         </a>
       </div>
-      <button class="menu-btn" id="menuBtn">
-        <i class="fas fa-bars"></i>
-      </button>
+      <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
     </div>
   </div>
 
-  <!-- Mobile Menu -->
   <div class="backdrop" id="backdrop"></div>
   <div class="mobile-nav" id="mobileNav">
     <a href="#about"><i class="fas fa-user"></i> About</a>
@@ -1176,72 +1180,33 @@
     <a href="#projects"><i class="fas fa-rocket"></i> Projects</a>
     <a href="https://vishalk.me/blog.html"><i class="fas fa-pen-fancy"></i> Blogs</a>
     <a href="https://vishalk.me/pandas-data.html"><i class="fa-solid fa-book"></i> Pandas Handbook</a>
-    <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download style="color: var(--primary);">
-      <i class="fas fa-download"></i> Download Resume
-    </a>
+    <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download style="color: var(--primary);"><i class="fas fa-download"></i> Download Resume</a>
   </div>
 
-  <!-- Modal -->
   <div class="modal" id="photoModal">
     <button class="modal-close" id="closeModal">&times;</button>
     <img src="profile.jpeg" alt="Vishal Kumar A">
   </div>
 
-  <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <div class="badge fade-up">
-        <i class="fas fa-microchip"></i> Data Scientist & ML Engineer
-      </div>
-      <h1 class="fade-up">
-        Vishal Kumar<br>
-        <span class="hero-highlight">Data Scientist & ML Engineer</span>
-      </h1>
-      <p class="fade-up">
-        Currently building ML solutions at JK Tyres R&D · Previously engineered scalable web systems
-      </p>
+      <div class="badge fade-up"><i class="fas fa-microchip"></i> Data Scientist & ML Engineer</div>
+      <h1 class="fade-up">Vishal Kumar<br><span class="hero-highlight">Data Scientist & ML Engineer</span></h1>
+      <p class="fade-up">Currently building ML solutions at JK Tyres R&D · Previously engineered scalable web systems</p>
       <div class="stats-grid fade-up">
-        <div class="stat-card">
-          <div class="stat-icon"><i class="fas fa-flask"></i></div>
-          <div class="stat-content">
-            <div class="stat-value">Current</div>
-            <div class="stat-label">JK Tyres R&D Intern</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
-          <div class="stat-content">
-            <div class="stat-value">2.3 yrs</div>
-            <div class="stat-label">Data Scientist and Web Engineering</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
-          <div class="stat-content">
-            <div class="stat-value">MSc</div>
-            <div class="stat-label">Data Science</div>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
-          <div class="stat-content">
-            <div class="stat-value">BSc</div>
-            <div class="stat-label">Data Science & Cyber Security</div>
-          </div>
-        </div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-flask"></i></div><div class="stat-content"><div class="stat-value">Current</div><div class="stat-label">JK Tyres R&D Intern</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-briefcase"></i></div><div class="stat-content"><div class="stat-value">2.3 yrs</div><div class="stat-label">Data Scientist and Web Engineering</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-graduation-cap"></i></div><div class="stat-content"><div class="stat-value">MSc</div><div class="stat-label">Data Science</div></div></div>
+        <div class="stat-card"><div class="stat-icon"><i class="fas fa-graduation-cap"></i></div><div class="stat-content"><div class="stat-value">BSc</div><div class="stat-label">Data Science & Cyber Security</div></div></div>
       </div>
       <div class="btn-group fade-up">
-        <a href="#projects" class="btn btn-primary">
-          <i class="fas fa-rocket"></i> View My Work
-        </a>
-        <a href="#contact" class="btn btn-secondary">
-          <i class="fas fa-paper-plane"></i> Let's Connect
-        </a>
+        <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View My Work</a>
+        <a href="#contact" class="btn btn-secondary"><i class="fas fa-paper-plane"></i> Let's Connect</a>
       </div>
     </div>
   </section>
 
-  <!-- COMPANY LOGOS SECTION - HORIZONTAL SCROLLING LEFT TO RIGHT -->
+  <!-- COMPANY LOGOS SECTION - INFINITE LOOP, NO SCROLLBAR -->
   <div class="logos-section">
     <div class="container">
       <div class="section-header" style="margin-bottom: 30px;">
@@ -1255,16 +1220,6 @@
     </div>
   </div>
 
-  <!-- Hidden SEO Section -->
-  <section style="display:none;">
-    <h2>About Vishal Kumar</h2>
-    <p>
-      Vishal Kumar is a Data Scientist and Machine Learning Engineer with experience at JK Tyre R&D. 
-      He specializes in building ML models, data pipelines, and real-world analytics solutions.
-    </p>
-  </section>
-
-  <!-- About Section -->
   <section id="about">
     <div class="container">
       <div class="section-header">
@@ -1278,7 +1233,6 @@
     </div>
   </section>
 
-  <!-- Experience Section -->
   <section id="experience">
     <div class="container">
       <div class="section-header">
@@ -1292,19 +1246,9 @@
           <div class="timeline-content">
             <span class="timeline-date">Sep 2025 - Present</span>
             <h4>Data Scientist Intern</h4>
-            <div class="timeline-sub">
-              <i class="fas fa-building"></i> JK Tyres Research & Development
-              <i class="fas fa-map-pin" style="margin-left: 16px;"></i> Mysore
-            </div>
-            <p class="timeline-desc">
-              Building ML models for tire manufacturing optimization · Predictive maintenance · Quality control analytics
-            </p>
-            <div class="tags" style="margin-top: 12px;">
-              <span class="tag tag-primary">Python</span>
-              <span class="tag tag-primary">Scikit-learn</span>
-              <span class="tag tag-primary">Pandas</span>
-              <span class="tag tag-primary">TensorFlow</span>
-            </div>
+            <div class="timeline-sub"><i class="fas fa-building"></i> JK Tyres Research & Development <i class="fas fa-map-pin"></i> Mysore</div>
+            <p class="timeline-desc">Building ML models for tire manufacturing optimization · Predictive maintenance · Quality control analytics</p>
+            <div class="tags" style="margin-top: 12px;"><span class="tag tag-primary">Python</span><span class="tag tag-primary">Scikit-learn</span><span class="tag tag-primary">Pandas</span><span class="tag tag-primary">TensorFlow</span></div>
           </div>
         </div>
         <div class="timeline-item fade-up">
@@ -1312,27 +1256,15 @@
           <div class="timeline-content">
             <span class="timeline-date">Jan 2023 - Sep 2024 · 1 yr 9 mos</span>
             <h4>Web & Software Engineer</h4>
-            <div class="timeline-sub">
-              <i class="fas fa-building"></i> Email On Business · Freelance
-              <i class="fas fa-map-pin" style="margin-left: 16px;"></i> San Jose, CA · Remote
-            </div>
-            <p class="timeline-desc">
-              Built scalable email verification systems · Architected distributed worker pools · 100K+ emails/batch processing
-            </p>
-            <div class="tags" style="margin-top: 12px;">
-              <span class="tag">Python</span>
-              <span class="tag">Flask</span>
-              <span class="tag">Celery</span>
-              <span class="tag">Redis</span>
-              <span class="tag">Docker</span>
-            </div>
+            <div class="timeline-sub"><i class="fas fa-building"></i> Email On Business · Freelance <i class="fas fa-map-pin"></i> San Jose, CA · Remote</div>
+            <p class="timeline-desc">Built scalable email verification systems · Architected distributed worker pools · 100K+ emails/batch processing</p>
+            <div class="tags" style="margin-top: 12px;"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Celery</span><span class="tag">Redis</span><span class="tag">Docker</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Education Section -->
   <section style="background: var(--bg-alt);">
     <div class="container">
       <div class="section-header">
@@ -1341,27 +1273,12 @@
         <p class="section-desc fade-up">Where I built my foundation</p>
       </div>
       <div class="edu-grid">
-        <div class="edu-card fade-up">
-          <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-          <div class="edu-content">
-            <h4>JSS Science and Technology</h4>
-            <div class="edu-degree">MSc Data Science</div>
-            <div class="edu-place">Mysore · 2024-2026</div>
-          </div>
-        </div>
-        <div class="edu-card fade-up">
-          <div class="edu-icon"><i class="fas fa-shield-alt"></i></div>
-          <div class="edu-content">
-            <h4>Garden City College</h4>
-            <div class="edu-degree">BSc Data Science & Cyber Security</div>
-            <div class="edu-place">Bangalore · 2021-2024</div>
-          </div>
-        </div>
+        <div class="edu-card fade-up"><div class="edu-icon"><i class="fas fa-graduation-cap"></i></div><div class="edu-content"><h4>JSS Science and Technology</h4><div class="edu-degree">MSc Data Science</div><div class="edu-place">Mysore · 2024-2026</div></div></div>
+        <div class="edu-card fade-up"><div class="edu-icon"><i class="fas fa-shield-alt"></i></div><div class="edu-content"><h4>Garden City College</h4><div class="edu-degree">BSc Data Science & Cyber Security</div><div class="edu-place">Bangalore · 2021-2024</div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
   <section id="skills">
     <div class="container">
       <div class="section-header">
@@ -1370,44 +1287,13 @@
         <p class="section-desc fade-up">Tools I use to build & scale</p>
       </div>
       <div class="skills-grid">
-        <div class="skill-category fade-up">
-          <h3><i class="fas fa-brain"></i> Data Science</h3>
-          <div class="skill-items">
-            <span class="skill-item">Python</span>
-            <span class="skill-item">Pandas</span>
-            <span class="skill-item">NumPy</span>
-            <span class="skill-item">Scikit-learn</span>
-            <span class="skill-item">TensorFlow</span>
-            <span class="skill-item">ML Pipelines</span>
-          </div>
-        </div>
-        <div class="skill-category fade-up">
-          <h3><i class="fas fa-server"></i> Backend</h3>
-          <div class="skill-items">
-            <span class="skill-item">Flask</span>
-            <span class="skill-item">FastAPI</span>
-            <span class="skill-item">Celery</span>
-            <span class="skill-item">Redis</span>
-            <span class="skill-item">PostgreSQL</span>
-            <span class="skill-item">REST APIs</span>
-          </div>
-        </div>
-        <div class="skill-category fade-up">
-          <h3><i class="fas fa-cloud"></i> DevOps & Tools</h3>
-          <div class="skill-items">
-            <span class="skill-item">Docker</span>
-            <span class="skill-item">Linux</span>
-            <span class="skill-item">Git</span>
-            <span class="skill-item">Nginx</span>
-            <span class="skill-item">AWS</span>
-            <span class="skill-item">CI/CD</span>
-          </div>
-        </div>
+        <div class="skill-category fade-up"><h3><i class="fas fa-brain"></i> Data Science</h3><div class="skill-items"><span class="skill-item">Python</span><span class="skill-item">Pandas</span><span class="skill-item">NumPy</span><span class="skill-item">Scikit-learn</span><span class="skill-item">TensorFlow</span><span class="skill-item">ML Pipelines</span></div></div>
+        <div class="skill-category fade-up"><h3><i class="fas fa-server"></i> Backend</h3><div class="skill-items"><span class="skill-item">Flask</span><span class="skill-item">FastAPI</span><span class="skill-item">Celery</span><span class="skill-item">Redis</span><span class="skill-item">PostgreSQL</span><span class="skill-item">REST APIs</span></div></div>
+        <div class="skill-category fade-up"><h3><i class="fas fa-cloud"></i> DevOps & Tools</h3><div class="skill-items"><span class="skill-item">Docker</span><span class="skill-item">Linux</span><span class="skill-item">Git</span><span class="skill-item">Nginx</span><span class="skill-item">AWS</span><span class="skill-item">CI/CD</span></div></div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
   <section id="projects" style="background: var(--bg-alt);">
     <div class="container">
       <div class="section-header">
@@ -1416,82 +1302,13 @@
         <p class="section-desc fade-up">Production systems I've built</p>
       </div>
       <div class="cards-grid">
-        <div class="project-card fade-up">
-          <div class="project-header">
-            <div class="project-icon"><i class="fas fa-envelope"></i></div>
-            <span class="project-badge">Production</span>
-          </div>
-          <h3>Quantum Verification Engine</h3>
-          <p>Bulk email validation system with distributed processing</p>
-          <div class="project-metrics">
-            <div class="metric">
-              <div class="metric-value">100K+</div>
-              <div class="metric-label">Emails/Batch</div>
-            </div>
-            <div class="metric">
-              <div class="metric-value"><50ms</div>
-              <div class="metric-label">Latency</div>
-            </div>
-          </div>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">Celery</span>
-            <span class="tag">Redis</span>
-          </div>
-        </div>
-        <div class="project-card fade-up">
-          <div class="project-header">
-            <div class="project-icon"><i class="fas fa-file-invoice"></i></div>
-            <span class="project-badge">Automation</span>
-          </div>
-          <h3>Data Extraction Matrix</h3>
-          <p>PDF to structured data extraction pipeline</p>
-          <div class="project-metrics">
-            <div class="metric">
-              <div class="metric-value">80%</div>
-              <div class="metric-label">Manual Work ↓</div>
-            </div>
-            <div class="metric">
-              <div class="metric-value">99.2%</div>
-              <div class="metric-label">Accuracy</div>
-            </div>
-          </div>
-          <div class="tags">
-            <span class="tag">BeautifulSoup</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">Flask</span>
-            <span class="tag">ML</span>
-            <span class="tag">Data Pipeline</span>
-          </div>
-        </div>
-        <div class="project-card fade-up">
-          <div class="project-header">
-            <div class="project-icon"><i class="fas fa-chart-line"></i></div>
-            <span class="project-badge">Analytics</span>
-          </div>
-          <h3>Revenue Intelligence Hub</h3>
-          <p>Business intelligence & predictive analytics</p>
-          <div class="project-metrics">
-            <div class="metric">
-              <div class="metric-value">₹984M+</div>
-              <div class="metric-label">Revenue Analyzed</div>
-            </div>
-            <div class="metric">
-              <div class="metric-value">2M+</div>
-              <div class="metric-label">Data Points</div>
-            </div>
-          </div>
-          <div class="tags">
-            <span class="tag">Power BI</span>
-            <span class="tag">DAX</span>
-            <span class="tag">SQL</span>
-          </div>
-        </div>
+        <div class="project-card fade-up"><div class="project-header"><div class="project-icon"><i class="fas fa-envelope"></i></div><span class="project-badge">Production</span></div><h3>Quantum Verification Engine</h3><p>Bulk email validation system with distributed processing</p><div class="project-metrics"><div class="metric"><div class="metric-value">100K+</div><div class="metric-label">Emails/Batch</div></div><div class="metric"><div class="metric-value"><50ms</div><div class="metric-label">Latency</div></div></div><div class="tags"><span class="tag">Python</span><span class="tag">Celery</span><span class="tag">Redis</span></div></div>
+        <div class="project-card fade-up"><div class="project-header"><div class="project-icon"><i class="fas fa-file-invoice"></i></div><span class="project-badge">Automation</span></div><h3>Data Extraction Matrix</h3><p>PDF to structured data extraction pipeline</p><div class="project-metrics"><div class="metric"><div class="metric-value">80%</div><div class="metric-label">Manual Work ↓</div></div><div class="metric"><div class="metric-value">99.2%</div><div class="metric-label">Accuracy</div></div></div><div class="tags"><span class="tag">BeautifulSoup</span><span class="tag">Pandas</span><span class="tag">Flask</span><span class="tag">ML</span></div></div>
+        <div class="project-card fade-up"><div class="project-header"><div class="project-icon"><i class="fas fa-chart-line"></i></div><span class="project-badge">Analytics</span></div><h3>Revenue Intelligence Hub</h3><p>Business intelligence & predictive analytics</p><div class="project-metrics"><div class="metric"><div class="metric-value">₹984M+</div><div class="metric-label">Revenue Analyzed</div></div><div class="metric"><div class="metric-value">2M+</div><div class="metric-label">Data Points</div></div></div><div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">SQL</span></div></div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
   <section id="contact">
     <div class="container">
       <div class="section-header">
@@ -1500,68 +1317,26 @@
         <p class="section-desc fade-up">Open to collaborations & opportunities</p>
       </div>
       <div class="contact-grid">
-        <a href="mailto:vishalkumara.vka@gmail.com" class="contact-card fade-up">
-          <i class="fas fa-envelope"></i>
-          <h4>Email</h4>
-          <p>vishalkumara.vka</p>
-        </a>
-        <a href="https://linkedin.com/in/vishalkumara" target="_blank" class="contact-card fade-up">
-          <i class="fab fa-linkedin"></i>
-          <h4>LinkedIn</h4>
-          <p>in/vishalkumara</p>
-        </a>
-        <a href="https://github.com/Vishalkumar-tech" target="_blank" class="contact-card fade-up">
-          <i class="fab fa-github"></i>
-          <h4>GitHub</h4>
-          <p>@Vishalkumar-tech</p>
-        </a>
-        <a href="tel:+917760752108" class="contact-card fade-up">
-          <i class="fas fa-phone"></i>
-          <h4>Phone</h4>
-          <p>+91 77607 52108</p>
-        </a>
+        <a href="mailto:vishalkumara.vka@gmail.com" class="contact-card fade-up"><i class="fas fa-envelope"></i><h4>Email</h4><p>vishalkumara.vka</p></a>
+        <a href="https://linkedin.com/in/vishalkumara" target="_blank" class="contact-card fade-up"><i class="fab fa-linkedin"></i><h4>LinkedIn</h4><p>in/vishalkumara</p></a>
+        <a href="https://github.com/Vishalkumar-tech" target="_blank" class="contact-card fade-up"><i class="fab fa-github"></i><h4>GitHub</h4><p>@Vishalkumar-tech</p></a>
+        <a href="tel:+917760752108" class="contact-card fade-up"><i class="fas fa-phone"></i><h4>Phone</h4><p>+91 77607 52108</p></a>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div>
-          <div class="footer-brand">VK</div>
-          <p style="color: rgba(255,255,255,0.7);">Data Scientist · ML Engineer · Systems Architect</p>
-          <div class="footer-social">
-            <a href="https://github.com/Vishalkumar-tech"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/vishalkumara"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-        <div class="footer-links">
-          <h4>Navigate</h4>
-          <ul>
-            <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
-            <li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li>
-            <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
-            <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="https://vishalk.me/pandas-data.html"><i class="fas fa-chevron-right"></i> Pandas Handbook</a></li>
-            <li><a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download><i class="fas fa-chevron-right"></i> Resume</a></li>
-          </ul>
-        </div>
+        <div><div class="footer-brand">VK</div><p style="color: rgba(255,255,255,0.7);">Data Scientist · ML Engineer · Systems Architect</p><div class="footer-social"><a href="https://github.com/Vishalkumar-tech"><i class="fab fa-github"></i></a><a href="https://linkedin.com/in/vishalkumara"><i class="fab fa-linkedin"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
+        <div class="footer-links"><h4>Navigate</h4><ul><li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li><li><a href="#experience"><i class="fas fa-chevron-right"></i> Experience</a></li><li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li><li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li></ul></div>
+        <div class="footer-links"><h4>Resources</h4><ul><li><a href="https://vishalk.me/pandas-data.html"><i class="fas fa-chevron-right"></i> Pandas Handbook</a></li><li><a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download><i class="fas fa-chevron-right"></i> Resume</a></li></ul></div>
       </div>
-      <div class="copyright">
-        <p>© 2026 Designed & Developed by Vishal Kumar A. All rights reserved.</p>
-      </div>
+      <div class="copyright"><p>© 2026 Designed & Developed by Vishal Kumar A. All rights reserved.</p></div>
     </div>
   </footer>
 
   <script>
-    // Company logos data (3 companies with your provided image paths)
     const companies = [
       { name: "JK Tyre & Industries", logo: "https://github.com/Vishalkumar-tech/Vishalkumar-tech.github.io/blob/main/jktyres.png?raw=true" },
       { name: "Email Verifier HQ", logo: "https://github.com/Vishalkumar-tech/Vishalkumar-tech.github.io/blob/main/emaliverifierhq.jpg?raw=true" },
@@ -1569,93 +1344,34 @@
     ];
 
     const logosTrack = document.getElementById('logosTrack');
-    
     function buildLogos() {
       let innerHtml = '';
-      // Duplicate the set twice for seamless infinite loop
       for(let repeat = 0; repeat < 2; repeat++) {
         companies.forEach(comp => {
-          innerHtml += `
-            <div class="logo-item">
-              <img class="logo-img" src="${comp.logo}" alt="${comp.name} logo" 
-                   onerror="this.onerror=null; this.src='https://placehold.co/140x80/6366f1/white?text=${encodeURIComponent(comp.name.substring(0,12))}';">
-              <span class="logo-name">${comp.name}</span>
-            </div>
-          `;
+          innerHtml += `<div class="logo-item"><img class="logo-img" src="${comp.logo}" alt="${comp.name} logo" onerror="this.onerror=null; this.src='https://placehold.co/140x80/6366f1/white?text=${encodeURIComponent(comp.name.substring(0,12))}';"><span class="logo-name">${comp.name}</span></div>`;
         });
       }
       logosTrack.innerHTML = innerHtml;
     }
-
     buildLogos();
 
-    // Modal
     const profileTrigger = document.getElementById('profileTrigger');
     const modal = document.getElementById('photoModal');
     const closeModal = document.getElementById('closeModal');
+    profileTrigger.addEventListener('click', () => { modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
+    closeModal.addEventListener('click', () => { modal.classList.remove('active'); document.body.style.overflow = 'auto'; });
+    modal.addEventListener('click', (e) => { if (e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = 'auto'; } });
 
-    profileTrigger.addEventListener('click', () => {
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-
-    closeModal.addEventListener('click', () => {
-      modal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
-    });
-
-    // Mobile Menu
     const menuBtn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
     const backdrop = document.getElementById('backdrop');
+    menuBtn.addEventListener('click', () => { mobileNav.classList.toggle('active'); backdrop.classList.toggle('active'); document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto'; });
+    backdrop.addEventListener('click', () => { mobileNav.classList.remove('active'); backdrop.classList.remove('active'); document.body.style.overflow = 'auto'; });
+    document.querySelectorAll('.mobile-nav a').forEach(link => { link.addEventListener('click', () => { mobileNav.classList.remove('active'); backdrop.classList.remove('active'); document.body.style.overflow = 'auto'; }); });
 
-    menuBtn.addEventListener('click', () => {
-      mobileNav.classList.toggle('active');
-      backdrop.classList.toggle('active');
-      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
-    });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
 
-    backdrop.addEventListener('click', () => {
-      mobileNav.classList.remove('active');
-      backdrop.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    });
-
-    document.querySelectorAll('.mobile-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.remove('active');
-        backdrop.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      });
-    });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Scroll animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } }); }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   </script>
 </body>
