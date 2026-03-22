@@ -405,6 +405,110 @@
       margin: 0 auto;
     }
 
+    /* ===== COMPANY LOGOS HORIZONTAL SCROLL SECTION ===== */
+    .logos-section {
+      background: linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);
+      padding: 50px 0;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logos-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .logos-track {
+      display: flex;
+      align-items: center;
+      animation: scrollLogos 28s linear infinite;
+      width: max-content;
+    }
+
+    .logos-track:hover {
+      animation-play-state: paused;
+    }
+
+    .logo-item {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 45px;
+      transition: transform 0.3s ease;
+      filter: grayscale(15%);
+      opacity: 0.9;
+    }
+
+    .logo-item:hover {
+      transform: scale(1.08);
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+
+    .logo-img {
+      height: 85px;
+      width: auto;
+      max-width: 170px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+      border-radius: 16px;
+      background: white;
+      padding: 8px 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-light);
+      background: rgba(255,255,255,0.9);
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.2px;
+    }
+
+    @keyframes scrollLogos {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .logo-img {
+        height: 60px;
+        max-width: 120px;
+        padding: 6px 8px;
+      }
+      .logo-item {
+        margin: 0 25px;
+      }
+      .logos-track {
+        animation-duration: 22s;
+      }
+      .logo-name {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-img {
+        height: 50px;
+        max-width: 100px;
+      }
+      .logo-item {
+        margin: 0 18px;
+      }
+    }
+
     /* ===== CARDS ===== */
     .cards-grid {
       display: grid;
@@ -1038,15 +1142,14 @@
           <p><i class="fas fa-bolt"></i> Data Scientist @ JK Tyres R&D</p>
         </div>
       </div>
-          <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-E4HM57SES4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-E4HM57SES4');
-</script>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-E4HM57SES4"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-E4HM57SES4');
+      </script>
       <div class="nav">
         <a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a>
         <a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i> Experience</a>
@@ -1054,12 +1157,10 @@
         <a href="#projects" class="nav-link"><i class="fas fa-rocket"></i> Projects</a>
         <a href="https://vishalk.me/blog.html" class="nav-link"><i class="fas fa-pen-fancy"></i> Blogs</a>
         <a href="https://vishalk.me/pandas-data.html" class="nav-link"><i class="fa-solid fa-book"></i> Pandas Handbook</a>
-        <!-- Resume Download Button -->
         <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download class="btn-resume">
           <i class="fas fa-download"></i> Resume
         </a>
       </div>
-
       <button class="menu-btn" id="menuBtn">
         <i class="fas fa-bars"></i>
       </button>
@@ -1073,7 +1174,7 @@
     <a href="#experience"><i class="fas fa-briefcase"></i> Experience</a>
     <a href="#skills"><i class="fas fa-code"></i> Skills</a>
     <a href="#projects"><i class="fas fa-rocket"></i> Projects</a>
-    <a href="https://vishalk.me/blog.html" class="nav-link"><i class="fas fa-pen-fancy"></i> Blogs</a>
+    <a href="https://vishalk.me/blog.html"><i class="fas fa-pen-fancy"></i> Blogs</a>
     <a href="https://vishalk.me/pandas-data.html"><i class="fa-solid fa-book"></i> Pandas Handbook</a>
     <a href="https://vishalkumar-tech.github.io/Vishal%20Kumar%20A%20Resume.pdf" download style="color: var(--primary);">
       <i class="fas fa-download"></i> Download Resume
@@ -1092,16 +1193,13 @@
       <div class="badge fade-up">
         <i class="fas fa-microchip"></i> Data Scientist & ML Engineer
       </div>
-
-     <h1 class="fade-up">
-     Vishal Kumar<br>
-   <span class="hero-highlight">Data Scientist & ML Engineer</span>
-    </h1>
-
+      <h1 class="fade-up">
+        Vishal Kumar<br>
+        <span class="hero-highlight">Data Scientist & ML Engineer</span>
+      </h1>
       <p class="fade-up">
         Currently building ML solutions at JK Tyres R&D · Previously engineered scalable web systems
       </p>
-
       <div class="stats-grid fade-up">
         <div class="stat-card">
           <div class="stat-icon"><i class="fas fa-flask"></i></div>
@@ -1110,7 +1208,6 @@
             <div class="stat-label">JK Tyres R&D Intern</div>
           </div>
         </div>
-        
         <div class="stat-card">
           <div class="stat-icon"><i class="fas fa-briefcase"></i></div>
           <div class="stat-content">
@@ -1118,7 +1215,6 @@
             <div class="stat-label">Data Scientist and Web Engineering</div>
           </div>
         </div>
-        
         <div class="stat-card">
           <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
           <div class="stat-content">
@@ -1126,7 +1222,6 @@
             <div class="stat-label">Data Science</div>
           </div>
         </div>
-        
         <div class="stat-card">
           <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
           <div class="stat-content">
@@ -1135,7 +1230,6 @@
           </div>
         </div>
       </div>
-
       <div class="btn-group fade-up">
         <a href="#projects" class="btn btn-primary">
           <i class="fas fa-rocket"></i> View My Work
@@ -1145,14 +1239,45 @@
         </a>
       </div>
     </div>
-    <!-- Hidden SEO Section -->
-  <section style="display:none;">
-  <h2>About Vishal Kumar</h2>
-  <p>
-    Vishal Kumar is a Data Scientist and Machine Learning Engineer with experience at JK Tyre R&D. 
-    He specializes in building ML models, data pipelines, and real-world analytics solutions.
-  </p>
   </section>
+
+  <!-- COMPANY LOGOS SECTION - HORIZONTAL SCROLLING LEFT TO RIGHT -->
+  <div class="logos-section">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 30px;">
+        <div class="section-label">PROUDLY CONTRIBUTED TO</div>
+        <h2 class="section-title" style="font-size: 1.8rem;">Companies I've Worked With</h2>
+        <p class="section-desc">Building innovative solutions across organizations</p>
+      </div>
+      <div class="logos-container">
+        <div class="logos-track" id="logosTrack"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden SEO Section -->
+  <section style="display:none;">
+    <h2>About Vishal Kumar</h2>
+    <p>
+      Vishal Kumar is a Data Scientist and Machine Learning Engineer with experience at JK Tyre R&D. 
+      He specializes in building ML models, data pipelines, and real-world analytics solutions.
+    </p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label fade-up">ABOUT ME</div>
+        <h2 class="section-title fade-up">Data Scientist & ML Engineer</h2>
+        <p class="section-desc fade-up">Passionate about turning data into actionable insights</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p style="font-size: 1.1rem; color: var(--text-light);">I'm Vishal Kumar, a Data Scientist and Machine Learning Engineer with 2.3+ years of experience in building ML models, data pipelines, and scalable web systems. Currently working at JK Tyre R&D, I specialize in predictive maintenance, quality control analytics, and manufacturing optimization.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Experience Section -->
   <section id="experience">
     <div class="container">
@@ -1161,9 +1286,7 @@
         <h2 class="section-title fade-up">Professional Journey</h2>
         <p class="section-desc fade-up">From research to production</p>
       </div>
-
       <div class="timeline">
-        <!-- Current Role -->
         <div class="timeline-item fade-up">
           <div class="timeline-icon"><i class="fas fa-microchip"></i></div>
           <div class="timeline-content">
@@ -1184,8 +1307,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Previous Role -->
         <div class="timeline-item fade-up">
           <div class="timeline-icon"><i class="fas fa-globe"></i></div>
           <div class="timeline-content">
@@ -1219,7 +1340,6 @@
         <h2 class="section-title fade-up">Academic Background</h2>
         <p class="section-desc fade-up">Where I built my foundation</p>
       </div>
-
       <div class="edu-grid">
         <div class="edu-card fade-up">
           <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
@@ -1229,7 +1349,6 @@
             <div class="edu-place">Mysore · 2024-2026</div>
           </div>
         </div>
-
         <div class="edu-card fade-up">
           <div class="edu-icon"><i class="fas fa-shield-alt"></i></div>
           <div class="edu-content">
@@ -1250,7 +1369,6 @@
         <h2 class="section-title fade-up">Technical Arsenal</h2>
         <p class="section-desc fade-up">Tools I use to build & scale</p>
       </div>
-
       <div class="skills-grid">
         <div class="skill-category fade-up">
           <h3><i class="fas fa-brain"></i> Data Science</h3>
@@ -1263,7 +1381,6 @@
             <span class="skill-item">ML Pipelines</span>
           </div>
         </div>
-
         <div class="skill-category fade-up">
           <h3><i class="fas fa-server"></i> Backend</h3>
           <div class="skill-items">
@@ -1275,7 +1392,6 @@
             <span class="skill-item">REST APIs</span>
           </div>
         </div>
-
         <div class="skill-category fade-up">
           <h3><i class="fas fa-cloud"></i> DevOps & Tools</h3>
           <div class="skill-items">
@@ -1299,7 +1415,6 @@
         <h2 class="section-title fade-up">Featured Work</h2>
         <p class="section-desc fade-up">Production systems I've built</p>
       </div>
-
       <div class="cards-grid">
         <div class="project-card fade-up">
           <div class="project-header">
@@ -1324,7 +1439,6 @@
             <span class="tag">Redis</span>
           </div>
         </div>
-
         <div class="project-card fade-up">
           <div class="project-header">
             <div class="project-icon"><i class="fas fa-file-invoice"></i></div>
@@ -1343,14 +1457,13 @@
             </div>
           </div>
           <div class="tags">
-            <span class="tag">BeautiFulSoup</span>
+            <span class="tag">BeautifulSoup</span>
             <span class="tag">Pandas</span>
             <span class="tag">Flask</span>
             <span class="tag">ML</span>
             <span class="tag">Data Pipeline</span>
           </div>
         </div>
-
         <div class="project-card fade-up">
           <div class="project-header">
             <div class="project-icon"><i class="fas fa-chart-line"></i></div>
@@ -1386,26 +1499,22 @@
         <h2 class="section-title fade-up">Let's Connect</h2>
         <p class="section-desc fade-up">Open to collaborations & opportunities</p>
       </div>
-
       <div class="contact-grid">
         <a href="mailto:vishalkumara.vka@gmail.com" class="contact-card fade-up">
           <i class="fas fa-envelope"></i>
           <h4>Email</h4>
           <p>vishalkumara.vka</p>
         </a>
-
         <a href="https://linkedin.com/in/vishalkumara" target="_blank" class="contact-card fade-up">
           <i class="fab fa-linkedin"></i>
           <h4>LinkedIn</h4>
           <p>in/vishalkumara</p>
         </a>
-
         <a href="https://github.com/Vishalkumar-tech" target="_blank" class="contact-card fade-up">
           <i class="fab fa-github"></i>
           <h4>GitHub</h4>
           <p>@Vishalkumar-tech</p>
         </a>
-
         <a href="tel:+917760752108" class="contact-card fade-up">
           <i class="fas fa-phone"></i>
           <h4>Phone</h4>
@@ -1428,7 +1537,6 @@
             <a href="#"><i class="fab fa-twitter"></i></a>
           </div>
         </div>
-
         <div class="footer-links">
           <h4>Navigate</h4>
           <ul>
@@ -1438,7 +1546,6 @@
             <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
           </ul>
         </div>
-
         <div class="footer-links">
           <h4>Resources</h4>
           <ul>
@@ -1447,7 +1554,6 @@
           </ul>
         </div>
       </div>
-
       <div class="copyright">
         <p>© 2026 Designed & Developed by Vishal Kumar A. All rights reserved.</p>
       </div>
@@ -1455,6 +1561,34 @@
   </footer>
 
   <script>
+    // Company logos data (3 companies with your provided image paths)
+    const companies = [
+      { name: "JK Tyre & Industries", logo: "https://github.com/Vishalkumar-tech/Vishalkumar-tech.github.io/blob/main/jktyres.png?raw=true" },
+      { name: "Email Verifier HQ", logo: "https://github.com/Vishalkumar-tech/Vishalkumar-tech.github.io/blob/main/emaliverifierhq.jpg?raw=true" },
+      { name: "Email On Business", logo: "https://github.com/Vishalkumar-tech/Vishalkumar-tech.github.io/blob/main/emailonbusiness.jpg?raw=true" }
+    ];
+
+    const logosTrack = document.getElementById('logosTrack');
+    
+    function buildLogos() {
+      let innerHtml = '';
+      // Duplicate the set twice for seamless infinite loop
+      for(let repeat = 0; repeat < 2; repeat++) {
+        companies.forEach(comp => {
+          innerHtml += `
+            <div class="logo-item">
+              <img class="logo-img" src="${comp.logo}" alt="${comp.name} logo" 
+                   onerror="this.onerror=null; this.src='https://placehold.co/140x80/6366f1/white?text=${encodeURIComponent(comp.name.substring(0,12))}';">
+              <span class="logo-name">${comp.name}</span>
+            </div>
+          `;
+        });
+      }
+      logosTrack.innerHTML = innerHtml;
+    }
+
+    buildLogos();
+
     // Modal
     const profileTrigger = document.getElementById('profileTrigger');
     const modal = document.getElementById('photoModal');
@@ -1525,4 +1659,5 @@
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   </script>
 </body>
+
 </html>
